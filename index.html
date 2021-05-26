@@ -88,7 +88,7 @@ ws.addEventListener("open", () => {
                 }else {
                     color = "#FFFF00"
                 }
-                for (let t = 0; t < 2; t++) {
+                for (let t = 0; t < data; t++) {
                     CreatePlayer(t)
                 }
             }
@@ -124,6 +124,11 @@ ws.addEventListener("open", () => {
                     color = "#00FF00"
                 }else {
                     color = "#FFFF00"
+                }
+                if(boys.length < data){
+                for (let t = 0; t < data-boys.length; t++) {
+                    CreatePlayer(t+data)
+                }
                 }
             }
         }
