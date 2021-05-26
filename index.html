@@ -96,7 +96,7 @@ ws.addEventListener("open", () => {
                     CreatePlayer(t)
                 }
             }
-        } else if(!(data.length >= 0)){
+        } else if((data.length >= 0)){
             // start = 0
             data = JSON.parse(data)
             if(hit == 0){
