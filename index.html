@@ -5587,6 +5587,7 @@ class Mass {
             for(let t = 0; t<this.shots.length;t++){
                 this.shots[t] = new Shot(this.shots[t].x,this.shots[t].y,this.shots[t].radius,this.shots[t].color,this.shots[t].xmom,this.shots[t].ymom,this.shots[t].friction, this.shots[t].marked)
             }
+            this.id = args["id"]
             this.body = this.nodes[0]
             this.rightshoulder = this.nodes[1]
             this.leftshoulder = this.nodes[2]
@@ -5613,8 +5614,6 @@ class Mass {
             this.rightarm = new SpringOP(this.rightshoulder, this.righthand, this.armlength, 8)
             this.springs.push(this.leftarm)
             this.springs.push(this.rightarm)
-        this.id = ID+.1
-
             for(let t = 0; t<this.nodes.length;t++){
                 // this.nodes[t].self = this
             }
