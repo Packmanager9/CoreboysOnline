@@ -27,7 +27,7 @@ wss.on("connection", ws => {
         game.splice(game.indexOf(ws))
     })
     ws.on("message", data => {
-        if (data <= 1 && data >= 0) {
+        if (data >= 0) {
             console.log(data)
             console.log(game.length - 1)
             ws.publicID = data
