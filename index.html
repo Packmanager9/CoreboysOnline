@@ -97,6 +97,7 @@ ws.addEventListener("open", () => {
             data = JSON.parse(data)
             if(hit == 0){
                 hit = 1
+                console.log("started running")
                 // console.log(data)
             }
             // console.log(data[6], ID)
@@ -125,11 +126,11 @@ ws.addEventListener("open", () => {
                 // console.log(connectionnumber, "2")
                 //     color = "#FFFF00"
                 // }
-                if(boys.length < data-1){
-                for (let t = boys.length; t < data-1; t++) {
-                    CreatePlayer(t)
-                }
-                }
+                // if(boys.length < data-1){
+                // for (let t = boys.length; t < data-1; t++) {
+                //     CreatePlayer(t)
+                // }
+                // }
             }
         }
 
