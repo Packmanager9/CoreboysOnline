@@ -92,8 +92,8 @@ ws.addEventListener("open", () => {
                     CreatePlayer(t)
                 }
             }
-        } else {
-            start = 0
+        } else if(typeof data.gamepad !== "undefined"){
+            // start = 0
             data = JSON.parse(data)
             if(hit == 0){
                 hit = 1
@@ -112,6 +112,18 @@ ws.addEventListener("open", () => {
                         boys[t]['gamepad']  = gp
                         
                     }
+                }
+            }
+        }else{
+            if(typeof data.gamepad == "undefined"){
+                connectionnumber = data
+                console.log(connectionnumber)
+                if (connectionnumber == 0) {
+                    color = "#FF0000"
+                } else if (connectionnumber == 1) {
+                    color = "#00FF00"
+                }else {
+                    color = "#FFFF00"
                 }
             }
         }
