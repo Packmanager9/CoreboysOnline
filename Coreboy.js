@@ -1,7 +1,7 @@
 
-let HOST = location.origin.replace(/^file/, 'ws')
-console.log(HOST)
-let ws = new WebSocket(HOST);
+// let HOST = location.origin.replace(/^http/, 'ws')
+// console.log(HOST)
+let ws = new WebSocket('https://coreboys.herokuapp.com/');
 let connectionnumber = 0
 let start = 0
 let ID = Math.random()
