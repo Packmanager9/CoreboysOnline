@@ -81,9 +81,9 @@ ws.addEventListener("open", () => {
                 start = 1
                 connectionnumber = data
                 console.log(connectionnumber)
-                if (connectionnumber == 1) {
+                if (connectionnumber == 0) {
                     color = "#FF0000"
-                } else if (connectionnumber == 2) {
+                } else if (connectionnumber == 1) {
                     color = "#00FF00"
                 }else {
                     color = "#FFFF00"
@@ -18710,7 +18710,7 @@ function CreatePlayer(t) {
         coreboy = new Mass(t)
     }
     coreboy.body.color = getRandomColor() // `rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
-    if (connectionnumber-1 == t) {
+    if (connectionnumber == t) {
                 coreboy.body.color = color
     }
 
