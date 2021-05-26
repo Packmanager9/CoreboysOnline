@@ -77,8 +77,11 @@ let hit = 0
 ws.addEventListener("open", () => {
     ws.addEventListener("message", ({ data }) => {
         if (start == 0) {
+            
+            console.log(data)
             if(data.length >= 0){
                 start = 1
+                data = data.split(',')
                 connectionnumber = (data[0])
                 if (connectionnumber == 0) {
                     color = "#FF0000"
@@ -89,11 +92,11 @@ ws.addEventListener("open", () => {
                 console.log(connectionnumber, "1")
                 }
                 console.log(connectionnumber, "1", data[1])
-                for (let t = 0; t < data[1]+1; t++) {
+                for (let t = 0; t < parseInt(data[1]); t++) {
                     CreatePlayer(t)
                 }
             }
-        } else if(!(data >= 0)){
+        } else if(!(data.length >= 0)){
             // start = 0
             data = JSON.parse(data)
             if(hit == 0){
@@ -119,7 +122,7 @@ ws.addEventListener("open", () => {
             }
             // }
         }else{
-            if(data >= 0){
+            if(data.length >= 0){
                 // connectionnumber = (data)
                 // if (connectionnumber == 0) {
                 //     color = "#FF0000"
