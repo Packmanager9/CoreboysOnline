@@ -88,7 +88,7 @@ ws.addEventListener("open", () => {
                     color = "#FFFF00"
                 console.log(connectionnumber, "1")
                 }
-                for (let t = 0; t < data; t++) {
+                for (let t = 0; t < data+1; t++) {
                     CreatePlayer(t)
                 }
             }
@@ -18970,12 +18970,12 @@ function main() {
             }
             counter = 1
             if (boys.length == 1) {
-                coreboy = new Mass(boys.length)
-                coreboy.body.color = "#ffffff"
-                boys.push(coreboy)
-                boom.push(new Circle(0, 0, 1, "transparent"))
-                scores.push(0)
-                drops.push(0)
+                // coreboy = new Mass(boys.length)
+                // coreboy.body.color = "#ffffff"
+                // boys.push(coreboy)
+                // boom.push(new Circle(0, 0, 1, "transparent"))
+                // scores.push(0)
+                // drops.push(0)
             }
         }
     }
