@@ -70,7 +70,7 @@ let ws = new WebSocket(HOST);
 let connectionnumber = 0
 let start = 0
 let ID = Math.random()
-let color = "#ffffff"
+let color = "#FFFFFF"
 let hit = 0
 
 
@@ -79,7 +79,7 @@ ws.addEventListener("open", () => {
         if (start == 0) {
             if(typeof data.gamepad == "undefined"){
                 start = 1
-                connectionnumber = data
+                connectionnumber = parseInt(data)
                 console.log(connectionnumber)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
@@ -116,7 +116,7 @@ ws.addEventListener("open", () => {
             }
         }else{
             if(typeof data.gamepad == "undefined"){
-                connectionnumber = data
+                connectionnumber = parseInt(data)
                 console.log(connectionnumber)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
