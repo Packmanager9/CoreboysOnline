@@ -6,11 +6,10 @@ const { Server } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
-console.log(PORT)
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+    .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+    .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const wss = new Server({ server });
 let boys = []
@@ -28,18 +27,15 @@ wss.on("connection", ws => {
         game.splice(game.indexOf(ws))
     })
     ws.on("message", data => {
-        if(data <= 1 || data >= 0){
+        if (data <= 1 || data >= 0) {
             console.log(data)
-            console.log(game.length-1)
+            console.log(game.length - 1)
             ws.publicID = data
-            ws.send(game.length-1)
-        }else{
-            for(let t = 0;t<Object.keys(game).length;t++){
-                if(ws.publicID!=data[6]){
-                    for(let t = 0;t<game.length;t++){
-                        game[t].send(data)
-                    }
-
+            ws.send(game.indexOf(ws))
+        } else {
+            for (let t = 0; t < game.length; t++) {
+                for (let t = 0; t < game.length; t++) {
+                    game[t].send(data)
                 }
             }
         }
