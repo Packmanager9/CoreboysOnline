@@ -115,16 +115,16 @@ ws.addEventListener("open", () => {
                 }
             }
         }else{
-            if(typeof data.gamepad == "undefined"){
-                connectionnumber = (data)
-                if (connectionnumber == 0) {
-                    color = "#FF0000"
-                } else if (connectionnumber == 1) {
-                    color = "#00FF00"
-                }else {
-                console.log(connectionnumber, "2")
-                    color = "#FFFF00"
-                }
+            if(data >= 0){
+                // connectionnumber = (data)
+                // if (connectionnumber == 0) {
+                //     color = "#FF0000"
+                // } else if (connectionnumber == 1) {
+                //     color = "#00FF00"
+                // }else {
+                // console.log(connectionnumber, "2")
+                //     color = "#FFFF00"
+                // }
                 if(boys.length < data){
                 for (let t = boys.length-1; t < data; t++) {
                     CreatePlayer(t)
