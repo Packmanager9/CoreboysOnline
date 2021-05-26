@@ -28,20 +28,21 @@ wss.on("connection", ws => {
     })
     ws.on("message", data => {
         if (data >= 0) {
-            console.log(data)
-            console.log([game.indexOf(ws), game.length])
+            // console.log(data)
+            // console.log([game.indexOf(ws), game.length])
 
             let sjon = {
                 "index":`${game.indexOf(ws)}`,
                 "length":`${game.length}`
              }
-            console.log(sjon)
+            // console.log(sjon)
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {
             for (let t = 0; t < game.length; t++) {
+                if(ws!=game[t]){
                     game[t].send(data)
-                    
+                }
             }
         }
     })
