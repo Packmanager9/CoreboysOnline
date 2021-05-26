@@ -5,7 +5,8 @@ const express = require('express');
 const { Server } = require('ws');
 
 const PORT = process.env.PORT || 3000;
-const INDEX = '/coreboyx.js';
+const INDEX = '/index.html';
+console.log(PORT)
 
 const server = express()
   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
