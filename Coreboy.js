@@ -1,5 +1,6 @@
 
-let HOST = location.origin.replace(/^http/, 'ws')
+let HOST = location.origin.replace(/^file/, 'ws')
+console.log(HOST)
 let ws = new WebSocket(HOST);
 let connectionnumber = 0
 let start = 0
