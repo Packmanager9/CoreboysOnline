@@ -5752,7 +5752,9 @@ class Mass {
             }
         }
     }else{
-                console.log(this.body.color, color)
+                if(Math.random()<.001){
+console.log(this.body.color, color)
+}
             }
     }
     copy() {
@@ -7291,7 +7293,9 @@ class Mass {
                         }
                     }
                 }else{
-                console.log(this.body.color, color)
+                if(Math.random()<.001){
+console.log(this.body.color, color)
+}
             }
             }
 
@@ -18739,6 +18743,8 @@ function CreatePlayer(t) {
     }
 
     boys.push(coreboy)
+    drops.push(0)
+    scores.push(0)
     boom.push(new Circle(0, 0, 1, "transparent"))
 }
 function main() {
