@@ -34,9 +34,7 @@ wss.on("connection", ws => {
             ws.send(game.indexOf(ws))
         } else {
             for (let t = 0; t < game.length; t++) {
-                for (let t = 0; t < game.length; t++) {
                     game[t].send(data)
-                }
             }
         }
     })
