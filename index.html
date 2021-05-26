@@ -78,11 +78,11 @@ ws.addEventListener("open", () => {
     ws.addEventListener("message", ({ data }) => {
         if (start == 0) {
             
+            data = JSON.parse(data)
             console.log(data)
             if(data.length >= 0 && data.length < 5){
                 start = 1
-                data = data.split(',')
-                connectionnumber = (data[0])
+                connectionnumber = (data.index)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
                 } else if (connectionnumber == 1) {
@@ -91,8 +91,8 @@ ws.addEventListener("open", () => {
                     color = "#FFFF00"
                 console.log(connectionnumber, "1")
                 }
-                console.log(connectionnumber, "1", data[1])
-                for (let t = 0; t < parseInt(data[1]); t++) {
+                console.log(connectionnumber, "1", data.index)
+                for (let t = 0; t < parseInt(data.length); t++) {
                     CreatePlayer(t)
                 }
             }
@@ -109,6 +109,7 @@ ws.addEventListener("open", () => {
                 for (let t = 0; t < boys.length; t++) {
                     if (boys[t].body.color != color) {
                     // if (boys[t].body.color == data.color) {
+                        console.log(data.color)
                             boys[t] = new Mass(boys[t].controller, data)
 
 

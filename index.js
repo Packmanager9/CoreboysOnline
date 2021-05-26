@@ -37,7 +37,7 @@ wss.on("connection", ws => {
              }
             console.log(sjon)
             ws.publicID = data
-            ws.send(`${game.indexOf(ws)},${game.length}`)
+            ws.send(JSON.stringify(sjon))
         } else {
             for (let t = 0; t < game.length; t++) {
                     game[t].send(data)
