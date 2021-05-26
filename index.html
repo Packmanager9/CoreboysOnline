@@ -7153,7 +7153,7 @@ class Mass {
 
         this.shotdraw = 0
         if (this.breaktimer <= 0 && this.shield == 0) {
-            if(this.id == ID){
+            if(this.body.color == color){
 
                 if (this.righthand.fired <= 0) {
                     if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
