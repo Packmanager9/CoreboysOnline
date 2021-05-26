@@ -77,7 +77,7 @@ let hit = 0
 ws.addEventListener("open", () => {
     ws.addEventListener("message", ({ data }) => {
         if (start == 0) {
-            if(data >= 0){
+            if(data.length >= 0){
                 start = 1
                 connectionnumber = (data[0])
                 if (connectionnumber == 0) {
@@ -88,7 +88,8 @@ ws.addEventListener("open", () => {
                     color = "#FFFF00"
                 console.log(connectionnumber, "1")
                 }
-                for (let t = 0; t < data[1]; t++) {
+                console.log(connectionnumber, "1", data[1])
+                for (let t = 0; t < data[1]+1; t++) {
                     CreatePlayer(t)
                 }
             }
