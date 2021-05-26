@@ -67,7 +67,7 @@
 let HOST = location.origin.replace(/^http/, 'ws')
 console.log(HOST)
 let ws = new WebSocket(HOST);
-let connectionnumber = 0
+let connectionnumber = -1
 let start = 0
 let ID = Math.random()
 let color = "#FFFFFF"
@@ -1921,7 +1921,7 @@ function setUp(canvas_pass, style = "#000000") {
                 //     boys[t].nodes[f].self =boys[t]
                 // }
             }else{
-                console.log(boys[t].body.color, color)
+                // console.log(boys[t].body.color, color)
             }
 
         for (let t = boys.length - 1; t >= 0; t--) {
