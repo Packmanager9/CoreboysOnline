@@ -1,7 +1,7 @@
 {
   "name": "coreboys",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "Coreboy.js",
   "engines": {
     "node": "12.17.x"
   },
