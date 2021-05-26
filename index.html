@@ -104,6 +104,7 @@ ws.addEventListener("open", () => {
             // if (data.id != ID) {
                 for (let t = 0; t < boys.length; t++) {
                     if (boys[t].body.color != color) {
+                    if (boys[t].body.color == data.color) {
                             boys[t] = new Mass(boys[t].controller, data)
 
 
@@ -114,6 +115,7 @@ ws.addEventListener("open", () => {
                         
                     }
                 }
+            }
             // }
         }else{
             if(data >= 0){
