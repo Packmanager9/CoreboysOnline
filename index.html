@@ -92,7 +92,7 @@ ws.addEventListener("open", () => {
                     CreatePlayer(t)
                 }
             }
-        } else if(typeof data.gamepad !== "undefined"){
+        } else if(!(data >= 0)){
             // start = 0
             data = JSON.parse(data)
             if(hit == 0){
@@ -100,7 +100,7 @@ ws.addEventListener("open", () => {
                 // console.log(data)
             }
             // console.log(data[6], ID)
-            if (data.id != ID) {
+            // if (data.id != ID) {
                 for (let t = 0; t < boys.length; t++) {
                     if (boys[t].body.color != color) {
                             boys[t] = new Mass(boys[t].controller, data)
@@ -113,7 +113,7 @@ ws.addEventListener("open", () => {
                         
                     }
                 }
-            }
+            // }
         }else{
             if(data >= 0){
                 // connectionnumber = (data)
