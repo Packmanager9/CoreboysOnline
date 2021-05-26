@@ -1,6 +1,6 @@
 
-
-const ws = new WebSocket("ws://localhost:8082")
+let HOST = location.origin.replace(/^http/, 'ws')
+let ws = new WebSocket(HOST);
 let connectionnumber = 0
 let start = 0
 let ID = Math.random()
