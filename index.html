@@ -80,13 +80,13 @@ ws.addEventListener("open", () => {
             if(typeof data.gamepad == "undefined"){
                 start = 1
                 connectionnumber = parseInt(data)
-                console.log(connectionnumber)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
                 } else if (connectionnumber == 1) {
                     color = "#00FF00"
                 }else {
                     color = "#FFFF00"
+                console.log(connectionnumber, "1")
                 }
                 for (let t = 0; t < data+1; t++) {
                     CreatePlayer(t)
@@ -117,16 +117,16 @@ ws.addEventListener("open", () => {
         }else{
             if(typeof data.gamepad == "undefined"){
                 connectionnumber = parseInt(data)
-                console.log(connectionnumber)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
                 } else if (connectionnumber == 1) {
                     color = "#00FF00"
                 }else {
+                console.log(connectionnumber, "2")
                     color = "#FFFF00"
                 }
                 if(boys.length < data){
-                for (let t = 0; t < data-boys.length+1; t++) {
+                for (let t = boys.length-1; t < data-boys.length+1; t++) {
                     CreatePlayer(t+data)
                 }
                 }
