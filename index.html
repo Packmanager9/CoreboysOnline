@@ -77,7 +77,7 @@ let hit = 0
 ws.addEventListener("open", () => {
     ws.addEventListener("message", ({ data }) => {
         if (start == 0) {
-            if(typeof data.gamepad == "undefined"){
+            if(data >= 0){
                 start = 1
                 connectionnumber = (data)
                 if (connectionnumber == 0) {
