@@ -79,7 +79,7 @@ ws.addEventListener("open", () => {
         if (start == 0) {
             if(typeof data.gamepad == "undefined"){
                 start = 1
-                connectionnumber = parseInt(data)
+                connectionnumber = (data)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
                 } else if (connectionnumber == 1) {
@@ -116,7 +116,7 @@ ws.addEventListener("open", () => {
             }
         }else{
             if(typeof data.gamepad == "undefined"){
-                connectionnumber = parseInt(data)
+                connectionnumber = (data)
                 if (connectionnumber == 0) {
                     color = "#FF0000"
                 } else if (connectionnumber == 1) {
@@ -126,8 +126,8 @@ ws.addEventListener("open", () => {
                     color = "#FFFF00"
                 }
                 if(boys.length < data){
-                for (let t = boys.length-1; t < data-boys.length+1; t++) {
-                    CreatePlayer(t+data)
+                for (let t = boys.length-1; t < data; t++) {
+                    CreatePlayer(t)
                 }
                 }
             }
