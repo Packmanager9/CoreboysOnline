@@ -5572,6 +5572,7 @@ class Mass {
             }
             // console.log(args)
             this.shotdraw =  args['shotdraw']
+            this.jumpcount =  args['jumpcount']
             for(let t = 0; t<this.nodes.length;t++){
                 this.nodes[t] = new Shot(this.nodes[t].x,this.nodes[t].y,this.nodes[t].radius,this.nodes[t].color,this.nodes[t].xmom,this.nodes[t].ymom,this.nodes[t].friction, 0, this.nodes[t].fired)
             }
