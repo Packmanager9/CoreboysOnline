@@ -79,7 +79,7 @@ ws.addEventListener("open", () => {
         if (start == 0) {
             
             console.log(data)
-            if(data.length >= 0){
+            if(data.length >= 0 && data.length < 5){
                 start = 1
                 data = data.split(',')
                 connectionnumber = (data[0])
@@ -108,7 +108,7 @@ ws.addEventListener("open", () => {
             // if (data.id != ID) {
                 for (let t = 0; t < boys.length; t++) {
                     if (boys[t].body.color != color) {
-                    if (boys[t].body.color == data.color) {
+                    // if (boys[t].body.color == data.color) {
                             boys[t] = new Mass(boys[t].controller, data)
 
 
@@ -117,7 +117,7 @@ ws.addEventListener("open", () => {
 
                         boys[t]['gamepad']  = gp
                         
-                    }
+                    // }
                 }
             }
             // }
