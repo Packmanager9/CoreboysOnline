@@ -31,10 +31,11 @@ wss.on("connection", ws => {
             console.log(data)
             console.log(game.length - 1)
             ws.publicID = data
-            ws.send(game.indexOf(ws))
+            ws.send([game.indexOf(ws), game.length])
         } else {
             for (let t = 0; t < game.length; t++) {
                     game[t].send(data)
+                    
             }
         }
     })
