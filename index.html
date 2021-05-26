@@ -5472,7 +5472,7 @@ class Mass {
     constructor(controller, args = 0) {
         if(args == 0){
             this.id = ID
-
+            this.jumpcount = 0
             this.gamepad = new Gamepad(controller)
             this.shotdraw = 0
             this.jumpreduction = 0
