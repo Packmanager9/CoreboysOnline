@@ -1919,6 +1919,8 @@ function setUp(canvas_pass, style = "#000000") {
                 // for(let f = 0;f<boys[t].nodes.length;f++){
                 //     boys[t].nodes[f].self =boys[t]
                 // }
+            }else{
+                console.log(boys[t].body.color, color)
             }
 
         for (let t = boys.length - 1; t >= 0; t--) {
@@ -4075,7 +4077,7 @@ class Boy {
 
         if (this.breaktimer <= 0 && this.shield == 0) {
 
-            if(this.body.color == color)
+            if(this.body.color == color){
             if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                 if (this.face == 1) {
                     if (this.righthand.fired <= 0) {
@@ -4155,6 +4157,7 @@ class Boy {
                 }
             }
         }
+    }
     }
 
     AImove(object, speed) {
@@ -5748,7 +5751,9 @@ class Mass {
                 }
             }
         }
-    }
+    }else{
+                console.log(boys[t].body.color, color)
+            }
     }
     copy() {
         let copy = new Mass(this.controller)
@@ -7285,7 +7290,9 @@ class Mass {
                             }
                         }
                     }
-                }
+                }else{
+                console.log(boys[t].body.color, color)
+            }
             }
 
         
