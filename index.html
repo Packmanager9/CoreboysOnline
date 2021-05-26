@@ -1874,6 +1874,10 @@ function setUp(canvas_pass, style = "#000000") {
     canvas.style.background = style
     canvas_context.scale(scale, scale)
     window.setInterval(function () {
+        
+        main()
+    }, 18)
+    window.setInterval(function () {
 
         for (let t = 0; t < boys.length; t++) {
             for(let f = 0;f<boys[t].nodes.length;f++){
@@ -1905,8 +1909,8 @@ function setUp(canvas_pass, style = "#000000") {
         }
         }
         
-        main()
-    }, 18)
+    
+    }, 1)
     document.addEventListener('keydown', (event) => {
         keysPressed[event.key] = true;
     });
