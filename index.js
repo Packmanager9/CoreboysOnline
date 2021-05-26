@@ -1,6 +1,19 @@
-const WebSocket = require("ws")
+
+'use strict';
+
+const express = require('express');
+const { Server } = require('ws');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const wss = new Server({ server });
 let boys = []
-const wss = new WebSocket.Server({port: 8082})
+// const wss = new WebSocket.Server({port: 8082})
 
 let games = []
 let game = []
@@ -31,3 +44,5 @@ wss.on("connection", ws => {
         }
     })
 })
+
+
