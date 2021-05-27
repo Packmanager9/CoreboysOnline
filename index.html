@@ -4142,7 +4142,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -4722,7 +4722,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -6374,7 +6374,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -6824,7 +6824,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -8618,7 +8618,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -9132,7 +9132,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -10959,7 +10959,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -11415,7 +11415,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -13110,7 +13110,7 @@
                                 return
                             }
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -14138,7 +14138,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -14597,7 +14597,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -15099,7 +15099,7 @@
                             let bombs = 0
                             for (let t = 0; t < this.shots.length; t++) {
                                 for (let k = 0; k < boys.length; k++) {
-                                    if (this != boys[k]) {
+                                    if (boys[k] && this != boys[k]) {
                                         if (this.shots[t].stuck == 1) {
                                             bombs++
                                             let link = new LineOP(this.shots[t], boys[k].body)
@@ -17280,7 +17280,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -19202,7 +19202,7 @@
 
 
                             for (let f = 0; f < boys.length; f++) {
-                                if (this != boys[f]) {
+                                if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (boys.indexOf(this) != t) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
@@ -19701,7 +19701,7 @@
                                         }
                                     }
                                 }
-                                if (this != boys[k]) {
+                                if (boys[k] && this != boys[k]) {
                                     for (let t = 0; t < stage.bricks.length; t++) {
                                         if (stage.bricks[t].edgeleft.x < (this.body.x + (this.body.radius * 1.6)) && stage.bricks[t].edgeright.x > (this.body.x - (this.body.radius * 1.6))) {
                                             if (Math.max(stage.bricks[t].edgeright.y, stage.bricks[t].edgeleft.y) < this.body.y) {
@@ -21198,33 +21198,47 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = 0; t < boys.length; t++) {
+                                    if(boys[t] ){
                                     if (boys[t].id == ID) {
                                         boys[t].enemycollide()
                                     }
                                 }
+                                }
                             } else {
                                 for (let t = boys.length - 1; t >= 0; t--) {
-                                    if (boys[t].id == ID) {
+                                    if(boys[t] ){
+                                        if (boys[t].id == ID) {
                                         boys[t].enemycollide()
+                                        }
                                     }
                                 }
                             }
 
                             if (flopper % 2 == 0) {
                                 for (let t = boys.length - 1; t >= 0; t--) {
+                                    if(boys[t] ){
                                     boys[t].operate()
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < boys.length; t++) {
+                                    if(boys[t] ){
                                     boys[t].operate()
+                                    }
                                 }
                             }
 
                             for (let t = 0; t < boys.length; t++) {
+                                    if(boys[t] ){
                                 boys[t].draw()
+                                    }
                             }
 
                             for (let t = 0; t < boys.length; t++) {
+
+                                if(!boys[t] ){
+                                    continue
+                                }
                                 if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5)) || boys[t].body.y < 0) {
                                     if (stock > 0) {
                                         if (drops[t] < stock) {
@@ -21405,16 +21419,16 @@
                                         if (characterbuttons[k].isPointInside(selectors[t].body)) {
                                             let coreboy
                                             if (k == 0) {
-                                                coreboy = new Mass(connectionnumber)
+                                                coreboy = new Mass(boys.length)
                                                 coreboy.body.color = selectors[t].body.color
                                             } else if (k == 1) {
-                                                coreboy = new Boy(connectionnumber)
+                                                coreboy = new Boy(boys.length)
                                                 coreboy.body.color = selectors[t].body.color
                                             } else if (k == 2) {
-                                                coreboy = new Blastgirl(connectionnumber)
+                                                coreboy = new Blastgirl(boys.length)
                                                 coreboy.body.color = selectors[t].body.color
                                             } else if (k == 3) {
-                                                coreboy = new Jox(connectionnumber)
+                                                coreboy = new Jox(boys.length)
                                                 coreboy.body.color = invertColor(selectors[t].body.color)
                                             } else if (k == 4) {
                                                 coreboy = new ScorchedMass(boys.length)
