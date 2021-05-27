@@ -5679,6 +5679,31 @@ class Mass {
             }
             this.id = args["id"]
             this.body = this.nodes[0]
+
+    if (this.controller == 0) {
+        this.body.color = "#FF0000"
+    }
+    if (this.controller == 1) {
+        this.body.color = "#00FF00"
+    }
+    if (this.controller == 2) {
+        this.body.color = "#0000FF"
+    }
+    if (this.controller == 3) {
+        this.body.color = "#FFFF00"
+    }
+    if (this.controller == 4) {
+        this.body.color = "#FFAA00"
+    }
+    if (this.controller == 5) {
+        this.body.color = "#00FFFF"
+    }
+    if (this.controller == 6) {
+        this.body.color = "#FF00FF"
+    }
+    if (this.controller == 7) {
+        this.body.color = "#bbbbbb"
+    }
             this.rightshoulder = this.nodes[1]
             this.leftshoulder = this.nodes[2]
             this.righthand = this.nodes[3]
