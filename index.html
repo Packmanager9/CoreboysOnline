@@ -5643,6 +5643,8 @@
                         draw() {
                             this.grounded = 0
                             this.frame++
+
+                            if(this.id == ID){
                             for (let t = 0; t < this.shots.length; t++) {
                                 this.shots[t].radius *= 1.02
                                 this.shots[t].ymom *= 1.02
@@ -5652,6 +5654,11 @@
                                     this.shots[t].marked = 1
                                 }
                             }
+                        }else{
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
+                        }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
@@ -7830,16 +7837,23 @@
                         draw() {
                             this.grounded = 0
                             this.frame++
-                            for (let t = 0; t < this.shots.length; t++) {
+                            if(this.id == ID){
+                                for (let t = 0; t < this.shots.length; t++) {
                                 this.shots[t].move()
                                 this.shots[t].draw()
                             }
+                            }else{
+
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
+                            }
+
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
                                 }
                             }
-
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
                             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
                             this.collideStage()
@@ -10152,6 +10166,7 @@
                         draw() {
                             this.grounded = 0
                             this.frame++
+                            if(this.id == ID){
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     this.shots[t].ymom += this.shots[t].gravity
@@ -10166,6 +10181,11 @@
                                 this.shots[t].move()
                                 this.shots[t].draw()
                             }
+                        }else{
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
+                        }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
                             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
                             this.collideStage()
@@ -12301,6 +12321,8 @@
                         draw() {
                             this.grounded = 0
                             this.frame++
+
+                            if(this.id == ID){
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     this.shots[t].ymom += this.shots[t].gravity
@@ -12315,6 +12337,11 @@
                                 this.shots[t].move()
                                 this.shots[t].draw()
                             }
+                        }else{
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
+                        }
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
@@ -15432,6 +15459,8 @@
                         draw() {
                             this.grounded = 0
                             this.frame++
+                            if(this.id == ID){
+
                             for (let t = 0; t < this.shots.length; t++) {
 
                                 if (this.shots[t].bomb == 1) {
@@ -15459,6 +15488,11 @@
                                     this.shots[t].move()
                                 }
                                 this.shots[t].draw()
+                            }
+                            }else{
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
                             }
                             this.detonate = 0
                             for (let j = 0; j < this.shots.length; j++) {
@@ -18138,6 +18172,7 @@
                             } else {
                                 this.body.radius = this.radsto
                             }
+                            if(this.id == ID){
                             for (let t = 0; t < this.shots.length; t++) {
                                 this.shots[t].radius *= 1.02
                                 this.shots[t].ymom *= 1.02
@@ -18147,6 +18182,11 @@
                                     this.shots[t].marked = 1
                                 }
                             }
+                        }else{
+                            for (let t = 0; t < this.shots.length; t++) {
+                                this.shots[t].draw()
+                            }
+                        }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
@@ -20480,6 +20520,8 @@
                             }
                             this.grounded = 0
                             this.frame++
+
+                            if(this.id == ID){
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
@@ -20501,6 +20543,11 @@
                                 }
                                 this.shots[t].move()
                                 this.shots[t].draw()
+                            }
+                            }else{
+                            for(let t =0;t<this.shots.length;t++){
+                                this.shots[t].draw()
+                            }
                             }
 
                             for (let j = 0; j < 10; j++) {
