@@ -18896,19 +18896,7 @@ function main() {
             }
         }
         stage.draw()
-        if (flopper % 2 == 0) {
-            for (let t = boys.length - 1; t >= 0; t--) {
-                // if(boys[t].body.color == color){
-                    boys[t].operate()
-                // }
-            }
-        } else {
-            for (let t = 0; t < boys.length; t++) {
-                // if(boys[t].body.color == color){
-                boys[t].operate()
-                // }
-            }
-        }
+
         if (flopper % 2 == 0) {
             for (let t = 0; t < boys.length; t++) {
                 // if(boys[t].body.color == color){
@@ -18923,6 +18911,19 @@ function main() {
             }
         }
 
+        if (flopper % 2 == 0) {
+            for (let t = boys.length - 1; t >= 0; t--) {
+                // if(boys[t].body.color == color){
+                    boys[t].operate()
+                // }
+            }
+        } else {
+            for (let t = 0; t < boys.length; t++) {
+                // if(boys[t].body.color == color){
+                boys[t].operate()
+                // }
+            }
+        }
 
         for (let t = 0; t < boys.length; t++) {
             boys[t].draw()
