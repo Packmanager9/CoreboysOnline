@@ -71,6 +71,7 @@
                     let connectionnumber = -1
                     let start = 0
                     let ID = Math.random()
+                    let IDaddress = 0
                     let color = "#FFFFFF"
                     let hit = 0
                     let players = 0
@@ -79,14 +80,15 @@
                     ws.addEventListener("open", () => {
                         ws.addEventListener("message", ({ data }) => {
                             if (start == 0) {
-
+                                console.log(data)
                                 data = JSON.parse(data)
                                 //console.log(data)
-                                if (data.length >= 0 && data.length < 5) {
+                                if (data.length >= 0 && data.length < 5 && !(data.delete)) {
                                     start = 1
-                                    connectionnumber = parseInt(data.index)
+                                    connectionnumber = parseInt(data.slot)
 
                                     ID = connectionnumber
+                                    IDaddress = connectionnumber
                                     if (connectionnumber == 0) {
                                         color = "#FF0000"
                                     }
@@ -112,18 +114,35 @@
                                         color = "#bbbbbb"
                                     }
                                     //console.log(connectionnumber, "1", data.index)
-                                    players = data.length
+                                    players = parseInt(data.length)
                                     for (let t = 0; t < parseInt(data.length); t++) {
                                         CreatePlayer(t)
                                     }
                                 }
                             }else if(JSON.parse(data).delete){
                                 console.log("del")
+
+                                if(JSON.parse(data).delete < ID){
+                                    // boys[JSON.parse(data).delete] = new Dummy(0)
+                                            IDaddress--
+                                            ID--
+                                            for(let t = 0;t<boys.length;t++){
+                                                if(t<JSON.parse(data).delete){
+                                                    boys[t].id--
+                                                }
+                                            }
+                                            connectionnumber = parseInt(data.slot)
+                                            console.log(IDaddress)
+                                        }
+                                        
                                 for(let t = 0;t<boys.length;t++){
                                     if(boys[t].id == JSON.parse(data).delete){
                                         boys.splice(t, 1)
                                     }
                                 }
+                                console.log(data)
+
+
                             } else if ((data.length >= 0)) {
                                 // start = 0
                                 data = JSON.parse(data)
@@ -199,15 +218,11 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = 0; t < boys.length; t++) {
-                                    // if(boys[t].body.color == color){
                                     boys[t].enemycollide()
-                                    // }
                                 }
                             } else {
                                 for (let t = boys.length - 1; t >= 0; t--) {
-                                    // if(boys[t].body.color == color){
                                     boys[t].enemycollide()
-                                    // }
                                 }
                             }
                         })
@@ -1817,7 +1832,7 @@
                                 if (this.anchor.anchored == 1) {
                                     this.body.xmom -= ((this.body.x - this.anchor.x) / (this.length)) * 5.66
                                     this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 5.66
-                                    this.body.ymom += this.body.self.gravity
+                                    this.body.ymom += this.body.gravity
                                 }
                                 if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 5.66
@@ -3853,7 +3868,7 @@
                         }
 
                         playerMove(object) {
-                            if (object.color == color) {
+                            if (this.id == ID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -4358,7 +4373,7 @@
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                                if (this.body.color == color) {
+                                if (this.id == ID) {
                                     if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                                         if (this.face == 1) {
                                             if (this.righthand.fired <= 0) {
@@ -5987,7 +6002,7 @@
                             }
                         }
                         playerMove(object) {
-                            if (object.color == color) {
+                            if (this.id == ID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -7529,7 +7544,7 @@
                             if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                 if (this.breaktimer < 0) {
                                     if (this.grounded == 1) {
-                                        if (this.body.color == color) {
+                                        if (this.id == ID) {
                                             this.shieldpower -= .63
                                             this.shield = 1
                                             this.shielddraw = 1
@@ -7550,7 +7565,7 @@
                                 this.shotdraw = 0
                             }
                             if (this.breaktimer <= 0 && this.shield == 0) {
-                                if (this.body.color == color) {
+                                if (this.id == ID) {
 
                                     if (this.righthand.fired <= 0) {
                                         if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
@@ -19160,9 +19175,9 @@
                             // game code goes here
 
                             for (let t = boys.length - 1; t >= 0; t--) {
-                                if (t == connectionnumber - 1) {
+                                // if (t == connectionnumber - 1) {
                                     boys[t].gamepad.gamepad.update()
-                                }
+                                // }
                             }
                             stage.draw()
 
@@ -19182,15 +19197,11 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = boys.length - 1; t >= 0; t--) {
-                                    // if(boys[t].body.color == color){
                                     boys[t].operate()
-                                    // }
                                 }
                             } else {
                                 for (let t = 0; t < boys.length; t++) {
-                                    // if(boys[t].body.color == color){
                                     boys[t].operate()
-                                    // }
                                 }
                             }
 
@@ -19285,17 +19296,16 @@
                             }
                             sender++
                             if(sender%1 ==0){
-                            for (let t = 0; t < boys.length; t++) {
-                                for (let f = 0; f < boys[t].nodes.length; f++) {
-                                    boys[t].nodes[f].self = 0
+                                for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
+                                    boys[IDaddress].nodes[f].self = 0
                                 }
-                                if (boys[t].body.color == color) {
-                                    boys[t].id = ID
+                                if (boys[IDaddress].id == ID) {
+                                    boys[IDaddress].id = ID
                                     let Json = {}
-                                    let keys = Object.keys(boys[t])
+                                    let keys = Object.keys(boys[IDaddress])
                                     for (let k = 0; k < keys.length; k++) {
-                                        if (!Object.keys(boys[t][keys[k]]).includes("self")) {
-                                            Json[keys[k]] = boys[t][keys[k]]
+                                        if (!Object.keys(boys[IDaddress][keys[k]]).includes("self")) {
+                                            Json[keys[k]] = boys[IDaddress][keys[k]]
                                         }
                                     }
                                     // //console.log(keys)
@@ -19306,16 +19316,16 @@
                                     // for(let f = 0;f<boys[t].nodes.length;f++){
                                     //     boys[t].nodes[f].self =boys[t]
                                     // }
+                                    console.log(boys[IDaddress].id, ID)
                                 } else {
-                                    // //console.log(boys[t].body.color, color)
+                                    console.log(boys[IDaddress].id, ID)
                                 }
 
-                                for (let t = boys.length - 1; t >= 0; t--) {
-                                    for (let k = 0; k < boys[t].nodes.length; k++) {
-                                        boys[t].nodes[k].self = boys[t]
-                                    }
-                                }
-                            }
+                                // for (let t = boys.length - 1; t >= 0; t--) {
+                                //     for (let k = 0; k < boys[t].nodes.length; k++) {
+                                //         boys[t].nodes[k].self = boys[t]
+                                //     }
+                                // }
                         }
                         } else {
                             canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)

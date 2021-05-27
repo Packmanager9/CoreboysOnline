@@ -2,7 +2,7 @@
 'use strict';
 
 const express = require('express');
-const { Server } = require('ws');
+const { Server, defaultMaxListeners } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
@@ -21,39 +21,116 @@ let game = []
 wss.on("connection", ws => {
     //console.log("new client")
     //console.log(wss.clients.size)
+    ws.index = game.length
     game.push(ws)
+    let pair = [game.length, -1]
+    ws.pair = pair
     ws.on("close", () => {
         //console.log("client left")
-        let deleter = game.indexOf(ws)
+        let deleter = ws.index
 
-        let sjon = {
-            "delete":`${deleter}`
-         }
+
+        game.splice(game.indexOf(ws), 1)
         for (let t = 0; t < game.length; t++) {
+
+            let sjon = {
+                "delete": `${deleter}`,
+                "index": `${t}`,
+                "length": `${game.length}`
+            }
             game[t].send(JSON.stringify(sjon))
             console.log(sjon)
         }
 
-        game.splice(game.indexOf(ws))
+        let minarr = []
+        for(let t = 0;t<game.length;t++){
+            minarr.push(game[t].pair[1])
+        }
+        if(Math.max(...minarr) == -1){
+            ws.pair[1] = 0
+        }else{
+            if(!minarr.includes(7)){
+                ws.pair[1] = 7
+            }
+            if(!minarr.includes(6)){
+                ws.pair[1] = 6
+            }
+            if(!minarr.includes(5)){
+                ws.pair[1] = 5
+            }
+            if(!minarr.includes(4)){
+                ws.pair[1] = 4
+            }
+            if(!minarr.includes(3)){
+                ws.pair[1] = 3
+            }
+            if(!minarr.includes(2)){
+                ws.pair[1] = 2
+            }
+            if(!minarr.includes(1)){
+                ws.pair[1] = 1
+            }
+            if(!minarr.includes(0)){
+                ws.pair[1] = 0
+            }
+        }
+
+
+        console.log(deleter)
     })
     ws.on("message", data => {
         if (data >= 0) {
             // //console.log(data)
             // //console.log([game.indexOf(ws), game.length])
+            let minarr = []
+            for(let t = 0;t<game.length;t++){
+                minarr.push(game[t].pair[1])
+            }
+            if(Math.max(...minarr) == -1){
+                ws.pair[1] = 0
+            }else{
+                if(!minarr.includes(7)){
+                    ws.pair[1] = 7
+                }
+                if(!minarr.includes(6)){
+                    ws.pair[1] = 6
+                }
+                if(!minarr.includes(5)){
+                    ws.pair[1] = 5
+                }
+                if(!minarr.includes(4)){
+                    ws.pair[1] = 4
+                }
+                if(!minarr.includes(3)){
+                    ws.pair[1] = 3
+                }
+                if(!minarr.includes(2)){
+                    ws.pair[1] = 2
+                }
+                if(!minarr.includes(1)){
+                    ws.pair[1] = 1
+                }
+                if(!minarr.includes(0)){
+                    ws.pair[1] = 0
+                }
+            }
 
             let sjon = {
-                "index":`${game.indexOf(ws)}`,
-                "length":`${game.length}`
-             }
+                "index": `${game.indexOf(ws)}`,
+                "length": `${game.length}`,
+                "slot": `${ws.pair[1]}`
+            }
             // //console.log(sjon)
+
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {
             data = JSON.parse(data)
             data.players = wss.clients.size
+            data.usedslots = []
             data = JSON.stringify(data)
             for (let t = 0; t < game.length; t++) {
-                if(ws!=game[t]){
+                if (ws != game[t]) {
                     game[t].send(data)
                 }
             }
