@@ -127,9 +127,14 @@
                                 }
                                 //console.log(data, ID)
                                 // if (data.id != ID) {
-                                for (let t = 0; t < boys.length; t++) {
+                                for (let t = 0; t < Math.max(data.players,boys.length); t++) {
+                                    if(t == ID){
+                                        console.log(ID)
+                                        continue
+                                    }
                                     // if (boys[t].body.color != color) {
-                                    if (boys[t].id == data.id) {
+                                        if(boys[t]){
+                                    if (boys[t].id == data.id || t>data.players) {
                                         //console.log(data)
                                         if(data.name == "Coreboy"){
                                             boys[t] = new Boy(t, data)
@@ -143,9 +148,9 @@
                                         let gp = new Gamepad(t)
 
                                         boys[t]['gamepad'] = gp
-
+                                    }
                                     } else {
-                                        if (boys.length < data.players) {
+                                        if (boys.length <= data.players) {
                                             let newplayer
                                         if(data.name == "Coreboy"){
                                             newplayer = new Boy(t, data)
@@ -1784,7 +1789,7 @@
                                 if (this.anchor.anchored == 1) {
                                     this.body.xmom -= ((this.body.x - this.anchor.x) / (this.length)) * 5.66
                                     this.body.ymom -= ((this.body.y - this.anchor.y) / (this.length)) * 5.66
-                                    this.body.ymom += this.body.self.gravity
+                                    this.body.ymom += this.body.gravity
                                 }
                                 if (this.anchor.fired < 10 && this.anchor.fired > 0) {
                                     this.anchor.xmom += ((this.body.x - this.anchor.x) / (this.length)) * 7.66
@@ -3753,7 +3758,7 @@
                                 this.breaktimer = 0
                                 this.bodyx = this.body.x
                                 for (let t = 0; t < this.nodes.length; t++) {
-                                    this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                                 }
                                 this.target = {}
                                 this.target.body = {}
@@ -5867,7 +5872,7 @@
                                 this.screwmomentum = 0
                                 this.screwtimer = 0
                                 for (let t = 0; t < this.nodes.length; t++) {
-                                    this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                                 }
 
                                 this.target = {}
@@ -7789,9 +7794,6 @@
 
                             // canvas_context.fillText(`_ ${this.shotdraw}`, this.body.x - 20, this.body.y - 300)
                             if (this.shotdraw == 1) {
-                                if (this.id != ID) {
-                                    console.log(this.shotdraw, this.body.color)
-                                }
                                 if (this.face == 1) {
                                     this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .66, "#00FFFF", this.speed * 2, 0)
                                 } else {
@@ -8057,7 +8059,7 @@
                             this.screwmomentum = 0
                             this.screwtimer = 0
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -10123,7 +10125,7 @@
                             this.screwmomentum = 0
                             this.screwtimer = 0
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -12038,7 +12040,7 @@
                             this.screwmomentum = 0
                             this.screwtimer = 0
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -12736,7 +12738,7 @@
                             this.screwmomentum = 0
                             this.screwtimer = 0
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -14737,7 +14739,7 @@
                             this.breaktimer = 0
                             this.bodyx = this.body.x
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -17023,7 +17025,7 @@
                             this.screwtimer = 0
                             this.blasting = 0
                             for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].self = this // lmao
+                                    this.nodes[t].gravity = this.gravity // lmao
                             }
                             this.target = {}
                             this.target.body = {}
@@ -19274,7 +19276,7 @@
                                 }
                             }
                             sender++
-                            if(sender%3 ==0){
+                            if(sender%1 ==0){
                             for (let t = 0; t < boys.length; t++) {
                                 for (let f = 0; f < boys[t].nodes.length; f++) {
                                     boys[t].nodes[f].self = 0
