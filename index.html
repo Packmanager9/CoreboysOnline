@@ -5507,30 +5507,6 @@ class Mass {
     constructor(controller, args = 0) {
         if(args == 0){
 
-    if (controller == 0) {
-        this .body.color = "#FF0000"
-    }
-    if (controller == 1) {
-        this .body.color = "#00FF00"
-    }
-    if (controller == 2) {
-        this .body.color = "#0000FF"
-    }
-    if (controller == 3) {
-        this .body.color = "#FFFF00"
-    }
-    if (controller == 4) {
-        this .body.color = "#FFAA00"
-    }
-    if (controller == 5) {
-        this .body.color = "#00FFFF"
-    }
-    if (controller == 6) {
-        this .body.color = "#FF00FF"
-    }
-    if (controller == 7) {
-        this .body.color = "#bbbbbb"
-    }
             this.id = ID
             this.jumpcount = 0
             this.gamepad = new Gamepad(controller)
@@ -5617,6 +5593,31 @@ class Mass {
             for (let t = 0; t < this.nodes.length; t++) {
                 this.nodes[t].self = this // lmao
             }
+
+    if (controller == 0) {
+        this .body.color = "#FF0000"
+    }
+    if (controller == 1) {
+        this .body.color = "#00FF00"
+    }
+    if (controller == 2) {
+        this .body.color = "#0000FF"
+    }
+    if (controller == 3) {
+        this .body.color = "#FFFF00"
+    }
+    if (controller == 4) {
+        this .body.color = "#FFAA00"
+    }
+    if (controller == 5) {
+        this .body.color = "#00FFFF"
+    }
+    if (controller == 6) {
+        this .body.color = "#FF00FF"
+    }
+    if (controller == 7) {
+        this .body.color = "#bbbbbb"
+    }
             this.target = {}
             this.target.body = {}
         }else{
@@ -18681,7 +18682,7 @@ for (let t = 0; t < 8; t++) {
 // object instantiation and creation happens here 
 
 //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
-let counter = 1
+let counter = 0
 
 // if (keysPressed['v']) {
 //     if (keysPressed['q']) {
