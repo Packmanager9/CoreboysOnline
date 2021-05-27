@@ -19040,6 +19040,7 @@
 
                     //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
                     let counter = 0
+                    let sender = 0
 
                     // if (keysPressed['v']) {
                     //     if (keysPressed['q']) {
@@ -19272,7 +19273,8 @@
                                     }
                                 }
                             }
-
+                            sender++
+                            if(sender%3 ==0){
                             for (let t = 0; t < boys.length; t++) {
                                 for (let f = 0; f < boys[t].nodes.length; f++) {
                                     boys[t].nodes[f].self = 0
@@ -19304,6 +19306,7 @@
                                     }
                                 }
                             }
+                        }
                         } else {
                             canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)
 
