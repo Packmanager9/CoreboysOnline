@@ -160,7 +160,10 @@
                                     }
                                     // if (boys[t].body.color != color) {
                                     if (boys[t]) {
-                                        if (boys[t].id == data.id) {
+                                        // console.log(data)
+                                        if(data.frame > boys[t].frame-100){
+
+                                            if (boys[t].id == data.id) {
                                             ////console.log(data)
                                             if (data.name == "Coreboy") {
                                                 boys[t] = new Boy(t, data)
@@ -192,6 +195,7 @@
                                             let gp = new Gamepad(t)
 
                                             boys[t]['gamepad'] = gp
+                                        }
                                         }
                                     } else {
                                         // if (boys.length <= data.players) {
@@ -2620,7 +2624,7 @@
                                                     let j = 0
                                                     while (this.shape.doesPerimeterTouch(circle)) {
                                                         j++
-                                                        if (j > 10000000) {
+                                                        if (j> 10000) {
                                                             break
                                                         }
                                                         if (circle == player.body) {
@@ -2698,7 +2702,7 @@
                                                 let j = 0
                                                 while (this.shape.doesPerimeterTouch(circle)) {
                                                     j++
-                                                    if (j > 10000000) {
+                                                    if (j> 10000) {
                                                         break
                                                     }
                                                     if (circle == player.body) {
@@ -3073,7 +3077,7 @@
                             let j = 0
                             while (this.shape.doesPerimeterTouch(circle)) {
                                 j++
-                                if (j > 10000000) {
+                                if (j> 10000) {
                                     break
                                 }
 
@@ -3764,6 +3768,7 @@
                                 this.speed = 11.5
                                 this.punchspeed = 6.5
                                 this.grounded = 0
+                                this.frame = 0
                                 this.jumping = 1
 
                                 this.color = getRandomColor()
@@ -3856,6 +3861,7 @@
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -4327,7 +4333,7 @@
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -5634,6 +5640,7 @@
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
                                 this.shots[t].radius *= 1.02
                                 this.shots[t].ymom *= 1.02
@@ -5903,6 +5910,7 @@
                                 this.speed = 11.5
                                 this.punchspeed = 6 // 5 // 5.7
                                 this.grounded = 0
+                                this.frame = 0
                                 this.jumping = 1
                                 this.body = new Shot((400 + (Math.random() * 0) + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37.5, this.color)
                                 this.nodes.push(this.body)
@@ -5987,6 +5995,7 @@
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -7817,6 +7826,7 @@
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
                                 this.shots[t].move()
                                 this.shots[t].draw()
@@ -8151,6 +8161,7 @@
                                 this.speed = 11.5
                                 this.punchspeed = 5
                                 this.grounded = 0
+                                this.frame = 0
                                 this.jumping = 1
 
 
@@ -8201,6 +8212,7 @@
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -8716,7 +8728,7 @@
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         if (this.id == ID) {
@@ -10135,6 +10147,7 @@
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     this.shots[t].ymom += this.shots[t].gravity
@@ -10458,6 +10471,7 @@
                                 this.speed = 11.5
                                 this.punchspeed = 5
                                 this.grounded = 0
+                                this.frame = 0
                                 this.jumping = 1
 
 
@@ -10508,6 +10522,7 @@
                                     this.shots[t] = new ShotC(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -11011,7 +11026,7 @@
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -12280,6 +12295,7 @@
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     this.shots[t].ymom += this.shots[t].gravity
@@ -12608,6 +12624,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                 this.links = []
                                 this.speed = 11.5
                                 this.punchspeed = 5
+                                this.frame = 0
                                 this.grounded = 0
                                 this.jumping = 1
 
@@ -12658,6 +12675,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                     this.shots[t] = new Shotb(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -13128,7 +13146,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -13249,6 +13267,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                         draw() {
 
                             this.grounded = 0
+                            this.frame++
                             this.safe = 0
                             this.safesto = 0
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -13540,6 +13559,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                 this.links = []
                                 this.speed = 12.5
                                 this.punchspeed = 6.1 // 5 // 5.7
+                                this.frame = 0
                                 this.grounded = 0
                                 this.jumping = 1
                                this.nodes.push(this.body)
@@ -13590,6 +13610,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                     this.shots[t] = new ShotD(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -14107,7 +14128,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -15404,6 +15425,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
 
                                 if (this.shots[t].bomb == 1) {
@@ -15749,6 +15771,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                 this.speed = 10.5
                                 this.punchspeed = 6.9
                                 this.grounded = 0
+                                this.frame = 0
                                 this.jumping = 1
                                 this.nodes.push(this.body)
                                 this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
@@ -15835,6 +15858,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                     this.shots[t] = new Circle(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -16530,7 +16554,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                     let j = 0
                                     while (boys[t].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[t].body.x) / (this.body.radius + boys[t].body.radius)
@@ -18100,6 +18124,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                         }
                         draw() {
                             this.grounded = 0
+                            this.frame++
                             this.countering--
                             if (this.countering > 0) {
                                 this.body.radius += 5
@@ -18332,7 +18357,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j > 10000000) {
+                                                    if (j> 10000) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -18524,6 +18549,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
+this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -18807,7 +18833,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j > 10000000) {
+                                                    if (j> 10000) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -19066,7 +19092,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000000) {
+                                        if (j> 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -20445,6 +20471,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                 }
                             }
                             this.grounded = 0
+                            this.frame++
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (typeof this.shots[t].gravity == "number") {
                                     if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
