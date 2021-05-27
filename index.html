@@ -139,7 +139,7 @@ ws.addEventListener("open", () => {
                         boys[t]['gamepad']  = gp
                         
                     }else{
-                        if(boys.length<players){
+                        if(boys.length<data.players){
                             let newplayer =  new Mass(t, data)
                         let gp = new Gamepad(boys[t].controller)
                         boys.push(newplayer)

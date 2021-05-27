@@ -39,6 +39,7 @@ wss.on("connection", ws => {
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {
+            data.players = wss.clients.size
             for (let t = 0; t < game.length; t++) {
                 if(ws!=game[t]){
                     game[t].send(data)
