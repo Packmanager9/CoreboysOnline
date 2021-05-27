@@ -127,7 +127,7 @@
                                             IDaddress--
                                             ID--
                                             for(let t = 0;t<boys.length;t++){
-                                                if(t<JSON.parse(data).delete){
+                                                if(t<=JSON.parse(data).delete){
                                                     boys[t].id--
                                                 }
                                             }
@@ -19171,8 +19171,6 @@
 
                             flopper++
                             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-                            // circx.draw() //checks for button presses/stick movement on the connected controller)
-                            // game code goes here
 
                             for (let t = boys.length - 1; t >= 0; t--) {
                                 // if (t == connectionnumber - 1) {
