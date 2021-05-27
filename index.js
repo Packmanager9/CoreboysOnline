@@ -19,8 +19,6 @@ let games = []
 let game = []
 
 wss.on("connection", ws => {
-    //console.log("new client")
-    //console.log(wss.clients.size)
     ws.index = game.length
     game.push(ws)
     let pair = [game.length, -1]
@@ -35,7 +33,6 @@ wss.on("connection", ws => {
                 "length": `${game.length}`
             }
             game[t].send(JSON.stringify(sjon))
-            console.log(sjon)
         }
         let minarr = []
         for(let t = 0;t<game.length;t++){
@@ -69,7 +66,6 @@ wss.on("connection", ws => {
                 ws.pair[1] = 0
             }
         }
-        console.log(deleter)
     })
     ws.on("message", data => {
         if (data >= 0) {
