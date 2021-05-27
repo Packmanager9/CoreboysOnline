@@ -172,6 +172,19 @@ ws.addEventListener("open", () => {
             }
         }
 
+        if (flopper % 2 == 0) {
+            for (let t = 0; t < boys.length; t++) {
+                // if(boys[t].body.color == color){
+                boys[t].enemycollide()
+                // }
+            }
+        } else {
+            for (let t = boys.length - 1; t >= 0; t--) {
+                // if(boys[t].body.color == color){
+                boys[t].enemycollide()
+                // }
+            }
+        }
     })
     ws.send(ID)
 })
@@ -5691,9 +5704,32 @@ class Mass {
             this.rightarm = new SpringOP(this.rightshoulder, this.righthand, this.armlength, 8)
             this.springs.push(this.leftarm)
             this.springs.push(this.rightarm)
+            // if(this.righthand.fired > 0){
+            //     // console.log(this.righthand.fired)
+            // }
             for(let t = 0; t<this.nodes.length;t++){
                 // this.nodes[t].self = this
             }
+        }
+    }
+    doJump(object, speed){
+        if(this.id == ID){
+            if (keysPressed['w']) {
+        this.jumping = 1
+        object.ymom = -speed * 2
+        this.jumpcount = 100 - this.jumpreduction
+
+    }
+    if (typeof object != 'undefined') {
+        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
+                if (this.gamepad.gamepad.axesStatus[1] < -.5) {
+                    object.ymom = -speed * 2
+                    this.jumpcount = 100
+                }
+            }
+        }
+    }
         }
     }
     playerMove(object){
@@ -5965,7 +6001,9 @@ class Mass {
                                     if (this.body.ymom > vsmashlimit) {
                                         this.body.ymom = vsmashlimit
                                     }
+                                if(this.id == ID){
                                     this.body.move()
+                                }
                                     this.fixupshoulder()
 
                                 }
@@ -5992,7 +6030,9 @@ class Mass {
                                     if (this.body.ymom > vsmashlimit) {
                                         this.body.ymom = vsmashlimit
                                     }
+                                if(this.id == ID){
                                     this.body.move()
+                                }
                                     this.fixupshoulder()
 
                                 }
@@ -6019,7 +6059,9 @@ class Mass {
                                     if (this.body.ymom > vsmashlimit) {
                                         this.body.ymom = vsmashlimit
                                     }
+                                if(this.id == ID){
                                     this.body.move()
+                                }
                                     this.fixupshoulder()
                                 }
                             }
@@ -6046,7 +6088,9 @@ class Mass {
                                     if (this.body.ymom > vsmashlimit) {
                                         this.body.ymom = vsmashlimit
                                     }
+                                if(this.id == ID){
                                     this.body.move()
+                                }
                                     this.fixupshoulder()
                                 }
                             }
@@ -6074,7 +6118,9 @@ class Mass {
                                 if (this.body.ymom > vsmashlimit) {
                                     this.body.ymom = vsmashlimit
                                 }
-                                this.body.move()
+                                if(this.id == ID){
+                                    this.body.move()
+                                }
                                 this.fixupshoulder()
 
                             }
@@ -6101,7 +6147,9 @@ class Mass {
                                 if (this.body.ymom > vsmashlimit) {
                                     this.body.ymom = vsmashlimit
                                 }
-                                this.body.move()
+                                if(this.id == ID){
+                                    this.body.move()
+                                }
                                 this.fixupshoulder()
                             }
                         }
@@ -6127,7 +6175,9 @@ class Mass {
                                 if (this.body.ymom > vsmashlimit) {
                                     this.body.ymom = vsmashlimit
                                 }
-                                this.body.move()
+                                if(this.id == ID){
+                                    this.body.move()
+                                }
                                 this.fixupshoulder()
                             }
                         }
@@ -6168,7 +6218,9 @@ class Mass {
         this.jumpcount--
         if (this.jumpcount <= -20) {
             if (boys.indexOf(this) <= humanPlayers) {
-                this.playerMove(this.body, this.speed, this.gamepad)
+            this.doJump(this.body, this.speed)
+            this.doJump(this.lefthand, this.speed)
+            this.doJump(this.righthand, this.speed)
             } else {
                 this.AIarmControl()
             }
