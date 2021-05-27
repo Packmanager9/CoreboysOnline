@@ -907,7 +907,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
+                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
                                 this.string = this.color
 
                                 gard.addColorStop(0, invertColor(this.string) + `51`)
