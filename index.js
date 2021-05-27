@@ -65,6 +65,7 @@ wss.on("connection", ws => {
                 "index": `${t}`,
                 "length": `${game.length}`
             }
+            // sjon.minarr = minarr
             game[t].send(JSON.stringify(sjon))
         }
     })
@@ -107,13 +108,47 @@ wss.on("connection", ws => {
                 "length": `${game.length}`,
                 "slot": `${ws.pair[1]}`
             }
-            sjon.minarr = minarr
+            // sjon.minarr = minarr
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {
             data = JSON.parse(data)
             data.players = wss.clients.size
             data.usedslots = []
+
+            let minarr = []
+            for(let t = 0;t<game.length;t++){
+                minarr.push(game[t].pair[1])
+            }
+            if(Math.max(...minarr) == -1){
+                ws.pair[1] = 0
+            }else{
+                if(!minarr.includes(7)){
+                    ws.pair[1] = 7
+                }
+                if(!minarr.includes(6)){
+                    ws.pair[1] = 6
+                }
+                if(!minarr.includes(5)){
+                    ws.pair[1] = 5
+                }
+                if(!minarr.includes(4)){
+                    ws.pair[1] = 4
+                }
+                if(!minarr.includes(3)){
+                    ws.pair[1] = 3
+                }
+                if(!minarr.includes(2)){
+                    ws.pair[1] = 2
+                }
+                if(!minarr.includes(1)){
+                    ws.pair[1] = 1
+                }
+                if(!minarr.includes(0)){
+                    ws.pair[1] = 0
+                }
+            }
+            // data.minarr = minarr
             data = JSON.stringify(data)
             for (let t = 0; t < game.length; t++) {
                 if (ws != game[t]) {

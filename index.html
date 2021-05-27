@@ -115,6 +115,7 @@
                                     }
                                     ////console.log(connectionnumber, "1", data.index)
                                     players = parseInt(data.length)
+                                    // console.log(data.minarr)
                                     for (let t = 0; t < parseInt(data.length); t++) {
                                         CreatePlayer(t)
                                     }
@@ -157,7 +158,7 @@
                                 let dropouts = 0
                                 for (let t = 0; t < Math.max(data.players, boys.length); t++) {
                                     if (boys[t] && boys[t].inactive != 1) {
-                                    }else{
+                                    } else {
                                         dropouts++
                                     }
                                 }
@@ -175,28 +176,28 @@
                                             if (boys[t].id == data.id) {
                                                 ////console.log(data)
                                                 if (data.name == "Coreboy") {
-                                                    boys[t] = new Boy(t, data)
+                                                    boys[t] = new Boy(data.id, data)
                                                 }
                                                 if (data.name == "Mass") {
-                                                    boys[t] = new Mass(t, data)
+                                                    boys[t] = new Mass(data.id, data)
                                                 }
                                                 if (data.name == "Blastgirl") {
-                                                    boys[t] = new Blastgirl(t, data)
+                                                    boys[t] = new Blastgirl(data.id, data)
                                                 }
                                                 if (data.name == "Jox") {
-                                                    boys[t] = new Jox(t, data)
+                                                    boys[t] = new Jox(data.id, data)
                                                 }
                                                 if (data.name == "Adobrasig Man") {
-                                                    boys[t] = new AsigMan(t, data)
+                                                    boys[t] = new AsigMan(data.id, data)
                                                 }
                                                 if (data.name == "Princess GeGeGeGee") {
-                                                    boys[t] = new Princess(t, data)
+                                                    boys[t] = new Princess(data.id, data)
                                                 }
                                                 if (data.name == "Dummy") {
-                                                    boys[t] = new Dummy(t, data)
+                                                    boys[t] = new Dummy(data.id, data)
                                                 }
                                                 if (data.name == "Scorched Mass") {
-                                                    boys[t] = new ScorchedMass(t, data)
+                                                    boys[t] = new ScorchedMass(data.id, data)
                                                 }
 
 
@@ -208,7 +209,7 @@
                                         }
                                     } else {
                                         // if (boys.length <= data.players) {
-                                            console.log(t)
+                                        console.log(t)
                                         let newplayer
                                         if (data.name == "Coreboy") {
                                             newplayer = new Boy(data.id, data)
@@ -293,7 +294,7 @@
                     let invscale = 1 / scale
                     let worldcounter = 0
                     //qqqqq
-                    let humanPlayers = 1000000
+                    let humanPlayers = -1
                     let stock = 0
                     // let punchaud1 = new Audio()
                     // punchaud1.src = "hitsound2.mp3"
@@ -518,7 +519,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = this.strokeWidth
@@ -715,7 +716,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = 5
@@ -915,7 +916,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = 5
@@ -925,8 +926,8 @@
                                 canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
                                 canvas_context.fillStyle = this.color
 
-                                if(Math.random()<.0001){
-                                console.log(this)
+                                if (Math.random() < .0001) {
+                                    console.log(this)
                                 }
                                 var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x, this.y, Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
                                 this.string = this.color
@@ -1114,7 +1115,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = 5
@@ -1317,7 +1318,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = 5
@@ -1514,7 +1515,7 @@
                             return false
                         }
                         draw() {
-                            if(typeof this.radius == 'undefined'){
+                            if (typeof this.radius !== 'number') {
                                 return
                             }
                             canvas_context.lineWidth = 5
@@ -2454,7 +2455,7 @@
                                     delete this.controller;
                                 },
                                 update: function () {
-                                    this.controller = navigator.getGamepads()[num]
+                                    this.controller = navigator.getGamepads()[0]
                                     this.buttonsCache = [];// clear the buttons cache
                                     for (var k = 0; k < this.buttonsStatus.length; k++) {// move the buttons status from the previous frame to the cache
                                         this.buttonsCache[k] = this.buttonsStatus[k];
@@ -3762,7 +3763,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length //boys.length
+                                this.id = controller //boys.length
                                 this.shielddraw = 0
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
@@ -4071,13 +4072,13 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -4123,7 +4124,7 @@
 
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -4136,7 +4137,7 @@
                             }
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -4144,7 +4145,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -4393,7 +4394,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 900) {
@@ -4412,7 +4413,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.shield == 1) {
@@ -4424,7 +4425,7 @@
                             }
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -4643,7 +4644,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                                         this.wmove = 1
                                     }
@@ -4800,7 +4801,7 @@
                             this.exgrip = 0
                             for (let t = 0; t < boys.length; t++) {
                                 if (this.amomu <= 0 && this.dmomu <= 0) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].brick.center.y > this.brick.center.y) {
                                             if (boys[t].body.x < this.body.x) {
                                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -4880,7 +4881,7 @@
                             if (this.trapped == 0) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -4936,12 +4937,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -5010,7 +5013,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -5107,7 +5110,7 @@
 
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -5258,7 +5261,7 @@
                             }
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -5298,7 +5301,7 @@
                                 this.hortsmash = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -5427,7 +5430,7 @@
                                 this.storeshield = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (boys[t].righthand.fired > 14) {
                                         if (this.body.x > boys[t].body.x) {
                                             if (Math.random() < .94) {
@@ -5446,7 +5449,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -5634,7 +5637,7 @@
                             }
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -5659,7 +5662,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -5684,7 +5687,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -5696,27 +5699,27 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
                             this.frame++
 
-                            if(this.id == ID){
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].radius *= 1.02
-                                this.shots[t].ymom *= 1.02
-                                this.shots[t].move()
-                                this.shots[t].draw()
-                                if (this.shots[t].radius > 35) {
-                                    this.shots[t].marked = 1
+                            if (this.id == ID) {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].radius *= 1.02
+                                    this.shots[t].ymom *= 1.02
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
+                                    if (this.shots[t].radius > 35) {
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
                                 }
                             }
-                        }else{
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
-                        }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
@@ -5762,7 +5765,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -5934,7 +5937,7 @@
                     class Mass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
-                                this.id = boys.length
+                                this.id = controller
                                 this.jumpcount = 0
                                 this.gamepad = new Gamepad(controller)
                                 this.shotdraw = 0
@@ -6269,13 +6272,13 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -6368,7 +6371,7 @@
 
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -6376,7 +6379,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -6626,7 +6629,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -6639,7 +6642,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 900) {
@@ -6658,7 +6661,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -6746,7 +6749,7 @@
 
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                                         this.wmove = 1
                                     }
@@ -6903,7 +6906,7 @@
                             if (this.under == 0) {
                                 for (let t = 0; t < boys.length; t++) {
                                     if (this.amomu <= 0 && this.dmomu <= 0) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             if (boys[t].brick.center.y > this.brick.center.y) {
                                                 if (boys[t].body.x < this.body.x) {
                                                     this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -6983,7 +6986,7 @@
                             if (this.trapped == 0 && ((this.dmomu <= 0) && (this.amomu <= 0)) && ((this.dmom <= 0) && (this.amom <= 0))) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -7039,12 +7042,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -7114,7 +7119,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -7285,7 +7290,7 @@
                             }
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.breaks()
@@ -7325,7 +7330,7 @@
 
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -7479,7 +7484,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -7658,7 +7663,7 @@
 
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.safe = 0
@@ -7865,7 +7870,7 @@
 
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -7890,7 +7895,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -7915,7 +7920,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -7927,21 +7932,21 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
                             this.frame++
-                            if(this.id == ID){
+                            if (this.id == ID) {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].move()
-                                this.shots[t].draw()
-                            }
-                            }else{
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
+                                }
+                            } else {
 
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
+                                }
                             }
 
                             for (let t = 0; t < this.shots.length; t++) {
@@ -8027,7 +8032,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.righthand.anchored == 1) {
@@ -8201,7 +8206,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
                                 this.shild = new Circle(0, 0, 0, "transparent")
@@ -8512,13 +8517,13 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -8612,7 +8617,7 @@
 
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -8620,7 +8625,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -8869,7 +8874,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -8892,7 +8897,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 950) {
@@ -8918,7 +8923,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -9005,7 +9010,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
@@ -9210,7 +9215,7 @@
                             this.exgrip = 0
                             for (let t = 0; t < boys.length; t++) {
                                 if (this.amomu <= 0 && this.dmomu <= 0) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].brick.center.y > this.brick.center.y) {
                                             if (boys[t].body.x < this.body.x) {
                                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -9290,7 +9295,7 @@
                             if (this.trapped == 0) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -9346,12 +9351,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -9425,7 +9432,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -9602,7 +9609,7 @@
                             }
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.breaks()
@@ -9651,7 +9658,7 @@
                                 this.hortsmash = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -9817,7 +9824,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -10028,7 +10035,7 @@
 
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -10231,7 +10238,7 @@
                             }
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -10256,7 +10263,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -10281,7 +10288,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -10293,31 +10300,31 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
                             this.frame++
-                            if(this.id == ID){
-                            for (let t = 0; t < this.shots.length; t++) {
-                                if (typeof this.shots[t].gravity == "number") {
-                                    this.shots[t].ymom += this.shots[t].gravity
-                                }
-                                if (typeof this.shots[t].countdown == "number") {
-                                    this.shots[t].countdown--
-                                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                                    if (this.shots[t].countdown <= 0) {
-                                        this.shots[t].marked = 1
+                            if (this.id == ID) {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    if (typeof this.shots[t].gravity == "number") {
+                                        this.shots[t].ymom += this.shots[t].gravity
                                     }
+                                    if (typeof this.shots[t].countdown == "number") {
+                                        this.shots[t].countdown--
+                                        this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
+                                        if (this.shots[t].countdown <= 0) {
+                                            this.shots[t].marked = 1
+                                        }
+                                    }
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
                                 }
-                                this.shots[t].move()
-                                this.shots[t].draw()
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
+                                }
                             }
-                        }else{
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
-                        }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
                             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
                             this.collideStage()
@@ -10372,7 +10379,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.righthand.anchored == 1) {
@@ -10553,7 +10560,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
                                 this.shild = new Circle(0, 0, 0, "transparent")
@@ -10865,13 +10872,13 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -10953,7 +10960,7 @@
 
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -10961,7 +10968,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -11208,7 +11215,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -11230,7 +11237,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 1500) {
@@ -11250,7 +11257,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -11337,7 +11344,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                                         this.wmove = 1
                                     }
@@ -11493,7 +11500,7 @@
                             this.exgrip = 0
                             for (let t = 0; t < boys.length; t++) {
                                 if (this.amomu <= 0 && this.dmomu <= 0) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].brick.center.y > this.brick.center.y) {
                                             if (boys[t].body.x < this.body.x) {
                                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -11586,7 +11593,7 @@
                             if (this.trapped == 0) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -11642,12 +11649,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -11715,7 +11724,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -11888,7 +11897,7 @@
 
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.breaks()
@@ -11941,7 +11950,7 @@
                                 this.hortsmash = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -12235,7 +12244,7 @@
 
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -12423,7 +12432,7 @@
                             }
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -12448,7 +12457,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -12473,7 +12482,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -12485,32 +12494,32 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
                             this.frame++
 
-                            if(this.id == ID){
-                            for (let t = 0; t < this.shots.length; t++) {
-                                if (typeof this.shots[t].gravity == "number") {
-                                    this.shots[t].ymom += this.shots[t].gravity
-                                }
-                                if (typeof this.shots[t].countdown == "number") {
-                                    this.shots[t].countdown--
-                                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                                    if (this.shots[t].countdown <= 0) {
-                                        this.shots[t].marked = 1
+                            if (this.id == ID) {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    if (typeof this.shots[t].gravity == "number") {
+                                        this.shots[t].ymom += this.shots[t].gravity
                                     }
+                                    if (typeof this.shots[t].countdown == "number") {
+                                        this.shots[t].countdown--
+                                        this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
+                                        if (this.shots[t].countdown <= 0) {
+                                            this.shots[t].marked = 1
+                                        }
+                                    }
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
                                 }
-                                this.shots[t].move()
-                                this.shots[t].draw()
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
+                                }
                             }
-                        }else{
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
-                        }
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
@@ -12589,7 +12598,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.righthand.anchored == 1) {
@@ -12753,7 +12762,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
                                 this.shild = new Circle(0, 0, 0, "transparent")
@@ -13065,7 +13074,7 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
@@ -13073,7 +13082,7 @@
                         control() {
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
@@ -13106,13 +13115,13 @@
                             }
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -13376,7 +13385,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -13397,7 +13406,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 900) {
@@ -13418,7 +13427,7 @@
                         }
                         breaks() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.shield == 1) {
@@ -13437,7 +13446,7 @@
                         fightcontrol() {
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -13462,7 +13471,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -13487,7 +13496,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -13498,7 +13507,7 @@
                             this.fixupshoulder()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -13577,7 +13586,7 @@
 
                         }
                         operate() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -13718,7 +13727,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
                                 this.detonate = 0
@@ -14033,13 +14042,13 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 copy.inactive = 1
                             }
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -14132,7 +14141,7 @@
 
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -14140,7 +14149,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -14389,7 +14398,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -14411,7 +14420,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 900) {
@@ -14431,7 +14440,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -14519,7 +14528,7 @@
 
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + Math.max(this.body.radius, boys[t].body.radius))) {
                                         this.wmove = 1
                                     }
@@ -14676,7 +14685,7 @@
                             if (this.under == 0) {
                                 for (let t = 0; t < boys.length; t++) {
                                     if (this.amomu <= 0 && this.dmomu <= 0) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             if (boys[t].brick.center.y > this.brick.center.y) {
                                                 if (boys[t].body.x < this.body.x) {
                                                     this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -14756,7 +14765,7 @@
                             if (this.trapped == 0 && ((this.dmomu <= 0) && (this.amomu <= 0)) && ((this.dmom <= 0) && (this.amom <= 0))) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -14812,12 +14821,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -14887,7 +14898,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -15058,7 +15069,7 @@
                             }
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.breaks()
@@ -15117,7 +15128,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -15273,7 +15284,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -15434,7 +15445,7 @@
 
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.safe = 0
@@ -15632,7 +15643,7 @@
                             }
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -15657,7 +15668,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -15682,7 +15693,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -15694,45 +15705,45 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
                             this.frame++
-                            if(this.id == ID){
+                            if (this.id == ID) {
 
-                            for (let t = 0; t < this.shots.length; t++) {
+                                for (let t = 0; t < this.shots.length; t++) {
 
-                                if (this.shots[t].bomb == 1) {
-                                    if (this.shots[t].stuck != 1) {
-                                        for (let k = 0; k < stage.bricks.length; k++) {
-                                            stage.bricks[k].stick(this.shots[t])
-                                        }
-                                        this.shots[t].move()
-                                    } else {
-                                        if (this.detonate == 1) {
-                                            let angle = Math.PI / 6
-                                            this.shots[t].marked = 1
-                                            for (let f = 0; f < 12; f++) {
-                                                let bullet = new ShotC(this.shots[t].x, this.shots[t].y, 13, getRandomColor(), Math.cos(angle * f) * 21, Math.sin(angle * f) * 21)
-                                                bullet.life = 13
-                                                this.shots.push(bullet)
+                                    if (this.shots[t].bomb == 1) {
+                                        if (this.shots[t].stuck != 1) {
+                                            for (let k = 0; k < stage.bricks.length; k++) {
+                                                stage.bricks[k].stick(this.shots[t])
+                                            }
+                                            this.shots[t].move()
+                                        } else {
+                                            if (this.detonate == 1) {
+                                                let angle = Math.PI / 6
+                                                this.shots[t].marked = 1
+                                                for (let f = 0; f < 12; f++) {
+                                                    let bullet = new ShotC(this.shots[t].x, this.shots[t].y, 13, getRandomColor(), Math.cos(angle * f) * 21, Math.sin(angle * f) * 21)
+                                                    bullet.life = 13
+                                                    this.shots.push(bullet)
+                                                }
                                             }
                                         }
+                                    } else {
+                                        this.shots[t].life--
+                                        if (this.shots[t].life <= 0) {
+                                            this.shots[t].marked = 1
+                                        }
+                                        this.shots[t].move()
                                     }
-                                } else {
-                                    this.shots[t].life--
-                                    if (this.shots[t].life <= 0) {
-                                        this.shots[t].marked = 1
-                                    }
-                                    this.shots[t].move()
+                                    this.shots[t].draw()
                                 }
-                                this.shots[t].draw()
-                            }
-                            }else{
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
+                                }
                             }
                             this.detonate = 0
                             for (let j = 0; j < this.shots.length; j++) {
@@ -15817,7 +15828,7 @@
                             }
                         }
                         operate() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -15982,7 +15993,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
                                 this.countering = -1
@@ -16470,7 +16481,7 @@
                             }
                         }
                         copy() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             let copy = new AsigMan(this.controller)
@@ -16487,7 +16498,7 @@
                             gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -16554,7 +16565,7 @@
 
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -16571,7 +16582,7 @@
                             }
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             let storage = {}
@@ -16582,7 +16593,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
                                     for (let k = 0; k < boys[t].shots.length; k++) {
                                         if (boys[t].shots[k].marked != 1) {
@@ -16847,7 +16858,7 @@
 
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     let j = 0
                                     while (boys[t].body.doesPerimeterTouch(this.body)) {
                                         j++
@@ -16877,7 +16888,7 @@
                             }
                         }
                         doubleJump() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 1200) {
@@ -16903,7 +16914,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.shield == 1) {
@@ -16915,7 +16926,7 @@
                             }
                         }
                         fightcontrol() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -17199,7 +17210,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 35)) {
                                         this.wmove = 1
                                         //////console.log("caseA")
@@ -17360,7 +17371,7 @@
                             this.exgrip = 0
                             for (let t = 0; t < boys.length; t++) {
                                 if (this.amomu <= 0 && this.dmomu <= 0) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].brick.center.y > this.brick.center.y) {
                                             if (boys[t].body.x < this.body.x) {
                                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -17444,7 +17455,7 @@
                             if (this.trapped == 0) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -17504,12 +17515,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -17592,7 +17605,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -17693,7 +17706,7 @@
 
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -17856,7 +17869,7 @@
                             }
                         }
                         AI() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -17896,7 +17909,7 @@
                                 this.hortsmash = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -18073,7 +18086,7 @@
                                 this.storeshield = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     if (boys[t].righthand.fired > 14) {
                                         if (this.body.x > boys[t].body.x) {
                                             if (Math.random() < .94) {
@@ -18092,7 +18105,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -18207,7 +18220,7 @@
 
                             let min = 250000
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     let link = new LineOP(this.body, boys[t].body)
                                     if (min > link.sqrDis()) {
                                         min = link.sqrDis()
@@ -18379,7 +18392,7 @@
                             }
                         }
                         degripl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -18404,7 +18417,7 @@
 
                         }
                         degripr() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -18429,7 +18442,7 @@
 
                         }
                         collideStage() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -18441,7 +18454,7 @@
                             //this.enemycollide()
                         }
                         draw() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.grounded = 0
@@ -18452,21 +18465,21 @@
                             } else {
                                 this.body.radius = this.radsto
                             }
-                            if(this.id == ID){
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].radius *= 1.02
-                                this.shots[t].ymom *= 1.02
-                                this.shots[t].move()
-                                this.shots[t].draw()
-                                if (this.shots[t].radius > 35) {
-                                    this.shots[t].marked = 1
+                            if (this.id == ID) {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].radius *= 1.02
+                                    this.shots[t].ymom *= 1.02
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
+                                    if (this.shots[t].radius > 35) {
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
                                 }
                             }
-                        }else{
-                            for (let t = 0; t < this.shots.length; t++) {
-                                this.shots[t].draw()
-                            }
-                        }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
@@ -18536,7 +18549,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -18752,7 +18765,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
-                                this.id = boys.length
+                                this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 30
                                 this.shild = new Circle(0, 0, 0, "transparent")
@@ -19063,14 +19076,14 @@
                             let copy = new Princess(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
-                            if(this.inactive == 1){
-                            copy.inactive = this.inactive
+                            if (this.inactive == 1) {
+                                copy.inactive = this.inactive
                             }
                             copy.body.color = this.body.color
                             return copy
                         }
                         fixupshoulder() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -19196,7 +19209,7 @@
 
                         }
                         enemycollide() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -19204,7 +19217,7 @@
                             for (let f = 0; f < boys.length; f++) {
                                 if (boys[f] && this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
-                                        if (boys.indexOf(this) != t) {
+                                        if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
                                                 if (boys[t].shots[k].marked != 1) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
@@ -19444,7 +19457,7 @@
                             }
                         }
                         AIarmControl() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.wmove == 1) {
@@ -19467,7 +19480,7 @@
                         }
                         doubleJump() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.body.y < 900) {
@@ -19487,7 +19500,7 @@
                             }
                         }
                         breaks() {
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
 
@@ -19574,7 +19587,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
@@ -19779,7 +19792,7 @@
                             this.exgrip = 0
                             for (let t = 0; t < boys.length; t++) {
                                 if (this.amomu <= 0 && this.dmomu <= 0) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].brick.center.y > this.brick.center.y) {
                                             if (boys[t].body.x < this.body.x) {
                                                 this.amomu = (Math.abs(this.brick.edgeleft.x - this.body.x)) / this.speed
@@ -19859,7 +19872,7 @@
                             if (this.trapped == 0) {
                                 this.tarmax = 0
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         if (boys[t].damage >= this.tarmax) {
                                             if (boys[t].safe == 1 || boys[t].safesto == 2) {
                                                 this.target = boys[t]
@@ -19915,12 +19928,14 @@
                                 let cancel = 0
 
                                 if (typeof this.target != "undefined") {
-                                    if (typeof this.target.body.x == "number") {
-                                        if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
-                                            cancel = -1
-                                        }
-                                        if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
-                                            cancel = 1
+                                    if (typeof this.target.body != "undefined") {
+                                        if (typeof this.target.body.x == "number") {
+                                            if (this.brick.edgeright.x > this.target.brick.edgeleft.x) {
+                                                cancel = -1
+                                            }
+                                            if (this.brick.edgeleft.x < this.target.brick.edgeright.x) {
+                                                cancel = 1
+                                            }
                                         }
                                     }
                                 }
@@ -19988,7 +20003,7 @@
                             if (this.shield == 0) {
 
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys.indexOf(this) != t) {
+                                    if (this != boys[t] && boys[t]) {
                                         for (let g = 0; g < boys[t].shots.length; g++) {
                                             let link = new LineOP(this.body, boys[t].shots[g])
                                             if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -20166,7 +20181,7 @@
                         }
                         AI() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.breaks()
@@ -20210,7 +20225,7 @@
                                 this.hortsmash = 0
                             }
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
 
 
                                     for (let g = 0; g < boys[t].shots.length; g++) {
@@ -20380,7 +20395,7 @@
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                if (boys.indexOf(this) != t) {
+                                if (this != boys[t] && boys[t]) {
                                     for (let g = 0; g < boys[t].shots.length; g++) {
                                         let link = new LineOP(this.body, boys[t].shots[g])
                                         if ((link.sqrDis()) / ((Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom)) * (Math.abs(boys[t].shots[g].xmom) + Math.abs(boys[t].shots[g].ymom))) < 32) {
@@ -20573,7 +20588,7 @@
                         }
                         fightcontrol() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.safe = 0
@@ -20764,7 +20779,7 @@
                         }
                         degripl() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -20790,7 +20805,7 @@
                         }
                         degripr() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.body.sxmom = 0
@@ -20816,7 +20831,7 @@
                         }
                         collideStage() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -20829,7 +20844,7 @@
                         }
                         draw() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             this.blasting--
@@ -20843,33 +20858,33 @@
                             this.grounded = 0
                             this.frame++
 
-                            if(this.id == ID){
-                            for (let t = 0; t < this.shots.length; t++) {
-                                if (typeof this.shots[t].gravity == "number") {
-                                    if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
-                                        this.shots[t].ymom += this.shots[t].gravity / 1.2
-                                        this.shots[t].radius -= .5
-                                        if (this.shots[t].radius < 10) {
-                                            this.shots[t].radius = 10
+                            if (this.id == ID) {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    if (typeof this.shots[t].gravity == "number") {
+                                        if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
+                                            this.shots[t].ymom += this.shots[t].gravity / 1.2
+                                            this.shots[t].radius -= .5
+                                            if (this.shots[t].radius < 10) {
+                                                this.shots[t].radius = 10
+                                            }
+                                        } else {
+                                            this.shots[t].marked = 1
                                         }
-                                    } else {
-                                        this.shots[t].marked = 1
                                     }
-                                }
-                                if (typeof this.shots[t].countdown == "number") {
-                                    this.shots[t].countdown--
-                                    this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
-                                    if (this.shots[t].countdown <= 0) {
-                                        this.shots[t].marked = 1
+                                    if (typeof this.shots[t].countdown == "number") {
+                                        this.shots[t].countdown--
+                                        this.shots[t].gravity = Math.cos(this.shots[t].countdown * (Math.PI / 4)) * 20
+                                        if (this.shots[t].countdown <= 0) {
+                                            this.shots[t].marked = 1
+                                        }
                                     }
+                                    this.shots[t].move()
+                                    this.shots[t].draw()
                                 }
-                                this.shots[t].move()
-                                this.shots[t].draw()
-                            }
-                            }else{
-                            for(let t =0;t<this.shots.length;t++){
-                                this.shots[t].draw()
-                            }
+                            } else {
+                                for (let t = 0; t < this.shots.length; t++) {
+                                    this.shots[t].draw()
+                                }
                             }
 
                             for (let j = 0; j < 10; j++) {
@@ -20929,7 +20944,7 @@
                         }
                         operate() {
 
-                            if(this.inactive == 1){
+                            if (this.inactive == 1) {
                                 return
                             }
                             if (this.righthand.anchored == 1) {
@@ -21187,10 +21202,10 @@
                         if (counter == 1) {
 
                             flopper++
-                            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  
+                            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
 
                             for (let t = boys.length - 1; t >= 0; t--) {
-                                if(boys[t]){
+                                if (boys[t]) {
                                     boys[t].gamepad.gamepad.update()
                                 }
                             }
@@ -21198,17 +21213,17 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = 0; t < boys.length; t++) {
-                                    if(boys[t] ){
-                                    if (boys[t].id == ID) {
-                                        boys[t].enemycollide()
+                                    if (boys[t]) {
+                                        if (boys[t].id == ID) {
+                                            boys[t].enemycollide()
+                                        }
                                     }
-                                }
                                 }
                             } else {
                                 for (let t = boys.length - 1; t >= 0; t--) {
-                                    if(boys[t] ){
+                                    if (boys[t]) {
                                         if (boys[t].id == ID) {
-                                        boys[t].enemycollide()
+                                            boys[t].enemycollide()
                                         }
                                     }
                                 }
@@ -21216,27 +21231,27 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = boys.length - 1; t >= 0; t--) {
-                                    if(boys[t] ){
-                                    boys[t].operate()
+                                    if (boys[t]) {
+                                        boys[t].operate()
                                     }
                                 }
                             } else {
                                 for (let t = 0; t < boys.length; t++) {
-                                    if(boys[t] ){
-                                    boys[t].operate()
+                                    if (boys[t]) {
+                                        boys[t].operate()
                                     }
                                 }
                             }
 
                             for (let t = 0; t < boys.length; t++) {
-                                    if(boys[t] ){
-                                boys[t].draw()
-                                    }
+                                if (boys[t]) {
+                                    boys[t].draw()
+                                }
                             }
 
                             for (let t = 0; t < boys.length; t++) {
 
-                                if(!boys[t] ){
+                                if (!boys[t]) {
                                     continue
                                 }
                                 if (boys[t].body.y > (1440 * (invscale * .5)) || boys[t].body.x < 0 || boys[t].body.x > (2560 * (invscale * .5)) || boys[t].body.y < 0) {
@@ -21294,16 +21309,16 @@
                             canvas_context.fillStyle = "white"
                             let dropouts = 0
                             for (let t = 0; t < boys.length; t++) {
-                                if(boys[t]){
-                                    if(boys[t].inactive == 1){
-                                    boys[t].body.x = - 100000
-                                    boys[t].body.y = - 100000
-                                    dropouts++
-                                }else{
-                                canvas_context.font = "60px arial"
-                                canvas_context.fillStyle = boys[t].body.color
-                                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 20, ((t-dropouts) * 61) + 70)
-                                }
+                                if (boys[t]) {
+                                    if (boys[t].inactive == 1) {
+                                        boys[t].body.x = - 100000
+                                        boys[t].body.y = - 100000
+                                        dropouts++
+                                    } else {
+                                        canvas_context.font = "60px arial"
+                                        canvas_context.fillStyle = boys[t].body.color
+                                        canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 20, ((t - dropouts) * 61) + 70)
+                                    }
                                 }
                             }
                             if (stock > 0) {
@@ -21326,40 +21341,41 @@
                             }
                             sender++
                             if (sender % 1 == 0) {
-                                if(boys[IDaddress]){
-                                for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
-                                    boys[IDaddress].nodes[f].self = 0
-                                }
-                                if (boys[IDaddress].id == ID) {
-                                    boys[IDaddress].id = ID
-                                    let Json = {}
-                                    let keys = Object.keys(boys[IDaddress])
-                                    for (let k = 0; k < keys.length; k++) {
-                                        if (!Object.keys(boys[IDaddress][keys[k]]).includes("self")) {
-                                            Json[keys[k]] = boys[IDaddress][keys[k]]
-                                        }
+                                if (boys[IDaddress]) {
+                                    for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
+                                        boys[IDaddress].nodes[f].self = 0
                                     }
-                                    // ////console.log(keys)
-                                    Json.brick = {}
-                                    Json.bricksto = {}
-                                    Json.wasfalse = []
+                                    if (boys[IDaddress].id == ID) {
+                                        boys[IDaddress].id = ID
+                                        let Json = {}
+                                        let keys = Object.keys(boys[IDaddress])
+                                        for (let k = 0; k < keys.length; k++) {
+                                            if (!Object.keys(boys[IDaddress][keys[k]]).includes("self")) {
+                                                Json[keys[k]] = boys[IDaddress][keys[k]]
+                                            }
+                                        }
+                                        // ////console.log(keys)
+                                        Json.brick = {}
+                                        Json.bricksto = {}
+                                        Json.wasfalse = []
+                                        Json.target = {}
 
 
-                                    ws.send(JSON.stringify(Json))
-                                    // for(let f = 0;f<boys[t].nodes.length;f++){
-                                    //     boys[t].nodes[f].self =boys[t]
+                                        ws.send(JSON.stringify(Json))
+                                        // for(let f = 0;f<boys[t].nodes.length;f++){
+                                        //     boys[t].nodes[f].self =boys[t]
+                                        // }
+                                        //console.log(boys[IDaddress].id, ID)
+                                    } else {
+                                        //console.log(boys[IDaddress].id, ID)
+                                    }
+
+                                    // for (let t = boys.length - 1; t >= 0; t--) {
+                                    //     for (let k = 0; k < boys[t].nodes.length; k++) {
+                                    //         boys[t].nodes[k].self = boys[t]
+                                    //     }
                                     // }
-                                    //console.log(boys[IDaddress].id, ID)
-                                } else {
-                                    //console.log(boys[IDaddress].id, ID)
                                 }
-
-                                // for (let t = boys.length - 1; t >= 0; t--) {
-                                //     for (let k = 0; k < boys[t].nodes.length; k++) {
-                                //         boys[t].nodes[k].self = boys[t]
-                                //     }
-                                // }
-                            }
                             }
                         } else {
                             canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)
