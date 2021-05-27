@@ -65,7 +65,7 @@
                 <script>
 
 let HOST = location.origin.replace(/^http/, 'ws')
-console.log(HOST)
+//console.log(HOST)
 let ws = new WebSocket(HOST);
 let connectionnumber = -1
 let start = 0
@@ -80,7 +80,7 @@ ws.addEventListener("open", () => {
         if (start == 0) {
             
             data = JSON.parse(data)
-            console.log(data)
+            //console.log(data)
             if(data.length >= 0 && data.length < 5){
                 start = 1
                 connectionnumber = parseInt(data.index)
@@ -110,7 +110,7 @@ ws.addEventListener("open", () => {
     if (connectionnumber ==7) {
         color = "#bbbbbb"
     }
-                console.log(connectionnumber, "1", data.index)
+                //console.log(connectionnumber, "1", data.index)
                 players=data.length
                 for (let t = 0; t < parseInt(data.length); t++) {
                     CreatePlayer(t)
@@ -121,15 +121,15 @@ ws.addEventListener("open", () => {
             data = JSON.parse(data)
             if(hit == 0){
                 hit = 1
-                console.log("started running")
-                // console.log(data)
+                //console.log("started running")
+                // //console.log(data)
             }
-            console.log(data, ID)
+            //console.log(data, ID)
             // if (data.id != ID) {
                 for (let t = 0; t < boys.length; t++) {
                     // if (boys[t].body.color != color) {
                     if (boys[t].id == data.id) {
-                        console.log(data)
+                        //console.log(data)
                             boys[t] = new Mass(t, data)
 
 
@@ -161,7 +161,7 @@ ws.addEventListener("open", () => {
                 // } else if (connectionnumber == 1) {
                 //     color = "#00FF00"
                 // }else {
-                // console.log(connectionnumber, "2")
+                // //console.log(connectionnumber, "2")
                 //     color = "#FFFF00"
                 // }
                 // if(boys.length < data-1){
@@ -421,7 +421,7 @@ class Circle {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     track() {
@@ -628,7 +628,7 @@ class Shot {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     move() {
@@ -820,7 +820,7 @@ class Shotb {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     move() {
@@ -1018,7 +1018,7 @@ class ShotP {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     move() {
@@ -1210,7 +1210,7 @@ class ShotC {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     move() {
@@ -1402,7 +1402,7 @@ class ShotD {
             canvas_context.fill()
             canvas_context.stroke();
         } else {
-            // //////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+            // ////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
         }
     }
     move() {
@@ -1950,7 +1950,7 @@ function setUp(canvas_pass, style = "#000000") {
                         Json[keys[k]] = boys[t][keys[k]]
                     }
                 }
-                // console.log(keys)
+                // //console.log(keys)
 
 
 
@@ -1959,7 +1959,7 @@ function setUp(canvas_pass, style = "#000000") {
                 //     boys[t].nodes[f].self =boys[t]
                 // }
             }else{
-                // console.log(boys[t].body.color, color)
+                // //console.log(boys[t].body.color, color)
             }
 
         for (let t = boys.length - 1; t >= 0; t--) {
@@ -1985,7 +1985,7 @@ function setUp(canvas_pass, style = "#000000") {
         TIP_engine.y = YS_engine * invscale
         TIP_engine.body = TIP_engine
 
-        ////console.log(TIP_engine)
+        //////console.log(TIP_engine)
         for (let t = 0; t < selectors.length; t++) {
             if (selectors[t].body.isPointInside(TIP_engine)) {
                 selectors[t].body.anchored = 2
@@ -2042,7 +2042,7 @@ function setUp(canvas_pass, style = "#000000") {
 
 
 function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-    //         //////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+    //         ////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
     if (object.self.shield == 0) {
         if (keysPressed['s']) {
@@ -2156,7 +2156,7 @@ function gamepad_control_controller_proto(object, speed = 1, controller) { // ba
 }
 
 function gamepad_control_controller_proto_dj(object, speed = 1, controller) { // basic control for objects using the controler
-    //         //////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+    //         ////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
 
     if (keysPressed['w']) {
@@ -2191,7 +2191,7 @@ function gamepad_control_controller_proto_dj(object, speed = 1, controller) { //
     }
 }
 function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-    //         //////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+    //         ////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
     if (typeof object.body != 'undefined') {
         if (typeof (controller.gamepad.axesStatus[1]) != 'undefined') {
             if (typeof (controller.gamepad.axesStatus[0]) != 'undefined') {
@@ -2383,7 +2383,7 @@ class Gamepad{
                 }
                 this.axesStatus = axes;// assign received values
                 this.buttonsStatus = pressed;
-                // //////////////console.log(pressed); // return buttons for debugging purposes
+                // ////////////////console.log(pressed); // return buttons for debugging purposes
                 return pressed;
             },
             buttonPressed: function (button, hold) {
@@ -5654,7 +5654,7 @@ class Mass {
                 //     this[keys[t]][keys2[j]] = args[keys[t]][keys2[j]]
                 //  }
             }
-            // console.log(args)
+            // //console.log(args)
             this.shotdraw =  args['shotdraw']
             this.jumpcount =  args['jumpcount']
             for(let t = 0; t<this.nodes.length;t++){
@@ -5810,7 +5810,7 @@ class Mass {
         }
     }else{
                 if(Math.random()<.001){
-//console.log(this.body.color, color)
+////console.log(this.body.color, color)
 }
             }
     }
@@ -6079,7 +6079,7 @@ class Mass {
 
                             }
                         } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                            // console.log(this, boys[t])
+                            // //console.log(this, boys[t])
                             this.striker = t
                             if (boys[t].lefthand.fired > 14) {
                                 if (this.shield == 1) {
@@ -6157,7 +6157,7 @@ class Mass {
             this.lefthand.ymom = -this.speed * 2
             this.righthand.ymom = -this.speed * 2
             this.jumpcount = 100
-            //////console.log(this)
+            ////////console.log(this)
         }
     }
     doubleJump() {
@@ -6602,7 +6602,7 @@ class Mass {
             if (this.safe == 0) {
                 this.screwshot = 1
                 if (this.body.x > (this.brick.center.x)) {
-                    ////////////console.log(this.brick.center.x, this.body.x)
+                    //////////////console.log(this.brick.center.x, this.body.x)
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
@@ -7353,7 +7353,7 @@ class Mass {
                     }
                 }else{
                 if(Math.random()<.001){
-//console.log(this.body.color, color)
+////console.log(this.body.color, color)
 }
             }
             }
@@ -12767,7 +12767,7 @@ class ScorchedMass {
             this.lefthand.ymom = -this.speed * 2
             this.righthand.ymom = -this.speed * 2
             this.jumpcount = 100
-            //////console.log(this)
+            ////////console.log(this)
         }
     }
     doubleJump() {
@@ -13212,7 +13212,7 @@ class ScorchedMass {
             if (this.safe == 0) {
                 this.screwshot = 1
                 if (this.body.x > (this.brick.center.x)) {
-                    ////////////console.log(this.brick.center.x, this.body.x)
+                    //////////////console.log(this.brick.center.x, this.body.x)
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
@@ -15091,7 +15091,7 @@ class AsigMan {
             if(boys.indexOf(this) != t) {
                 if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 35)) {
                     this.wmove = 1
-                    //console.log("caseA")
+                    ////console.log("caseA")
                 }
 
                 if (this.fleeing == 0) {
@@ -15112,7 +15112,7 @@ class AsigMan {
                 if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                     if (Math.random() < .2) {
                         this.wmove = 1
-                        //console.log("caseB")
+                        ////console.log("caseB")
                     }
                     if (Math.random() < .1) {
                         this.dmove = 1
@@ -15234,7 +15234,7 @@ class AsigMan {
                 this.dmove = 1
                 this.downspike = 1
                 this.wmove = 1
-                //console.log("caseC")
+                ////console.log("caseC")
             }
             if (this.under == 2) {
                 this.amove = 1
@@ -15243,7 +15243,7 @@ class AsigMan {
                 this.dmove = 0
                 this.wmove = 1
                 this.downspike = 1
-                //console.log("caseD")
+                ////console.log("caseD")
             }
         }
         this.exgrip = 0
@@ -15276,7 +15276,7 @@ class AsigMan {
             this.dmove = 1
             if (Math.random() < .5) {
                 this.wmove = 1
-                //console.log("caseE")
+                ////console.log("caseE")
             }
             this.amove = 0
             this.amom = 0
@@ -15294,7 +15294,7 @@ class AsigMan {
             this.dmom = 0
             this.amove = 1
             this.wmove = 1
-            //console.log("caseF")
+            ////console.log("caseF")
             this.dmove = 0
         } else {
             if (this.amomu > 0) {
@@ -15313,14 +15313,14 @@ class AsigMan {
                 this.amove = 1
                 this.dmove = 0
                 this.wmove = 1
-                //console.log("caseG")
+                ////console.log("caseG")
                 this.amomu = 0
                 this.dmomu = 0
             } else {
                 this.amove = 0
                 this.dmove = 1
                 this.wmove = 1
-                //console.log("caseH")
+                ////console.log("caseH")
                 this.amomu = 0
                 this.dmomu = 0
             }
@@ -15363,7 +15363,7 @@ class AsigMan {
                                             this.downspike = 1
                                             this.wmove = 1
                                         }
-                                        //console.log("caseI", cancel)
+                                        ////console.log("caseI", cancel)
                                     } else {
                                         this.brick = this.bricksto
                                     }
@@ -15379,7 +15379,7 @@ class AsigMan {
                                             this.downspike = 1
                                             this.wmove = 1
                                         }
-                                        //console.log("caseJ", cancel)
+                                        ////console.log("caseJ", cancel)
                                     } else {
                                         this.brick = this.bricksto
                                     }
@@ -15417,7 +15417,7 @@ class AsigMan {
                             this.downspike = 1
                             this.wmove = 1
                         }
-                        //console.log("caseK", cancel)
+                        ////console.log("caseK", cancel)
                     }
                 } else {
                     let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -15432,7 +15432,7 @@ class AsigMan {
                             this.wmove = 1
                         }
                         //problem2
-                        //console.log("caseL", cancel)
+                        ////console.log("caseL", cancel)
                     }
                 }
 
@@ -15450,14 +15450,14 @@ class AsigMan {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
-                    //console.log("caseM")
+                    ////console.log("caseM")
                     this.amomu = 0
                     this.dmomu = 0
                 } else {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
-                    //console.log("caseN")
+                    ////console.log("caseN")
                     this.amomu = 0
                     this.dmomu = 0
                 }
@@ -15490,7 +15490,7 @@ class AsigMan {
                                     this.storeshield = 1
                                 } else {
                                     this.wmove = 1
-                                    //console.log("caseO")
+                                    ////console.log("caseO")
                                 }
                             } else {
                                 if (this.body.x < boys[t].shots[g].x) {
@@ -15548,7 +15548,7 @@ class AsigMan {
                                     }
                                     if (this.under == 0) {
                                         this.wmove = 1
-                                        //console.log("caseP")
+                                        ////console.log("caseP")
                                         this.downspike = 1
                                     }
                                 }
@@ -15563,14 +15563,14 @@ class AsigMan {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
-                    //console.log("caseQ")
+                    ////console.log("caseQ")
                     this.amomu = 0
                     this.dmomu = 0
                 } else {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
-                    //console.log("caseR")
+                    ////console.log("caseR")
                     this.amomu = 0
                     this.dmomu = 0
                 }
@@ -15591,7 +15591,7 @@ class AsigMan {
                                     this.storeshield = 1
                                 } else {
                                     this.wmove = 1
-                                    //console.log("caseS")
+                                    ////console.log("caseS")
                                 }
                             } else {
                                 if (this.body.x < boys[t].shots[g].x) {
@@ -15650,7 +15650,7 @@ class AsigMan {
                                     }
                                     if (this.under == 0) {
                                         this.wmove = 1
-                                        //console.log("caseT")
+                                        ////console.log("caseT")
                                         this.downspike = 1
                                     }
                                 }
@@ -15665,14 +15665,14 @@ class AsigMan {
                     this.amove = 1
                     this.dmove = 0
                     this.wmove = 1
-                    //console.log("caseU")
+                    ////console.log("caseU")
                     this.amomu = 0
                     this.dmomu = 0
                 } else {
                     this.amove = 0
                     this.dmove = 1
                     this.wmove = 1
-                    //console.log("caseV")
+                    ////console.log("caseV")
                     this.amomu = 0
                     this.dmomu = 0
                 }
@@ -15797,7 +15797,7 @@ class AsigMan {
                     if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                         if (this.face == -1) {
                             if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                // console.log(Math.abs(this.body.x - boys[t].body.x))
+                                // //console.log(Math.abs(this.body.x - boys[t].body.x))
                                 if (this.fleeing != 1) {
                                     this.leftshot = 1
                                 }
@@ -15811,7 +15811,7 @@ class AsigMan {
                     if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                         if (this.face == 1) {
                             if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                // console.log(Math.abs(this.body.x - boys[t].body.x))
+                                // //console.log(Math.abs(this.body.x - boys[t].body.x))
                                 if (this.fleeing != 1) {
                                     this.rightshot = 1
                                 }
@@ -16045,7 +16045,7 @@ class AsigMan {
                                 }
                                 if (this.under == 0) {
                                     this.wmove = 1
-                                    //console.log("caseX")
+                                    ////console.log("caseX")
                                     this.downspike = 1
                                 }
                             }
@@ -18797,7 +18797,7 @@ function CreatePlayer(t) {
     }
     // coreboy.body.color = getRandomColor() // `rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
     if (connectionnumber == t) {
-        console.log(t)
+        //console.log(t)
                 // coreboy.body.color = color
                 // color = coreboy.body.color
 
