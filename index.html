@@ -144,6 +144,10 @@ ws.addEventListener("open", () => {
                         let gp = new Gamepad(boys[t].controller)
                         boys.push(newplayer)
                         boys[t]['gamepad']  = gp
+                        drops.push(0)
+                        scores.push(0)
+                        boom.push(new Circle(0, 0, 1, "transparent"))
+                        
                         }
                     }
                 // }
