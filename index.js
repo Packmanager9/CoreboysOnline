@@ -26,14 +26,7 @@ wss.on("connection", ws => {
     ws.on("close", () => {
         let deleter = ws.index
         game.splice(game.indexOf(ws), 1)
-        for (let t = 0; t < game.length; t++) {
-            let sjon = {
-                "delete": `${deleter}`,
-                "index": `${t}`,
-                "length": `${game.length}`
-            }
-            game[t].send(JSON.stringify(sjon))
-        }
+
         let minarr = []
         for(let t = 0;t<game.length;t++){
             minarr.push(game[t].pair[1])
@@ -65,6 +58,14 @@ wss.on("connection", ws => {
             if(!minarr.includes(0)){
                 ws.pair[1] = 0
             }
+        }
+        for (let t = 0; t < game.length; t++) {
+            let sjon = {
+                "delete": `${ws.pair[1]}`,
+                "index": `${t}`,
+                "length": `${game.length}`
+            }
+            game[t].send(JSON.stringify(sjon))
         }
     })
     ws.on("message", data => {
@@ -106,6 +107,7 @@ wss.on("connection", ws => {
                 "length": `${game.length}`,
                 "slot": `${ws.pair[1]}`
             }
+            sjon.minarr = minarr
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {

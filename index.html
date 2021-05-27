@@ -122,22 +122,24 @@
                             } else if (JSON.parse(data).delete) {
                                 //console.log("del")
 
-                                if (JSON.parse(data).delete < ID) {
-                                    // boys[JSON.parse(data).delete] = new Dummy(0)
-                                    IDaddress--
-                                    ID--
-                                    for (let t = 0; t < boys.length; t++) {
-                                        if (t <= JSON.parse(data).delete) {
-                                            boys[t].id--
-                                        }
-                                    }
-                                    connectionnumber = parseInt(data.slot)
-                                    //console.log(IDaddress)
-                                }
+                                // if (JSON.parse(data).delete < ID) {
+                                //     // boys[JSON.parse(data).delete] = new Dummy(0)
+                                //     // IDaddress--
+                                //     // ID--
+                                //     for (let t = 0; t < boys.length; t++) {
+                                //         if (t <= JSON.parse(data).delete) {
+                                //             // boys[t].id--
+                                //         }
+                                //     }
+                                //     connectionnumber = parseInt(data.slot)
+                                //     //console.log(IDaddress)
+                                // }
 
                                 for (let t = 0; t < boys.length; t++) {
                                     if (boys[t].id == JSON.parse(data).delete) {
-                                        boys.splice(t, 1)
+                                        // boys.splice(t, 1)
+                                        boys[t].inactive = 1
+                                        // boys[t].id = -1
                                     }
                                 }
                                 //console.log(data)
@@ -152,6 +154,13 @@
                                     // ////console.log(data)
                                 }
                                 ////console.log(data, ID)
+                                let dropouts = 0
+                                for (let t = 0; t < Math.max(data.players, boys.length); t++) {
+                                    if (boys[t] && boys[t].inactive != 1) {
+                                    }else{
+                                        dropouts++
+                                    }
+                                }
                                 // if (data.id != ID) {
                                 for (let t = 0; t < Math.max(data.players, boys.length); t++) {
                                     if (t == ID) {
@@ -159,7 +168,7 @@
                                         continue
                                     }
                                     // if (boys[t].body.color != color) {
-                                    if (boys[t]) {
+                                    if (boys[t] && boys[t].inactive != 1) {
                                         // console.log(data)
                                         if (data.frame > boys[t].frame - 100) {
 
@@ -199,35 +208,36 @@
                                         }
                                     } else {
                                         // if (boys.length <= data.players) {
+                                            console.log(t)
                                         let newplayer
                                         if (data.name == "Coreboy") {
-                                            newplayer = new Boy(t, data)
+                                            newplayer = new Boy(data.id, data)
                                         }
                                         if (data.name == "Mass") {
-                                            newplayer = new Mass(t, data)
+                                            newplayer = new Mass(data.id, data)
                                         }
                                         if (data.name == "Blastgirl") {
-                                            newplayer = new Blastgirl(t, data)
+                                            newplayer = new Blastgirl(data.id, data)
                                         }
                                         if (data.name == "Jox") {
-                                            newplayer = new Jox(t, data)
+                                            newplayer = new Jox(data.id, data)
                                         }
                                         if (data.name == "Adobrasig Man") {
-                                            newplayer = new AsigMan(t, data)
+                                            newplayer = new AsigMan(data.id, data)
                                         }
                                         if (data.name == "Princess GeGeGeGee") {
-                                            newplayer = new Princess(t, data)
+                                            newplayer = new Princess(data.id, data)
                                         }
                                         if (data.name == "Dummy") {
-                                            newplayer = new Dummy(t, data)
+                                            newplayer = new Dummy(data.id, data)
                                         }
                                         if (data.name == "Scorched Mass") {
-                                            newplayer = new ScorchedMass(t, data)
+                                            newplayer = new ScorchedMass(data.id, data)
                                         }
 
-                                        newplayer.id = t
-                                        boys.push(newplayer)
-                                        let gp = new Gamepad(t)
+                                        newplayer.id = data.id
+                                        boys[t] = (newplayer)
+                                        let gp = new Gamepad(data.id)
                                         boys[t]['gamepad'] = gp
                                         drops.push(0)
                                         scores.push(0)
@@ -508,6 +518,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = this.strokeWidth
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -702,6 +715,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = 5
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -899,6 +915,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = 5
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -906,8 +925,10 @@
                                 canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
                                 canvas_context.fillStyle = this.color
 
-
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
+                                if(Math.random()<.0001){
+                                console.log(this)
+                                }
+                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x, this.y, Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
                                 this.string = this.color
 
                                 gard.addColorStop(0, invertColor(this.string) + `51`)
@@ -1093,6 +1114,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = 5
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -1293,6 +1317,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = 5
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -1487,6 +1514,9 @@
                             return false
                         }
                         draw() {
+                            if(typeof this.radius == 'undefined'){
+                                return
+                            }
                             canvas_context.lineWidth = 5
                             canvas_context.strokeStyle = this.color
                             canvas_context.beginPath();
@@ -3773,12 +3803,6 @@
                                 this.jumping = 1
 
                                 this.color = getRandomColor()
-                                if (controller == 0) {
-                                    this.color = "#ffAA00"
-                                }
-                                if (controller == 1) {
-                                    this.color = "#ff0000"
-                                }
                                 this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37, this.color)
 
                                 if (this.controller == 0) {
@@ -4047,12 +4071,15 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth)
                             this.leftshoulder.y = this.body.y - (this.shoulderwidth)
@@ -4096,6 +4123,9 @@
 
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -4106,6 +4136,9 @@
                             }
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -4360,6 +4393,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 900) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -4376,6 +4412,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
                                     this.breaktimer = 200
@@ -4385,6 +4424,9 @@
                             }
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.safe = 0
                             this.safesto = 0
@@ -5216,6 +5258,9 @@
                             }
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.breaks()
                             for (let t = 0; t < this.shots.length; t++) {
@@ -5589,6 +5634,9 @@
                             }
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -5611,6 +5659,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -5633,6 +5684,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -5642,6 +5696,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
 
@@ -5705,6 +5762,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
@@ -6209,12 +6269,15 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.screwangle != 0) {
 
@@ -6305,6 +6368,9 @@
 
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -6560,6 +6626,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -6570,6 +6639,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 900) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -6586,6 +6658,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
@@ -7210,6 +7285,9 @@
                             }
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.breaks()
                             if (this.screwtimer > 0) {
                                 this.screwtimer--
@@ -7580,6 +7658,9 @@
 
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.safe = 0
                             this.safesto = 0
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -7784,6 +7865,9 @@
 
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -7806,6 +7890,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -7828,6 +7915,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -7837,6 +7927,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
                             if(this.id == ID){
@@ -7934,6 +8027,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
                                     this.righthand.anchored = -10
@@ -8416,12 +8512,15 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             if (this.screwangle != 0) {
@@ -8513,6 +8612,9 @@
 
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -8767,6 +8869,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -8787,6 +8892,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 950) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -8810,6 +8918,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
@@ -9491,6 +9602,9 @@
                             }
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.breaks()
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
@@ -9914,6 +10028,9 @@
 
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.safe = 0
                             this.safesto = 0
@@ -10114,6 +10231,9 @@
                             }
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -10136,6 +10256,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -10158,6 +10281,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -10167,6 +10293,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
                             if(this.id == ID){
@@ -10243,6 +10372,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
                                     this.righthand.anchored = -10
@@ -10733,12 +10865,15 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.screwtimer <= 0) {
 
@@ -10818,6 +10953,9 @@
 
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -11070,6 +11208,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -11089,6 +11230,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 1500) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -11106,6 +11250,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
@@ -11741,6 +11888,9 @@
 
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.breaks()
 
                             if (this.screwtimer > 0) {
@@ -12085,6 +12235,9 @@
 
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.safe = 0
                             this.safesto = 0
@@ -12270,6 +12423,9 @@
                             }
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -12292,6 +12448,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -12314,6 +12473,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -12323,6 +12485,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
 
@@ -12424,6 +12589,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
                                     this.righthand.anchored = -10
@@ -12897,11 +13065,17 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
                         control() {
                         }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
                             this.leftshoulder.y = this.body.y - (this.shoulderwidth * .7)
 
@@ -12932,6 +13106,9 @@
                             }
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let f = 0; f < boys.length; f++) {
                                 if (this != boys[f]) {
                                     for (let t = 0; t < boys.length; t++) {
@@ -13199,6 +13376,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -13217,6 +13397,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 900) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -13235,6 +13418,9 @@
                         }
                         breaks() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
                                     this.breaktimer = 200
@@ -13251,6 +13437,9 @@
                         fightcontrol() {
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -13273,6 +13462,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -13295,6 +13487,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -13303,6 +13498,9 @@
                             this.fixupshoulder()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.grounded = 0
                             this.frame++
@@ -13379,6 +13577,9 @@
 
                         }
                         operate() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
@@ -13832,12 +14033,15 @@
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
+                            if(this.inactive == 1){
+                                copy.inactive = 1
+                            }
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.screwangle != 0) {
 
@@ -13928,6 +14132,9 @@
 
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -14182,6 +14389,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -14201,6 +14411,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 900) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -14218,6 +14431,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
@@ -14842,6 +15058,9 @@
                             }
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.breaks()
                             if (this.screwtimer > 0) {
                                 this.screwtimer--
@@ -15215,6 +15434,9 @@
 
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.safe = 0
                             this.safesto = 0
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -15410,6 +15632,9 @@
                             }
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -15432,6 +15657,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -15454,6 +15682,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -15463,6 +15694,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
                             if(this.id == ID){
@@ -15583,6 +15817,9 @@
                             }
                         }
                         operate() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
@@ -16233,6 +16470,9 @@
                             }
                         }
                         copy() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             let copy = new AsigMan(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -16247,6 +16487,9 @@
                             gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
                         }
                         fixupshoulder() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth)
                             this.leftshoulder.y = this.body.y - (this.shoulderwidth)
@@ -16311,6 +16554,9 @@
 
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2.5
@@ -16325,6 +16571,9 @@
                             }
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             let storage = {}
                             if (this.countering > 0) {
                                 storage.ymom = this.body.ymom
@@ -16628,6 +16877,9 @@
                             }
                         }
                         doubleJump() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 1200) {
                                 if (this.body.ymom < 0) {
                                     this.wmove = 0
@@ -16651,6 +16903,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
                                     this.breaktimer = 200
@@ -16660,6 +16915,9 @@
                             }
                         }
                         fightcontrol() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.safe = 0
                             this.safesto = 0
@@ -17598,6 +17856,9 @@
                             }
                         }
                         AI() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             this.breaks()
                             for (let t = 0; t < this.shots.length; t++) {
@@ -18118,6 +18379,9 @@
                             }
                         }
                         degripl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -18140,6 +18404,9 @@
 
                         }
                         degripr() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -18162,6 +18429,9 @@
 
                         }
                         collideStage() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -18171,6 +18441,9 @@
                             //this.enemycollide()
                         }
                         draw() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.grounded = 0
                             this.frame++
                             this.countering--
@@ -18263,6 +18536,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
@@ -18787,14 +19063,16 @@
                             let copy = new Princess(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
+                            if(this.inactive == 1){
+                            copy.inactive = this.inactive
+                            }
                             copy.body.color = this.body.color
                             return copy
                         }
-                        control() {
-                            gamepad_control_controller_proto(this.center, this.speed + (this.speed * (this.grounded * .5)), this.controller)
-                        }
                         fixupshoulder() {
-
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.screwangle != 0) {
 
@@ -18918,6 +19196,9 @@
 
                         }
                         enemycollide() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
 
                             for (let f = 0; f < boys.length; f++) {
@@ -19163,6 +19444,9 @@
                             }
                         }
                         AIarmControl() {
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.wmove == 1) {
                                 this.jumping = 1
                                 this.body.ymom = -this.speed * 2
@@ -19182,6 +19466,10 @@
                             }
                         }
                         doubleJump() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.body.y < 900) {
                                 this.wmove = 0
                                 this.screwshot = 0
@@ -19199,6 +19487,9 @@
                             }
                         }
                         breaks() {
+                            if(this.inactive == 1){
+                                return
+                            }
 
                             if (this.shield == 1) {
                                 if (this.shieldpower <= 0) {
@@ -19874,6 +20165,10 @@
                             }
                         }
                         AI() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.breaks()
 
                             if (this.screwtimer > 0) {
@@ -20278,6 +20573,9 @@
                         }
                         fightcontrol() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.safe = 0
                             this.safesto = 0
                             for (let t = 0; t < stage.bricks.length; t++) {
@@ -20465,6 +20763,10 @@
                             }
                         }
                         degripl() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -20487,6 +20789,10 @@
 
                         }
                         degripr() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.body.sxmom = 0
                             this.body.symom = 0
 
@@ -20509,6 +20815,10 @@
 
                         }
                         collideStage() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
@@ -20518,6 +20828,10 @@
                             //this.enemycollide()
                         }
                         draw() {
+
+                            if(this.inactive == 1){
+                                return
+                            }
                             this.blasting--
                             if (this.grounded == 1) {
                                 if (this.screwtimer > 5) {
@@ -20615,6 +20929,9 @@
                         }
                         operate() {
 
+                            if(this.inactive == 1){
+                                return
+                            }
                             if (this.righthand.anchored == 1) {
                                 if (this.body.x > this.righthand.x) {
                                     this.righthand.anchored = -10
@@ -20822,62 +21139,6 @@
                     let counter = 0
                     let sender = 0
 
-                    // if (keysPressed['v']) {
-                    //     if (keysPressed['q']) {
-                    //         if (Math.random() < .01) {
-
-                    //             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-                    //             this.update()
-                    //             gamepadAPI[1].update()
-                    //             gamepadAPI[2].update()
-                    //             gamepadAPI[3].update() //checks for button presses/stick movement on the connected controller)
-                    //             // game code goes here
-                    //             stage.draw()
-                    //             for (let t = 0; t < boys.length; t++) {
-                    //                 boys[t].draw()
-                    //             }
-                    //             for (let t = 0; t < boom.length; t++) {
-                    //                 if (boys[t].body.y > 1440 || boys[t].body.x < 0 || boys[t].body.x > 2560) {
-                    //                     scores[t]++
-                    //                     if (boys[t].go !== 1) {
-                    //                         boys[t].go = 1
-                    //                         boom[t] = new Explosion(boys[t].body.x)
-                    //                         // if (Math.random() < .5) {
-                    //                         //     boys[t] = new Mass(t)
-                    //                         //     boys[t].body.color = getRandomColor()
-                    //                         // } else {
-                    //                         boys[t] = new Mass(t)
-                    //                         boys[t].body.color = getRandomColor()
-                    //                         if (t == 0) {
-                    //                             boys[t].body.color = "#ffAA00"
-                    //                         }
-                    //                         if (t == 1) {
-                    //                             boys[t].body.color = "#ff0000"
-                    //                         }
-                    //                         // }
-                    //                     }
-                    //                 }
-                    //                 boom[t].draw()
-                    //             }
-                    //             canvas_context.font = "50px arial"
-                    //             canvas_context.fillStyle = "white"
-                    //             canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-
-                    //         }
-                    //     }
-
-                    // } else {
-
-                    // canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
-
-                    // stage.draw()
-                    // for (let t = 0; t < boys.length; t++) {
-                    //     boys[t].draw()
-                    // }
-                    // canvas_context.font = "50px arial"
-                    // canvas_context.fillStyle = "white"
-
-
 
                     let massSelector = new Circle(700, 700, 200, "White")
 
@@ -20896,8 +21157,6 @@
                     characterbuttons.push(prinSelector)
 
 
-                    // canvas_context.fillText(`Score: Human ${scores[1]}, Robot ${scores[0]}`, 1000, 100)
-                    // }
                     let flopper = 0
 
 
@@ -20919,16 +21178,6 @@
                         } else if (chooser == 6) {
                             coreboy = new Princess(t)
                         }
-
-
-                        // coreboy.body.color = getRandomColor() // `rgb(${t * 64}, ${255 - (t * 264)}, ${Math.random() * 255})`
-                        if (connectionnumber == t) {
-                            ////console.log(t)
-                            // coreboy.body.color = color
-                            // color = coreboy.body.color
-
-                        }
-
                         boys.push(coreboy)
                         drops.push(0)
                         scores.push(0)
@@ -20938,12 +21187,12 @@
                         if (counter == 1) {
 
                             flopper++
-                            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  // refreshes the image
+                            canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)  
 
                             for (let t = boys.length - 1; t >= 0; t--) {
-                                // if (t == connectionnumber - 1) {
-                                boys[t].gamepad.gamepad.update()
-                                // }
+                                if(boys[t]){
+                                    boys[t].gamepad.gamepad.update()
+                                }
                             }
                             stage.draw()
 
@@ -21029,22 +21278,20 @@
                             }
                             canvas_context.font = "60px arial"
                             canvas_context.fillStyle = "white"
-                            // if (boys.length == 2) {
-                            // canvas_context.fillText(`Score: ${boys[0].name+" "} ${scores[0]}/${drops[0]}, ${boys[1].name+" "} ${scores[1]}/${drops[1]}`, 800, 100)
-                            // }else{
+                            let dropouts = 0
                             for (let t = 0; t < boys.length; t++) {
+                                if(boys[t]){
+                                    if(boys[t].inactive == 1){
+                                    boys[t].body.x = - 100000
+                                    boys[t].body.y = - 100000
+                                    dropouts++
+                                }else{
                                 canvas_context.font = "60px arial"
                                 canvas_context.fillStyle = boys[t].body.color
-                                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 20, (t * 61) + 70)
+                                canvas_context.fillText(`${boys[t].name + " "} ${scores[t]}/${drops[t]}`, 20, ((t-dropouts) * 61) + 70)
+                                }
+                                }
                             }
-                            // }
-                            // canvas_context.fillText(`Falls: `, 200, 100)
-                            // canvas_context.fillText(`Red ${scores[0]}`, 200, 150)
-                            // canvas_context.fillText(`Green ${scores[1]}`, 200, 200)
-                            // canvas_context.fillText(`Blue ${scores[2]} `, 200, 250)
-                            // canvas_context.fillText(`Yellow ${scores[3]} `, 200, 300)
-                            // }
-
                             if (stock > 0) {
                                 let wet = boys.length - 1
                                 let winner = {}
@@ -21065,6 +21312,7 @@
                             }
                             sender++
                             if (sender % 1 == 0) {
+                                if(boys[IDaddress]){
                                 for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
                                     boys[IDaddress].nodes[f].self = 0
                                 }
@@ -21097,6 +21345,7 @@
                                 //         boys[t].nodes[k].self = boys[t]
                                 //     }
                                 // }
+                            }
                             }
                         } else {
                             canvas_context.clearRect(0, 0, canvas.width * invscale, canvas.height * invscale)
