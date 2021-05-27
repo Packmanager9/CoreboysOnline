@@ -161,69 +161,69 @@
                                     // if (boys[t].body.color != color) {
                                     if (boys[t]) {
                                         // console.log(data)
-                                        if(data.frame > boys[t].frame-100){
+                                        if (data.frame > boys[t].frame - 100) {
 
                                             if (boys[t].id == data.id) {
-                                            ////console.log(data)
-                                            if (data.name == "Coreboy") {
-                                                boys[t] = new Boy(t, data)
-                                            }
-                                            if (data.name == "Mass") {
-                                                boys[t] = new Mass(t, data)
-                                            }
-                                            if (data.name == "Blastgirl") {
-                                                boys[t] = new Blastgirl(t, data)
-                                            }
-                                            if (data.name == "Jox") {
-                                                boys[t] = new Jox(t, data)
-                                            }
-                                            if (data.name == "Adobrasig Man") {
-                                                boys[t] = new AsigMan(t, data)
-                                            }
-                                            if (data.name == "Princess GeGeGeGee") {
-                                                boys[t] = new Princess(t, data)
-                                            }
-                                            if (data.name == "Dummy") {
-                                                boys[t] = new Dummy(t, data)
-                                            }
-                                            if (data.name == "Scorched Mass") {
-                                                boys[t] = new ScorchedMass(t, data)
-                                            }
+                                                ////console.log(data)
+                                                if (data.name == "Coreboy") {
+                                                    boys[t] = new Boy(t, data)
+                                                }
+                                                if (data.name == "Mass") {
+                                                    boys[t] = new Mass(t, data)
+                                                }
+                                                if (data.name == "Blastgirl") {
+                                                    boys[t] = new Blastgirl(t, data)
+                                                }
+                                                if (data.name == "Jox") {
+                                                    boys[t] = new Jox(t, data)
+                                                }
+                                                if (data.name == "Adobrasig Man") {
+                                                    boys[t] = new AsigMan(t, data)
+                                                }
+                                                if (data.name == "Princess GeGeGeGee") {
+                                                    boys[t] = new Princess(t, data)
+                                                }
+                                                if (data.name == "Dummy") {
+                                                    boys[t] = new Dummy(t, data)
+                                                }
+                                                if (data.name == "Scorched Mass") {
+                                                    boys[t] = new ScorchedMass(t, data)
+                                                }
 
 
 
-                                            let gp = new Gamepad(t)
+                                                let gp = new Gamepad(t)
 
-                                            boys[t]['gamepad'] = gp
-                                        }
+                                                boys[t]['gamepad'] = gp
+                                            }
                                         }
                                     } else {
                                         // if (boys.length <= data.players) {
                                         let newplayer
-                                            if (data.name == "Coreboy") {
-                                                newplayer = new Boy(t, data)
-                                            }
-                                            if (data.name == "Mass") {
-                                                newplayer = new Mass(t, data)
-                                            }
-                                            if (data.name == "Blastgirl") {
-                                                newplayer = new Blastgirl(t, data)
-                                            }
-                                            if (data.name == "Jox") {
-                                                newplayer = new Jox(t, data)
-                                            }
-                                            if (data.name == "Adobrasig Man") {
-                                                newplayer = new AsigMan(t, data)
-                                            }
-                                            if (data.name == "Princess GeGeGeGee") {
-                                                newplayer = new Princess(t, data)
-                                            }
-                                            if (data.name == "Dummy") {
-                                                newplayer = new Dummy(t, data)
-                                            }
-                                            if (data.name == "Scorched Mass") {
-                                                newplayer = new ScorchedMass(t, data)
-                                            }
+                                        if (data.name == "Coreboy") {
+                                            newplayer = new Boy(t, data)
+                                        }
+                                        if (data.name == "Mass") {
+                                            newplayer = new Mass(t, data)
+                                        }
+                                        if (data.name == "Blastgirl") {
+                                            newplayer = new Blastgirl(t, data)
+                                        }
+                                        if (data.name == "Jox") {
+                                            newplayer = new Jox(t, data)
+                                        }
+                                        if (data.name == "Adobrasig Man") {
+                                            newplayer = new AsigMan(t, data)
+                                        }
+                                        if (data.name == "Princess GeGeGeGee") {
+                                            newplayer = new Princess(t, data)
+                                        }
+                                        if (data.name == "Dummy") {
+                                            newplayer = new Dummy(t, data)
+                                        }
+                                        if (data.name == "Scorched Mass") {
+                                            newplayer = new ScorchedMass(t, data)
+                                        }
 
                                         newplayer.id = t
                                         boys.push(newplayer)
@@ -479,7 +479,7 @@
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = x
                             this.y = y
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -674,7 +674,7 @@
                             this.x = x
                             this.y = y
                             this.marked = marked
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -867,10 +867,10 @@
                         }
                     }
                     class Shotb {
-                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0,reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
+                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = x
                             this.y = y
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -1061,10 +1061,10 @@
                         }
                     }
                     class ShotP {
-                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0,reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
+                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = x
                             this.y = y
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -1261,10 +1261,10 @@
                         }
                     }
                     class ShotC {
-                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0,reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
+                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = x
                             this.y = y
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -1458,7 +1458,7 @@
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = x
                             this.y = y
-                            this.radius = radius
+                            this.radius = parseInt(radius)
                             this.color = color
                             this.xmom = xmom
                             this.ymom = ymom
@@ -1493,6 +1493,7 @@
                             if (this.radius > 0) {
                                 canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
                                 canvas_context.fillStyle = this.color
+
 
 
                                 var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
@@ -2038,7 +2039,7 @@
                         window.setInterval(function () {
 
                             main()
-                        }, 23)
+                        }, 18)
                         document.addEventListener('keydown', (event) => {
                             keysPressed[event.key] = true;
                         });
@@ -2624,7 +2625,7 @@
                                                     let j = 0
                                                     while (this.shape.doesPerimeterTouch(circle)) {
                                                         j++
-                                                        if (j> 10000) {
+                                                        if (j > 10000) {
                                                             break
                                                         }
                                                         if (circle == player.body) {
@@ -2702,7 +2703,7 @@
                                                 let j = 0
                                                 while (this.shape.doesPerimeterTouch(circle)) {
                                                     j++
-                                                    if (j> 10000) {
+                                                    if (j > 10000) {
                                                         break
                                                     }
                                                     if (circle == player.body) {
@@ -3077,7 +3078,7 @@
                             let j = 0
                             while (this.shape.doesPerimeterTouch(circle)) {
                                 j++
-                                if (j> 10000) {
+                                if (j > 10000) {
                                     break
                                 }
 
@@ -3861,7 +3862,7 @@
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -4043,6 +4044,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Boy(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -4333,7 +4335,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -5995,7 +5997,7 @@ this.frame = args['frame']
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -6196,6 +6198,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Mass(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -8212,7 +8215,7 @@ this.frame = args['frame']
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -8394,6 +8397,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Blastgirl(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -8728,7 +8732,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         if (this.id == ID) {
@@ -8777,7 +8781,7 @@ this.frame = args['frame']
                                 }
                             }
                             this.jumpcount--
-                
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -9977,120 +9981,120 @@ this.frame = args['frame']
 
 
 
-                                if (this.righthand.fired <= 0) {
-                                    if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
-                                        if (this.face == 1) {
+                                    if (this.righthand.fired <= 0) {
+                                        if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
+                                            if (this.face == 1) {
+                                                if (this.righthand.anchored == 0) {
+                                                    this.shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
+                                                    // if(this.wasfalse[1] == 0){
+                                                    this.shot.gravity = -.1
+                                                    this.shot.countdown = 100
+                                                    if (this.charge <= 0) {
+                                                        this.righthand.fired = 10
+                                                        if (this.righthand.anchored == 0) {
+                                                            this.charge += 40.5
+                                                        }
+                                                        this.shots.push(this.shot)
+                                                        if (this.grounded != 1) {
+                                                            this.body.xmom -= .5
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (this.face == -1) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
+                                                    this.shot.gravity = -.1
+                                                    this.shot.countdown = 100
+                                                    if (this.charge <= 0) {
+                                                        this.lefthand.fired = 10
+                                                        if (this.lefthand.anchored == 0) {
+                                                            this.charge += 40.5
+                                                        }
+                                                        this.shots.push(this.shot)
+                                                        if (this.grounded != 1) {
+                                                            this.body.xmom -= .5
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (this.body.fired > 0) {
+                                        this.body.ymom -= this.body.fired * .018
+                                    }
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
+                                        if (this.screwangle == 0) {
+
+                                            if (this.body.fired <= 0) {
+                                                this.jumping = 1
+                                                this.screwangle = Math.PI * 1.5
+                                                this.screwtimer = 50
+                                                this.lefthand.fired = 40
+                                                this.righthand.fired = 40
+                                                this.lefthand.ymom = -70
+                                                this.righthand.ymom = -70
+                                                this.lefthand.xmom = 25
+                                                this.righthand.xmom = -25
+                                                this.body.fired = 50
+                                                this.lefthand.anchored = -10
+                                                this.righthand.anchored = -10
+                                                this.body.ymom = -jumplimit
+                                            }
+                                        }
+                                    }
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
+                                        if (this.righthand.fired <= 0) {
                                             if (this.righthand.anchored == 0) {
-                                                this.shot = new Shot(this.righthand.x, this.righthand.y, 40, "#FF0000", this.speed * (1.9), 0)
-                                                // if(this.wasfalse[1] == 0){
-                                                this.shot.gravity = -.1
-                                                this.shot.countdown = 100
-                                                if (this.charge <= 0) {
-                                                    this.righthand.fired = 10
-                                                    if (this.righthand.anchored == 0) {
-                                                        this.charge += 40.5
-                                                    }
-                                                    this.shots.push(this.shot)
-                                                    if (this.grounded != 1) {
-                                                        this.body.xmom -= .5
-                                                    }
-                                                }
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = this.punchspeed * 18
+                                                this.righthand.xmom = -this.punchspeed * -5.1
+                                                this.righthand.fired = 18
                                             }
                                         }
-                                        if (this.face == -1) {
+                                        if (this.lefthand.fired <= 0) {
                                             if (this.lefthand.anchored == 0) {
-                                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, 40, "#FF0000", -this.speed * (1.9), 0)
-                                                this.shot.gravity = -.1
-                                                this.shot.countdown = 100
-                                                if (this.charge <= 0) {
-                                                    this.lefthand.fired = 10
-                                                    if (this.lefthand.anchored == 0) {
-                                                        this.charge += 40.5
-                                                    }
-                                                    this.shots.push(this.shot)
-                                                    if (this.grounded != 1) {
-                                                        this.body.xmom -= .5
-                                                    }
-                                                }
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = this.punchspeed * 18
+                                                this.lefthand.xmom = this.punchspeed * -5.1
+                                                this.lefthand.fired = 18
                                             }
                                         }
                                     }
-                                }
 
-                                if (this.body.fired > 0) {
-                                    this.body.ymom -= this.body.fired * .018
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
-                                    if (this.screwangle == 0) {
-
-                                        if (this.body.fired <= 0) {
-                                            this.jumping = 1
-                                            this.screwangle = Math.PI * 1.5
-                                            this.screwtimer = 50
-                                            this.lefthand.fired = 40
-                                            this.righthand.fired = 40
-                                            this.lefthand.ymom = -70
-                                            this.righthand.ymom = -70
-                                            this.lefthand.xmom = 25
-                                            this.righthand.xmom = -25
-                                            this.body.fired = 50
-                                            this.lefthand.anchored = -10
-                                            this.righthand.anchored = -10
-                                            this.body.ymom = -jumplimit
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.righthand.anchored == 0) {
+                                                this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
+                                                this.shot.gravity = 1
+                                                this.shots.push(this.shot)
+                                                this.fleeing = 0
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = this.punchspeed * 5
+                                                this.righthand.xmom = this.punchspeed * 18.1
+                                                this.righthand.fired = 22
+                                            }
                                         }
-                                    }
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = this.punchspeed * 18
-                                            this.righthand.xmom = -this.punchspeed * -5.1
-                                            this.righthand.fired = 18
-                                        }
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = this.punchspeed * 18
-                                            this.lefthand.xmom = this.punchspeed * -5.1
-                                            this.lefthand.fired = 18
-                                        }
-                                    }
-                                }
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 20, "#FFAA00", this.speed * 1.2, -this.speed * 1.4)
-                                            this.shot.gravity = 1
-                                            this.shots.push(this.shot)
-                                            this.fleeing = 0
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = this.punchspeed * 5
-                                            this.righthand.xmom = this.punchspeed * 18.1
-                                            this.righthand.fired = 22
-                                        }
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
-                                            this.shot.gravity = 1
-                                            this.shots.push(this.shot)
-                                            this.fleeing = 0
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = this.punchspeed * 5
-                                            this.lefthand.xmom = -this.punchspeed * 18.1
-                                            this.lefthand.fired = 22
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.lefthand.anchored == 0) {
+                                                this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 20, "#FFAA00", - this.speed * 1.2, -this.speed * 1.4)
+                                                this.shot.gravity = 1
+                                                this.shots.push(this.shot)
+                                                this.fleeing = 0
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = this.punchspeed * 5
+                                                this.lefthand.xmom = -this.punchspeed * 18.1
+                                                this.lefthand.fired = 22
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
                         }
                         degripl() {
                             this.body.sxmom = 0
@@ -10522,7 +10526,7 @@ this.frame = args['frame']
                                     this.shots[t] = new ShotC(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -10703,6 +10707,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Jox(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -11026,7 +11031,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -11065,7 +11070,7 @@ this.frame = args['frame']
                                 this.screwshot = 0
                             }
                             this.jumpcount--
-                  
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -12144,101 +12149,101 @@ this.frame = args['frame']
 
 
 
-                                if (this.blasting <= -45) {
-                                    if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
-                                        if (this.face == 1) {
+                                    if (this.blasting <= -45) {
+                                        if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
+                                            if (this.face == 1) {
+                                                if (this.righthand.anchored == 0) {
+                                                    if (this.charge <= 0) {
+                                                        this.righthand.fired = 20
+                                                        if (this.righthand.anchored == 0) {
+                                                            this.charge += 40.5
+                                                        }
+                                                        this.body.xmom = 35
+                                                        if (this.body.ymom > 0) {
+                                                            this.body.ymom = -1
+                                                        }
+                                                        this.grounded = 0
+                                                        this.jumping = 1
+                                                        this.body.fired = 20
+                                                        this.blasting = 20
+                                                    }
+                                                }
+                                            }
+                                            if (this.face == -1) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    if (this.charge <= 0) {
+                                                        this.lefthand.fired = 20
+                                                        if (this.lefthand.anchored == 0) {
+                                                            this.charge += 40.5
+                                                        }
+                                                        this.body.xmom = -35
+                                                        if (this.body.ymom > 0) {
+                                                            this.body.ymom = -1
+                                                        }
+                                                        this.grounded = 0
+                                                        this.jumping = 1
+                                                        this.body.fired = 20
+                                                        this.blasting = 20
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
+
+                                        if (this.screwangle == 0) {
+                                            if (this.body.fired <= 0) {
+                                                this.jumping = 1
+                                                this.screwangle = Math.PI * 1.5
+                                                this.screwtimer = 75
+                                                this.lefthand.fired = 40
+                                                this.righthand.fired = 40
+                                                this.lefthand.ymom = -70
+                                                this.righthand.ymom = -70
+                                                this.lefthand.xmom = 25
+                                                this.righthand.xmom = -25
+                                                this.body.fired = 75
+                                                this.lefthand.anchored = -10
+                                                this.righthand.anchored = -10
+                                                this.body.ymom = -jumplimit
+                                            }
+                                        }
+                                    }
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
+                                        if (this.righthand.fired <= 0) {
                                             if (this.righthand.anchored == 0) {
-                                                if (this.charge <= 0) {
-                                                    this.righthand.fired = 20
-                                                    if (this.righthand.anchored == 0) {
-                                                        this.charge += 40.5
-                                                    }
-                                                    this.body.xmom = 35
-                                                    if (this.body.ymom > 0) {
-                                                        this.body.ymom = -1
-                                                    }
-                                                    this.grounded = 0
-                                                    this.jumping = 1
-                                                    this.body.fired = 20
-                                                    this.blasting = 20
-                                                }
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = this.punchspeed * 12
+                                                this.righthand.xmom = -this.punchspeed * - 10.1
+                                                this.righthand.fired = 18
                                             }
                                         }
-                                        if (this.face == -1) {
+                                        if (this.lefthand.fired <= 0) {
                                             if (this.lefthand.anchored == 0) {
-                                                if (this.charge <= 0) {
-                                                    this.lefthand.fired = 20
-                                                    if (this.lefthand.anchored == 0) {
-                                                        this.charge += 40.5
-                                                    }
-                                                    this.body.xmom = -35
-                                                    if (this.body.ymom > 0) {
-                                                        this.body.ymom = -1
-                                                    }
-                                                    this.grounded = 0
-                                                    this.jumping = 1
-                                                    this.body.fired = 20
-                                                    this.blasting = 20
-                                                }
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = this.punchspeed * 12
+                                                this.lefthand.xmom = this.punchspeed * - 10.1
+                                                this.lefthand.fired = 18
                                             }
                                         }
                                     }
-                                }
 
-                                if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
-
-                                    if (this.screwangle == 0) {
-                                        if (this.body.fired <= 0) {
-                                            this.jumping = 1
-                                            this.screwangle = Math.PI * 1.5
-                                            this.screwtimer = 75
-                                            this.lefthand.fired = 40
-                                            this.righthand.fired = 40
-                                            this.lefthand.ymom = -70
-                                            this.righthand.ymom = -70
-                                            this.lefthand.xmom = 25
-                                            this.righthand.xmom = -25
-                                            this.body.fired = 75
-                                            this.lefthand.anchored = -10
-                                            this.righthand.anchored = -10
-                                            this.body.ymom = -jumplimit
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
+                                        if (this.reflecting <= -10) {
+                                            this.reflecting = 20
+                                            this.lefthand.xmom = this.punchspeed * -23.5
+                                            this.lefthand.fired = 21
+                                            this.righthand.xmom = -this.punchspeed * -23.5
+                                            this.righthand.ymom = this.punchspeed * 3
+                                            this.lefthand.ymom = this.punchspeed * 3
+                                            this.righthand.fired = 21
                                         }
-                                    }
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = this.punchspeed * 12
-                                            this.righthand.xmom = -this.punchspeed * - 10.1
-                                            this.righthand.fired = 18
-                                        }
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = this.punchspeed * 12
-                                            this.lefthand.xmom = this.punchspeed * - 10.1
-                                            this.lefthand.fired = 18
-                                        }
-                                    }
-                                }
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
-                                    if (this.reflecting <= -10) {
-                                        this.reflecting = 20
-                                        this.lefthand.xmom = this.punchspeed * -23.5
-                                        this.lefthand.fired = 21
-                                        this.righthand.xmom = -this.punchspeed * -23.5
-                                        this.righthand.ymom = this.punchspeed * 3
-                                        this.lefthand.ymom = this.punchspeed * 3
-                                        this.righthand.fired = 21
                                     }
                                 }
                             }
-                        }
                         }
                         degripl() {
                             this.body.sxmom = 0
@@ -12581,14 +12586,14 @@ this.frame = args['frame']
                                 this.charge = 0
                                 this.shots = []
 
-this.color = getRandomColor()
-if (controller == 0) {
-    this.color = "#ffAA00"
-}
-if (controller == 1) {
-    this.color = "#ff0000"
-}
-this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 75, this.color)
+                                this.color = getRandomColor()
+                                if (controller == 0) {
+                                    this.color = "#ffAA00"
+                                }
+                                if (controller == 1) {
+                                    this.color = "#ff0000"
+                                }
+                                this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 75, this.color)
                                 this.controller = controller
                                 if (this.controller == 0) {
                                     this.body.color = "#FF0000"
@@ -12675,7 +12680,7 @@ this.body = new Shotb((400 + ((boys.length * 150 * invscale)) % ((canvas.width *
                                     this.shots[t] = new Shotb(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -12858,6 +12863,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Dummy(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -13146,7 +13152,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -13184,7 +13190,7 @@ this.frame = args['frame']
                                 this.screwshot = 0
                             }
                             this.jumpcount--
-                 
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -13358,8 +13364,8 @@ this.frame = args['frame']
                                 this.body.symom = 0
                             }
                             // if (this.controller == 0) {
-                  
-                                if (boys.indexOf(this) <= humanPlayers) {
+
+                            if (boys.indexOf(this) <= humanPlayers) {
                                 if (this.breaktimer < 0) {
                                     this.playerMove(this.body, this.speed, this.gamepad)
 
@@ -13523,7 +13529,7 @@ this.frame = args['frame']
                                     this.color = "#ff0000"
                                 }
                                 this.body = new ShotD((400 + (Math.random() * 0) + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 39.5, this.color)
-                             
+
                                 this.controller = controller
                                 if (this.controller == 0) {
                                     this.body.color = "#FF0000"
@@ -13562,7 +13568,7 @@ this.frame = args['frame']
                                 this.frame = 0
                                 this.grounded = 0
                                 this.jumping = 1
-                               this.nodes.push(this.body)
+                                this.nodes.push(this.body)
                                 this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
                                 this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
                                 this.lefthand = new ShotD(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 23.5, "magenta", 0, 0, .85)
@@ -13605,12 +13611,11 @@ this.frame = args['frame']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new ShotD(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
                                 }
-
                                 for (let t = 0; t < this.shots.length; t++) {
                                     this.shots[t] = new ShotD(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -13792,6 +13797,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new ScorchedMass(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -14128,7 +14134,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -14167,7 +14173,7 @@ this.frame = args['frame']
                                 this.screwshot = 0
                             }
                             this.jumpcount--
-             
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -15253,122 +15259,122 @@ this.frame = args['frame']
                                 if (this.id == ID) {
 
 
-                                if (this.righthand.fired <= 0) {
-                                    if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
-
-                                        if (this.face == 1) {
-                                            if (this.righthand.anchored == 0) {
-                                                this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .91, "#FF4400", this.speed * 3, 0)
-                                                if (this.charge > 80) {
-                                                    this.shot.color = "#FF9944"
-                                                }
-                                                // if(this.wasfalse[1] == 0){
-                                                if (this.charge >= 100) {
-                                                    this.charge = 0
-                                                    this.righthand.xmom = 15
-                                                    this.righthand.ymom = 0
-                                                    this.shots.push(this.shot)
-                                                    if (this.grounded != 1) {
-                                                        this.body.xmom -= 5
-                                                    }
-                                                }
-                                                if (this.righthand.anchored == 0) {
-                                                    this.righthand.xmom += 1
-                                                    this.righthand.ymom -= 1
-                                                    this.charge += 1.5
-                                                }
-                                                this.shotdraw = 1
-                                            }
-                                        }
-                                        if (this.face == -1) {
-                                            if (this.lefthand.anchored == 0) {
-                                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
-                                                if (this.charge > 80) {
-                                                    this.shot.color = "#FF9944"
-                                                }
-                                                if (this.charge >= 100) {
-                                                    this.charge = 0
-                                                    this.lefthand.xmom = -15
-                                                    this.lefthand.ymom = 0
-                                                    this.shots.push(this.shot)
-                                                    if (this.grounded != 1) {
-                                                        this.body.xmom += 5
-                                                    }
-                                                }
-                                                if (this.lefthand.anchored == 0) {
-                                                    this.lefthand.xmom -= 1
-                                                    this.lefthand.ymom -= 1
-                                                    this.charge += 1.5
-                                                }
-                                                this.shotdraw = 1
-
-                                            }
-                                        }
-                                    }
-                                }
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
-                                    if (this.body.fired <= 0) {
-                                        if (this.screwangle == 0) {
-                                            this.screwmomentum = Math.PI / 5
-                                            this.screwtimer = 42
-                                            this.jumping = 1
-                                            this.lefthand.fired = 30
-                                            this.righthand.fired = 30
-                                            // this.degripr()
-                                            // this.degripl()
-                                            this.body.fired = 42
-                                            this.lefthand.anchored = -10
-                                            this.righthand.anchored = -10
-                                            this.body.ymom = -jumplimit  //-this.speed * 3
-                                        }
-                                    }
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.righthand.fired <= 0) {
-                                            this.shot = new ShotC(this.body.x, this.body.y, 24, "#FF0000", 0, (this.speed * 1.5))
-                                            this.shot.bomb = 1
-                                            this.detonate = 1
-                                            this.shots.push(this.shot)
-                                            if (this.body.ymom > -jumplimit) {
-                                                this.body.ymom -= this.speed * 1.8
-                                                if (this.body.ymom < -jumplimit) {
-                                                    this.body.ymom = -jumplimit
-                                                }
-                                            } else {
-                                            }
-                                            this.lefthand.fired = 28
-                                            this.righthand.fired = 28
-                                        }
-                                    }
-                                }
-
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                                     if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.fleeing = 0
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
-                                            this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
-                                            this.righthand.fired = 18
+                                        if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
+
+                                            if (this.face == 1) {
+                                                if (this.righthand.anchored == 0) {
+                                                    this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .91, "#FF4400", this.speed * 3, 0)
+                                                    if (this.charge > 80) {
+                                                        this.shot.color = "#FF9944"
+                                                    }
+                                                    // if(this.wasfalse[1] == 0){
+                                                    if (this.charge >= 100) {
+                                                        this.charge = 0
+                                                        this.righthand.xmom = 15
+                                                        this.righthand.ymom = 0
+                                                        this.shots.push(this.shot)
+                                                        if (this.grounded != 1) {
+                                                            this.body.xmom -= 5
+                                                        }
+                                                    }
+                                                    if (this.righthand.anchored == 0) {
+                                                        this.righthand.xmom += 1
+                                                        this.righthand.ymom -= 1
+                                                        this.charge += 1.5
+                                                    }
+                                                    this.shotdraw = 1
+                                                }
+                                            }
+                                            if (this.face == -1) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
+                                                    if (this.charge > 80) {
+                                                        this.shot.color = "#FF9944"
+                                                    }
+                                                    if (this.charge >= 100) {
+                                                        this.charge = 0
+                                                        this.lefthand.xmom = -15
+                                                        this.lefthand.ymom = 0
+                                                        this.shots.push(this.shot)
+                                                        if (this.grounded != 1) {
+                                                            this.body.xmom += 5
+                                                        }
+                                                    }
+                                                    if (this.lefthand.anchored == 0) {
+                                                        this.lefthand.xmom -= 1
+                                                        this.lefthand.ymom -= 1
+                                                        this.charge += 1.5
+                                                    }
+                                                    this.shotdraw = 1
+
+                                                }
+                                            }
                                         }
                                     }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.fleeing = 0
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
-                                            this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
-                                            this.lefthand.fired = 18
+
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
+                                        if (this.body.fired <= 0) {
+                                            if (this.screwangle == 0) {
+                                                this.screwmomentum = Math.PI / 5
+                                                this.screwtimer = 42
+                                                this.jumping = 1
+                                                this.lefthand.fired = 30
+                                                this.righthand.fired = 30
+                                                // this.degripr()
+                                                // this.degripl()
+                                                this.body.fired = 42
+                                                this.lefthand.anchored = -10
+                                                this.righthand.anchored = -10
+                                                this.body.ymom = -jumplimit  //-this.speed * 3
+                                            }
+                                        }
+                                    }
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.righthand.fired <= 0) {
+                                                this.shot = new ShotC(this.body.x, this.body.y, 24, "#FF0000", 0, (this.speed * 1.5))
+                                                this.shot.bomb = 1
+                                                this.detonate = 1
+                                                this.shots.push(this.shot)
+                                                if (this.body.ymom > -jumplimit) {
+                                                    this.body.ymom -= this.speed * 1.8
+                                                    if (this.body.ymom < -jumplimit) {
+                                                        this.body.ymom = -jumplimit
+                                                    }
+                                                } else {
+                                                }
+                                                this.lefthand.fired = 28
+                                                this.righthand.fired = 28
+                                            }
+                                        }
+                                    }
+
+
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.righthand.anchored == 0) {
+                                                this.fleeing = 0
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                                                this.righthand.xmom = (this.punchspeed * 11.1) //+ this.body.xmom
+                                                this.righthand.fired = 18
+                                            }
+                                        }
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.lefthand.anchored == 0) {
+                                                this.fleeing = 0
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = (this.punchspeed * 5) //+ this.body.ymom
+                                                this.lefthand.xmom = -(this.punchspeed * 11.1) //+ this.body.xmom
+                                                this.lefthand.fired = 18
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
                         }
                         degripl() {
                             this.body.sxmom = 0
@@ -15525,9 +15531,9 @@ this.frame = args['frame']
                             if (this.shotdraw == 1) {
 
                                 if (this.face == -1) {
-                                                this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
-                                }else if (this.face == 1) {
-                                                this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
+                                    this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
+                                } else if (this.face == 1) {
+                                    this.shot = new Shot(this.righthand.x, this.righthand.y, this.charge * .91, "#FF4400", -this.speed * 3, 0)
                                 }
                                 this.shot.draw()
                             }
@@ -15554,8 +15560,8 @@ this.frame = args['frame']
                                 this.body.symom = 0
                             }
                             // if (this.controller == 0) {
-                     
-                                if (boys.indexOf(this) <= humanPlayers) {
+
+                            if (boys.indexOf(this) <= humanPlayers) {
                                 if (this.breaktimer < 0) {
                                     this.playerMove(this.body, this.speed, this.gamepad)
 
@@ -15727,14 +15733,14 @@ this.frame = args['frame']
                                 this.shots = []
                                 this.wasfalse = []
 
-this.color = getRandomColor()
-if (controller == 0) {
-    this.color = "#ffAA00"
-}
-if (controller == 1) {
-    this.color = "#ff0000"
-}
-this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, this.radsto, this.color)
+                                this.color = getRandomColor()
+                                if (controller == 0) {
+                                    this.color = "#ffAA00"
+                                }
+                                if (controller == 1) {
+                                    this.color = "#ff0000"
+                                }
+                                this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, this.radsto, this.color)
                                 this.controller = controller
                                 if (this.controller == 0) {
                                     this.body.color = "#FF0000"
@@ -15858,7 +15864,7 @@ this.body = new Circle((400 + ((boys.length * 150 * invscale)) % ((canvas.width 
                                     this.shots[t] = new Circle(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -16188,6 +16194,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new AsigMan(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             if (typeof this.colorsto != "undefined") {
                                 copy.body.color = this.colorsto
                             } else {
@@ -16334,8 +16341,8 @@ this.frame = args['frame']
                                                 if (this.countering > 0) {
                                                 } else {
                                                     if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                        this.body.move()
+                                                    }
                                                 }
                                                 this.fixupshoulder()
 
@@ -16366,8 +16373,8 @@ this.frame = args['frame']
                                                 if (this.countering > 0) {
                                                 } else {
                                                     if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                        this.body.move()
+                                                    }
                                                 }
                                                 this.fixupshoulder()
 
@@ -16398,8 +16405,8 @@ this.frame = args['frame']
                                                 if (this.countering > 0) {
                                                 } else {
                                                     if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                        this.body.move()
+                                                    }
                                                 }
                                                 this.fixupshoulder()
                                             }
@@ -16430,8 +16437,8 @@ this.frame = args['frame']
                                                 if (this.countering > 0) {
                                                 } else {
                                                     if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                        this.body.move()
+                                                    }
                                                 }
                                                 this.fixupshoulder()
                                             }
@@ -16467,8 +16474,8 @@ this.frame = args['frame']
                                             if (this.countering > 0) {
                                             } else {
                                                 if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                    this.body.move()
+                                                }
                                             }
                                             this.fixupshoulder()
 
@@ -16499,8 +16506,8 @@ this.frame = args['frame']
                                             if (this.countering > 0) {
                                             } else {
                                                 if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                    this.body.move()
+                                                }
                                             }
                                             this.fixupshoulder()
                                         }
@@ -16529,8 +16536,8 @@ this.frame = args['frame']
                                             if (this.countering > 0) {
                                             } else {
                                                 if (this.id == ID) {
-                                                            this.body.move()
-                                                        }
+                                                    this.body.move()
+                                                }
                                             }
                                             this.fixupshoulder()
                                         }
@@ -16554,7 +16561,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[t].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[t].body.x) / (this.body.radius + boys[t].body.radius)
@@ -16591,7 +16598,7 @@ this.frame = args['frame']
                             }
 
                             this.jumpcount--
-                      
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -16676,145 +16683,145 @@ this.frame = args['frame']
                                 if (this.id == ID) {
 
 
-                                if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.righthand.fired <= 0) {
-                                            if (this.countering <= -30) {
-                                                this.colorsto = this.body.color
-                                                this.countering = 5
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.righthand.fired <= 0) {
+                                                if (this.countering <= -30) {
+                                                    this.colorsto = this.body.color
+                                                    this.countering = 5
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
-                                    if (this.face == 1) {
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
+                                        if (this.face == 1) {
+                                            if (this.righthand.fired <= 0) {
+                                                if (this.righthand.anchored == 0) {
+                                                    this.righthand.ymom = 0
+                                                    this.righthand.xmom = this.punchspeed * 14
+                                                    this.righthand.fired = 18
+                                                }
+                                            }
+                                            if (this.righthand2.fired <= 0) {
+                                                this.righthand2.xmom = this.punchspeed * 14
+                                                this.righthand2.fired = 18
+                                            }
+                                            if (this.righthand3.fired <= 0) {
+                                                this.righthand3.xmom = this.punchspeed * 14
+                                                this.righthand3.fired = 28
+                                            }
+                                        }
+                                        if (this.face == -1) {
+                                            if (this.lefthand.fired <= 0) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.lefthand.ymom = 0
+                                                    this.lefthand.xmom = -this.punchspeed * 14
+                                                    this.lefthand.fired = 18
+                                                }
+                                            }
+                                            if (this.lefthand2.fired <= 0) {
+                                                this.lefthand2.xmom = -this.punchspeed * 14
+                                                this.lefthand2.fired = 18
+                                            }
+                                            if (this.lefthand3.fired <= 0) {
+                                                this.lefthand3.xmom = -this.punchspeed * 14
+                                                this.lefthand3.fired = 18
+                                            }
+                                        }
+                                    }
+
+
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                                         if (this.righthand.fired <= 0) {
                                             if (this.righthand.anchored == 0) {
-                                                this.righthand.ymom = 0
-                                                this.righthand.xmom = this.punchspeed * 14
+                                                this.righthand.ymom = -this.punchspeed * 14
+                                                this.righthand.xmom = 0
                                                 this.righthand.fired = 18
                                             }
-                                        }
-                                        if (this.righthand2.fired <= 0) {
-                                            this.righthand2.xmom = this.punchspeed * 14
+                                        } if (this.righthand2.fired <= 0) {
+                                            this.righthand2.ymom = -this.punchspeed * 14
+                                            this.righthand2.xmom = -this.punchspeed * 4
                                             this.righthand2.fired = 18
+                                        } if (this.righthand3.fired <= 0) {
+                                            this.righthand3.ymom = -this.punchspeed * 14
+                                            this.righthand3.xmom = this.punchspeed * 4
+                                            this.righthand3.fired = 18
                                         }
-                                        if (this.righthand3.fired <= 0) {
-                                            this.righthand3.xmom = this.punchspeed * 14
-                                            this.righthand3.fired = 28
-                                        }
-                                    }
-                                    if (this.face == -1) {
                                         if (this.lefthand.fired <= 0) {
                                             if (this.lefthand.anchored == 0) {
-                                                this.lefthand.ymom = 0
-                                                this.lefthand.xmom = -this.punchspeed * 14
+                                                this.lefthand.ymom = -this.punchspeed * 14
+                                                this.lefthand.xmom = -this.punchspeed * 0
                                                 this.lefthand.fired = 18
                                             }
                                         }
                                         if (this.lefthand2.fired <= 0) {
-                                            this.lefthand2.xmom = -this.punchspeed * 14
+                                            this.lefthand2.ymom = -this.punchspeed * 14
+                                            this.lefthand2.xmom = -this.punchspeed * -4
                                             this.lefthand2.fired = 18
                                         }
                                         if (this.lefthand3.fired <= 0) {
-                                            this.lefthand3.xmom = -this.punchspeed * 14
+                                            this.lefthand3.ymom = -this.punchspeed * 14
+                                            this.lefthand3.xmom = -this.punchspeed * 4
                                             this.lefthand3.fired = 18
                                         }
                                     }
-                                }
 
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.righthand.ymom = -this.punchspeed * 14
-                                            this.righthand.xmom = 0
-                                            this.righthand.fired = 18
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.righthand.anchored == 0) {
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                                this.righthand.xmom = this.punchspeed * 9
+                                                this.body.ymom -= this.speed * .1275
+                                                this.righthand.fired = 19
+                                            }
                                         }
-                                    } if (this.righthand2.fired <= 0) {
-                                        this.righthand2.ymom = -this.punchspeed * 14
-                                        this.righthand2.xmom = -this.punchspeed * 4
-                                        this.righthand2.fired = 18
-                                    } if (this.righthand3.fired <= 0) {
-                                        this.righthand3.ymom = -this.punchspeed * 14
-                                        this.righthand3.xmom = this.punchspeed * 4
-                                        this.righthand3.fired = 18
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.lefthand.ymom = -this.punchspeed * 14
-                                            this.lefthand.xmom = -this.punchspeed * 0
-                                            this.lefthand.fired = 18
-                                        }
-                                    }
-                                    if (this.lefthand2.fired <= 0) {
-                                        this.lefthand2.ymom = -this.punchspeed * 14
-                                        this.lefthand2.xmom = -this.punchspeed * -4
-                                        this.lefthand2.fired = 18
-                                    }
-                                    if (this.lefthand3.fired <= 0) {
-                                        this.lefthand3.ymom = -this.punchspeed * 14
-                                        this.lefthand3.xmom = -this.punchspeed * 4
-                                        this.lefthand3.fired = 18
-                                    }
-                                }
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                            this.righthand.xmom = this.punchspeed * 9
+                                        if (this.righthand2.fired <= 0) {
+                                            this.rightshoulder2.xmom = 0
+                                            this.rightshoulder2.ymom = 0
+                                            this.righthand2.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                            this.righthand2.xmom = 0
                                             this.body.ymom -= this.speed * .1275
-                                            this.righthand.fired = 19
+                                            this.righthand2.fired = 20
                                         }
-                                    }
-                                    if (this.righthand2.fired <= 0) {
-                                        this.rightshoulder2.xmom = 0
-                                        this.rightshoulder2.ymom = 0
-                                        this.righthand2.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                        this.righthand2.xmom = 0
-                                        this.body.ymom -= this.speed * .1275
-                                        this.righthand2.fired = 20
-                                    }
-                                    if (this.righthand3.fired <= 0) {
-                                        this.rightshoulder3.xmom = 0
-                                        this.rightshoulder3.ymom = 0
-                                        this.righthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                        this.righthand3.xmom = -this.punchspeed * 7
-                                        this.body.ymom -= this.speed * .1275
-                                        this.righthand3.fired = 21
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                            this.lefthand.xmom = this.punchspeed * -9
+                                        if (this.righthand3.fired <= 0) {
+                                            this.rightshoulder3.xmom = 0
+                                            this.rightshoulder3.ymom = 0
+                                            this.righthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                            this.righthand3.xmom = -this.punchspeed * 7
                                             this.body.ymom -= this.speed * .1275
-                                            this.lefthand.fired = 18
+                                            this.righthand3.fired = 21
                                         }
-                                    }
-                                    if (this.lefthand2.fired <= 0) {
-                                        this.leftshoulder2.xmom = 0
-                                        this.leftshoulder2.ymom = 0
-                                        this.lefthand2.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                        this.lefthand2.xmom = 0
-                                        this.body.ymom -= this.speed * .1275
-                                        this.lefthand2.fired = 19
-                                    }
-                                    if (this.lefthand3.fired <= 0) {
-                                        this.leftshoulder3.xmom = 0
-                                        this.leftshoulder3.ymom = 0
-                                        this.lefthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
-                                        this.lefthand3.xmom = -this.punchspeed * -7
-                                        this.body.ymom -= this.speed * .1275
-                                        this.lefthand3.fired = 19
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.lefthand.anchored == 0) {
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                                this.lefthand.xmom = this.punchspeed * -9
+                                                this.body.ymom -= this.speed * .1275
+                                                this.lefthand.fired = 18
+                                            }
+                                        }
+                                        if (this.lefthand2.fired <= 0) {
+                                            this.leftshoulder2.xmom = 0
+                                            this.leftshoulder2.ymom = 0
+                                            this.lefthand2.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                            this.lefthand2.xmom = 0
+                                            this.body.ymom -= this.speed * .1275
+                                            this.lefthand2.fired = 19
+                                        }
+                                        if (this.lefthand3.fired <= 0) {
+                                            this.leftshoulder3.xmom = 0
+                                            this.leftshoulder3.ymom = 0
+                                            this.lefthand3.ymom = (this.punchspeed * 14) + this.body.ymom * 2
+                                            this.lefthand3.xmom = -this.punchspeed * -7
+                                            this.body.ymom -= this.speed * .1275
+                                            this.lefthand3.fired = 19
+                                        }
                                     }
                                 }
-                            }
                             }
                         }
 
@@ -18244,7 +18251,7 @@ this.frame = args['frame']
                                     }
                                     this.doubleJump()
                                 }
-                            }else {
+                            } else {
                                 if (this.breaktimer < 0) {
                                     this.AImove(this.body, this.speed, this.gamepad)
 
@@ -18357,7 +18364,7 @@ this.frame = args['frame']
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j> 10000) {
+                                                    if (j > 10000) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -18549,7 +18556,7 @@ this.frame = args['frame']
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                 }
                                 this.id = args["id"]
-this.frame = args['frame']
+                                this.frame = args['frame']
                                 this.body = this.nodes[0]
                                 this.body.fired = this.nodes[0].fired
                                 if (this.controller == 0) {
@@ -18731,6 +18738,7 @@ this.frame = args['frame']
                         copy() {
                             let copy = new Princess(this.controller)
                             copy.id = this.id
+                            copy.frame = this.frame
                             copy.body.color = this.body.color
                             return copy
                         }
@@ -18833,7 +18841,7 @@ this.frame = args['frame']
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j> 10000) {
+                                                    if (j > 10000) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -19092,7 +19100,7 @@ this.frame = args['frame']
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j> 10000) {
+                                        if (j > 10000) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -19131,7 +19139,7 @@ this.frame = args['frame']
                                 this.screwshot = 0
                             }
                             this.jumpcount--
-                
+
                             if (this.jumpcount <= -20) {
                                 if (boys.indexOf(this) <= humanPlayers) {
                                     this.doJump(this.body, this.speed)
@@ -20300,113 +20308,113 @@ this.frame = args['frame']
                                 if (this.id == ID) {
 
 
-                                if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.face == 1) {
-                                            if (this.righthand.anchored == 0) {
-                                                this.righthand.ymom = this.punchspeed * 8
-                                                this.righthand.xmom = this.punchspeed * 19.1
-                                                this.righthand.fired = 19
-                                                this.body.xmom -= 5
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.face == 1) {
+                                                if (this.righthand.anchored == 0) {
+                                                    this.righthand.ymom = this.punchspeed * 8
+                                                    this.righthand.xmom = this.punchspeed * 19.1
+                                                    this.righthand.fired = 19
+                                                    this.body.xmom -= 5
+                                                }
+                                            }
+                                        }
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.face == -1) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.lefthand.ymom = this.punchspeed * 8
+                                                    this.lefthand.xmom = this.punchspeed * -19.1
+                                                    this.lefthand.fired = 19
+                                                    this.body.xmom += 5
+                                                }
                                             }
                                         }
                                     }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.face == -1) {
-                                            if (this.lefthand.anchored == 0) {
-                                                this.lefthand.ymom = this.punchspeed * 8
-                                                this.lefthand.xmom = this.punchspeed * -19.1
-                                                this.lefthand.fired = 19
-                                                this.body.xmom += 5
-                                            }
-                                        }
-                                    }
-                                }
 
-                                if (this.body.fired > 30) {
-                                    this.body.ymom -= this.body.fired * .008
-                                }
-                                if (this.screwtimer == 30) {
-                                    this.body.fired = 30
-                                    this.body.ymom = vsmashlimit
-                                } else if (this.screwtimer <= 30) {
-                                    if (this.screwtimer > 0) {
+                                    if (this.body.fired > 30) {
+                                        this.body.ymom -= this.body.fired * .008
+                                    }
+                                    if (this.screwtimer == 30) {
+                                        this.body.fired = 30
                                         this.body.ymom = vsmashlimit
-                                    }
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
-                                            this.shot.gravity = -.7
-                                            this.shots.push(this.shot)
-                                            this.fleeing = 0
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.fired = 30
-                                            this.body.ymom -= this.speed / 3
+                                    } else if (this.screwtimer <= 30) {
+                                        if (this.screwtimer > 0) {
+                                            this.body.ymom = vsmashlimit
                                         }
                                     }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .4)
-                                            this.shot.gravity = -.7
-                                            this.shots.push(this.shot)
-                                            this.fleeing = 0
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.fired = 30
-                                            this.body.ymom -= this.speed / 3
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.righthand.anchored == 0) {
+                                                this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
+                                                this.shot.gravity = -.7
+                                                this.shots.push(this.shot)
+                                                this.fleeing = 0
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.fired = 30
+                                                this.body.ymom -= this.speed / 3
+                                            }
+                                        }
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.lefthand.anchored == 0) {
+                                                this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .4)
+                                                this.shot.gravity = -.7
+                                                this.shots.push(this.shot)
+                                                this.fleeing = 0
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.fired = 30
+                                                this.body.ymom -= this.speed / 3
+                                            }
                                         }
                                     }
-                                }
-                                if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('A') || (keysPressed['k'] || keysPressed['ArrowDown'])) {
 
-                                    if (this.screwangle == 0) {
+                                        if (this.screwangle == 0) {
 
-                                        if (this.body.fired <= 0) {
-                                            this.blasting = 0
-                                            this.jumping = 1
-                                            this.screwangle = Math.PI * 1.5
-                                            this.screwtimer = 40
-                                            this.lefthand.fired = 40
-                                            this.righthand.fired = 40
-                                            this.lefthand.ymom = -5
-                                            this.righthand.ymom = -5
-                                            this.lefthand.xmom = 5
-                                            this.righthand.xmom = -5
-                                            this.body.fired = 10
-                                            this.lefthand.anchored = -10
-                                            this.righthand.anchored = -10
-                                            this.body.ymom = -jumplimit / 3
+                                            if (this.body.fired <= 0) {
+                                                this.blasting = 0
+                                                this.jumping = 1
+                                                this.screwangle = Math.PI * 1.5
+                                                this.screwtimer = 40
+                                                this.lefthand.fired = 40
+                                                this.righthand.fired = 40
+                                                this.lefthand.ymom = -5
+                                                this.righthand.ymom = -5
+                                                this.lefthand.xmom = 5
+                                                this.righthand.xmom = -5
+                                                this.body.fired = 10
+                                                this.lefthand.anchored = -10
+                                                this.righthand.anchored = -10
+                                                this.body.ymom = -jumplimit / 3
+                                            }
                                         }
+
+
                                     }
 
-
-                                }
-
-                                if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
-                                    if (this.righthand.fired <= 0) {
-                                        if (this.righthand.anchored == 0) {
-                                            this.rightshoulder.xmom = 0
-                                            this.rightshoulder.ymom = 0
-                                            this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
-                                            this.righthand.xmom = -this.punchspeed * -5.1
-                                            this.righthand.fired = 19
+                                    if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
+                                        if (this.righthand.fired <= 0) {
+                                            if (this.righthand.anchored == 0) {
+                                                this.rightshoulder.xmom = 0
+                                                this.rightshoulder.ymom = 0
+                                                this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
+                                                this.righthand.xmom = -this.punchspeed * -5.1
+                                                this.righthand.fired = 19
+                                            }
                                         }
-                                    }
-                                    if (this.lefthand.fired <= 0) {
-                                        if (this.lefthand.anchored == 0) {
-                                            this.leftshoulder.xmom = 0
-                                            this.leftshoulder.ymom = 0
-                                            this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
-                                            this.lefthand.xmom = this.punchspeed * -5.1
-                                            this.lefthand.fired = 19
+                                        if (this.lefthand.fired <= 0) {
+                                            if (this.lefthand.anchored == 0) {
+                                                this.leftshoulder.xmom = 0
+                                                this.leftshoulder.ymom = 0
+                                                this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
+                                                this.lefthand.xmom = this.punchspeed * -5.1
+                                                this.lefthand.fired = 19
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
                         }
                         degripl() {
                             this.body.sxmom = 0
@@ -20946,6 +20954,9 @@ this.frame = args['frame']
                                         // } else {
 
                                         // if (t == 0) {
+                                        boys[t].body.x = - 100000
+                                        boys[t].body.y = - 100000
+
                                         if (stock > 0) {
                                             if (drops[t] < stock) {
                                                 boys[t] = boys[t].copy()
