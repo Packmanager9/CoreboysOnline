@@ -72,6 +72,7 @@ let start = 0
 let ID = Math.random()
 let color = "#FFFFFF"
 let hit = 0
+let players = 0
 
 
 ws.addEventListener("open", () => {
@@ -82,16 +83,35 @@ ws.addEventListener("open", () => {
             console.log(data)
             if(data.length >= 0 && data.length < 5){
                 start = 1
-                connectionnumber = (data.index)
-                if (connectionnumber == 0) {
-                    color = "#FF0000"
-                } else if (connectionnumber == 1) {
-                    color = "#00FF00"
-                }else {
-                    color = "#FFFF00"
-                console.log(connectionnumber, "1")
-                }
+                connectionnumber = parseInt(data.index)
+
+                ID = connectionnumber
+                if (connectionnumber ==0) {
+        color = "#FF0000"
+    }
+    if (connectionnumber ==1) {
+        color = "#00FF00"
+    }
+    if (connectionnumber ==2) {
+        color = "#0000FF"
+    }
+    if (connectionnumber ==3) {
+        color = "#FFFF00"
+    }
+    if (connectionnumber ==4) {
+        color = "#FFAA00"
+    }
+    if (connectionnumber ==5) {
+        color = "#00FFFF"
+    }
+    if (connectionnumber ==6) {
+        color = "#FF00FF"
+    }
+    if (connectionnumber ==7) {
+        color = "#bbbbbb"
+    }
                 console.log(connectionnumber, "1", data.index)
+                players=data.length
                 for (let t = 0; t < parseInt(data.length); t++) {
                     CreatePlayer(t)
                 }
@@ -107,19 +127,26 @@ ws.addEventListener("open", () => {
             console.log(data, ID)
             // if (data.id != ID) {
                 for (let t = 0; t < boys.length; t++) {
-                    if (boys[t].body.color != color) {
-                    if (boys[t].body.color == data.color) {
-                        console.log(data.color)
-                            boys[t] = new Mass(boys[t].controller, data)
+                    // if (boys[t].body.color != color) {
+                    if (boys[t].id == data.id) {
+                        console.log(data)
+                            boys[t] = new Mass(t, data)
 
 
 
-                        let gp = new Gamepad(boys[t].controller)
+                        let gp = new Gamepad(t)
 
                         boys[t]['gamepad']  = gp
                         
+                    }else{
+                        if(boys.length<players){
+                            let newplayer =  new Mass(t, data)
+                        let gp = new Gamepad(boys[t].controller)
+                        boys.push(newplayer)
+                        boys[t]['gamepad']  = gp
+                        }
                     }
-                }
+                // }
             }
             // }
         }else{
@@ -5507,7 +5534,7 @@ class Mass {
     constructor(controller, args = 0) {
         if(args == 0){
 
-            this.id = ID
+            this.id = boys.length
             this.jumpcount = 0
             this.gamepad = new Gamepad(controller)
             this.shotdraw = 0
@@ -5553,17 +5580,33 @@ class Mass {
             this.punchspeed = 6 // 5 // 5.7
             this.grounded = 0
             this.jumping = 1
-    
-    
-            this.color = getRandomColor()
-            // if (controller == 0) {
-            //     this.color = "#ffAA00"
-            // }
-            // if (controller == 1) {
-            //     this.color = "#ff0000"
-            // }
             this.body = new Shot((400 + (Math.random() * 0) + ((boys.length * 150 * invscale)) % ((canvas.width * invscale) - 800)), 500, 37.5, this.color)
             this.nodes.push(this.body)
+
+    if (controller == 0) {
+        this.body.color = "#FF0000"
+    }
+    if (controller == 1) {
+        this.body.color = "#00FF00"
+    }
+    if (controller == 2) {
+        this.body.color = "#0000FF"
+    }
+    if (controller == 3) {
+        this.body.color = "#FFFF00"
+    }
+    if (controller == 4) {
+        this.body.color = "#FFAA00"
+    }
+    if (controller == 5) {
+        this.body.color = "#00FFFF"
+    }
+    if (controller == 6) {
+        this.body.color = "#FF00FF"
+    }
+    if (controller == 7) {
+        this.body.color = "#bbbbbb"
+    }
             this.leftshoulder = new Shot(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
             this.rightshoulder = new Shot(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "red", 0, 0, .999)
             this.lefthand = new Shot(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 21.5, "magenta", 0, 0, .85)
@@ -5594,30 +5637,6 @@ class Mass {
                 this.nodes[t].self = this // lmao
             }
 
-    if (controller == 0) {
-        this .body.color = "#FF0000"
-    }
-    if (controller == 1) {
-        this .body.color = "#00FF00"
-    }
-    if (controller == 2) {
-        this .body.color = "#0000FF"
-    }
-    if (controller == 3) {
-        this .body.color = "#FFFF00"
-    }
-    if (controller == 4) {
-        this .body.color = "#FFAA00"
-    }
-    if (controller == 5) {
-        this .body.color = "#00FFFF"
-    }
-    if (controller == 6) {
-        this .body.color = "#FF00FF"
-    }
-    if (controller == 7) {
-        this .body.color = "#bbbbbb"
-    }
             this.target = {}
             this.target.body = {}
         }else{
@@ -18774,7 +18793,7 @@ function CreatePlayer(t) {
     if (connectionnumber == t) {
         console.log(t)
                 // coreboy.body.color = color
-                color = coreboy.body.color
+                // color = coreboy.body.color
 
     }
 
