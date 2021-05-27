@@ -1101,7 +1101,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (this.radius * 1.25), Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0))
+                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), Math.ceil(this.y - (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
                                 this.string = this.color
 
 
@@ -3852,6 +3852,7 @@
                                 }
                                 // ////console.log(args)
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 // //console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
@@ -5994,6 +5995,7 @@
                                 }
                                 // ////console.log(args)
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 // //console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
@@ -8220,6 +8222,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Shotb(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -10537,6 +10540,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new ShotC(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -12698,6 +12702,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Shotb(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -13634,6 +13639,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new ShotD(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -15889,6 +15895,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Circle(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -18587,6 +18594,7 @@
                                     this[keys[t]] = args[keys[t]]
                                 }
                                 this.shotdraw = args['shotdraw']
+                                this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new ShotP(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -21070,7 +21078,9 @@
                                         }
                                     }
                                     // ////console.log(keys)
-
+                                    Json.brick = {}
+                                    Json.bricksto = {}
+                                    Json.wasfalse = []
 
 
                                     ws.send(JSON.stringify(Json))
