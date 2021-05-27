@@ -26,13 +26,9 @@ wss.on("connection", ws => {
     let pair = [game.length, -1]
     ws.pair = pair
     ws.on("close", () => {
-        //console.log("client left")
         let deleter = ws.index
-
-
         game.splice(game.indexOf(ws), 1)
         for (let t = 0; t < game.length; t++) {
-
             let sjon = {
                 "delete": `${deleter}`,
                 "index": `${t}`,
@@ -41,7 +37,6 @@ wss.on("connection", ws => {
             game[t].send(JSON.stringify(sjon))
             console.log(sjon)
         }
-
         let minarr = []
         for(let t = 0;t<game.length;t++){
             minarr.push(game[t].pair[1])
@@ -74,14 +69,10 @@ wss.on("connection", ws => {
                 ws.pair[1] = 0
             }
         }
-
-
         console.log(deleter)
     })
     ws.on("message", data => {
         if (data >= 0) {
-            // //console.log(data)
-            // //console.log([game.indexOf(ws), game.length])
             let minarr = []
             for(let t = 0;t<game.length;t++){
                 minarr.push(game[t].pair[1])
@@ -114,14 +105,11 @@ wss.on("connection", ws => {
                     ws.pair[1] = 0
                 }
             }
-
             let sjon = {
                 "index": `${game.indexOf(ws)}`,
                 "length": `${game.length}`,
                 "slot": `${ws.pair[1]}`
             }
-            // //console.log(sjon)
-
             ws.publicID = data
             ws.send(JSON.stringify(sjon))
         } else {
