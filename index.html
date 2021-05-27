@@ -299,8 +299,8 @@
                     let YS_engine
                     class Point {
                         constructor(x, y) {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = 0
                         }
                         pointDistance(point) {
@@ -377,8 +377,8 @@
                     }
                     class Triangle {
                         constructor(x, y, color, length, fill = 0, strokeWidth = 0, leg1Ratio = 1, leg2Ratio = 1, heightRatio = 1) {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.color = color
                             this.length = length
                             this.x1 = this.x + this.length * leg1Ratio
@@ -431,15 +431,15 @@
                     }
                     class Rectangle {
                         constructor(x, y, width, height, color, fill = 1, stroke = 0, strokeWidth = 1) {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.height = height
                             this.width = width
                             this.color = color
                             this.xmom = 0
                             this.ymom = 0
                             this.stroke = stroke
-                            this.strokeWidth = strokeWidth
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.fill = fill
                         }
                         draw() {
@@ -477,22 +477,22 @@
                     }
                     class Circle {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
-                            this.marked = marked
+                            this.fired = parseInt(fired)
+                            this.marked = parseInt(marked)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -671,22 +671,22 @@
                     }
                     class Shot {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
-                            this.marked = marked
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
+                            this.marked = parseInt(marked)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
+                            this.fired = parseInt(fired)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -868,22 +868,22 @@
                     }
                     class Shotb {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
-                            this.marked = marked
+                            this.fired = parseInt(fired)
+                            this.marked = parseInt(marked)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -1062,22 +1062,22 @@
                     }
                     class ShotP {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
-                            this.marked = marked
+                            this.fired = parseInt(fired)
+                            this.marked = parseInt(marked)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -1262,22 +1262,22 @@
                     }
                     class ShotC {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
-                            this.marked = marked
+                            this.fired = parseInt(fired)
+                            this.marked = parseInt(marked)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -1456,22 +1456,22 @@
                     }
                     class ShotD {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
-                            this.x = x
-                            this.y = y
+                            this.x = parseInt(x)
+                            this.y = parseInt(y)
                             this.radius = parseInt(radius)
                             this.color = color
-                            this.xmom = xmom
-                            this.ymom = ymom
-                            this.friction = friction
-                            this.reflect = reflect
-                            this.strokeWidth = strokeWidth
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
+                            this.friction = parseInt(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseInt(strokeWidth)
                             this.strokeColor = strokeColor
                             this.anchored = 0
                             this.anchor = {}
                             this.sxmom = 0
                             this.symom = 0
-                            this.fired = fired
-                            this.marked = marked
+                            this.fired = parseInt(fired)
+                            this.marked = parseInt(marked)
                         }
                         smove() {
                             this.x += this.sxmom
@@ -1654,8 +1654,8 @@
                                 sides = 2
                             }
                             this.reflect = reflect
-                            this.xmom = xmom
-                            this.ymom = ymom
+                            this.xmom = parseInt(xmom)
+                            this.ymom = parseInt(ymom)
                             this.body = new Circle(x, y, size - (size * .293), "transparent")
                             this.nodes = []
                             this.angle = angle
