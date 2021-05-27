@@ -1930,6 +1930,8 @@ function setUp(canvas_pass, style = "#000000") {
     window.setInterval(function () {
         
         main()
+    }, 18)
+    window.setInterval(function () {
 
         for (let t = 0; t < boys.length; t++) {
             for(let f = 0;f<boys[t].nodes.length;f++){
@@ -1964,7 +1966,7 @@ function setUp(canvas_pass, style = "#000000") {
         }
         
     
-    }, 36)
+    }, 55)
     document.addEventListener('keydown', (event) => {
         keysPressed[event.key] = true;
     });
@@ -7211,9 +7213,11 @@ class Mass {
         if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
             if (this.breaktimer < 0) {
                 if (this.grounded == 1) {
+            if(this.body.color == color){
                     this.shieldpower -= .63
                     this.shield = 1
                     this.shielddraw = 1
+            }
                 }
             }
         } else {
