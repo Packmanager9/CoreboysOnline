@@ -7620,11 +7620,13 @@ class Mass {
         this.body.xmom *= .99
         this.body.ymom *= .99
 
-        for (let t = 0; t < this.nodes.length; t++) {
+        if(this.id == ID){
+            for (let t = 0; t < this.nodes.length; t++) {
             this.nodes[t].frictiveMove()
         }
         for (let t = 0; t < this.nodes.length; t++) {
             this.nodes[t].smove()
+        }
         }
 
         this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
