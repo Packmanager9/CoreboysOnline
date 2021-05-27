@@ -176,28 +176,28 @@
                                             if (boys[t].id == data.id) {
                                                 ////console.log(data)
                                                 if (data.name == "Coreboy") {
-                                                    boys[t] = new Boy(t, data)  //data.id?
+                                                    boys[t] = new Boy(data.id, data)  //data.id?
                                                 }
                                                 if (data.name == "Mass") {
-                                                    boys[t] = new Mass(t, data)
+                                                    boys[t] = new Mass(data.id, data)
                                                 }
                                                 if (data.name == "Blastgirl") {
-                                                    boys[t] = new Blastgirl(t, data)
+                                                    boys[t] = new Blastgirl(data.id, data)
                                                 }
                                                 if (data.name == "Jox") {
-                                                    boys[t] = new Jox(t, data)
+                                                    boys[t] = new Jox(data.id, data)
                                                 }
                                                 if (data.name == "Adobrasig Man") {
-                                                    boys[t] = new AsigMan(t, data)
+                                                    boys[t] = new AsigMan(data.id, data)
                                                 }
                                                 if (data.name == "Princess GeGeGeGee") {
-                                                    boys[t] = new Princess(t, data)
+                                                    boys[t] = new Princess(data.id, data)
                                                 }
                                                 if (data.name == "Dummy") {
-                                                    boys[t] = new Dummy(t, data)
+                                                    boys[t] = new Dummy(data.id, data)
                                                 }
                                                 if (data.name == "Scorched Mass") {
-                                                    boys[t] = new ScorchedMass(t, data)
+                                                    boys[t] = new ScorchedMass(data.id, data)
                                                 }
 
 
@@ -294,7 +294,7 @@
                     let invscale = 1 / scale
                     let worldcounter = 0
                     //qqqqq
-                    let humanPlayers = -1
+                    let humanPlayers = 999999
                     let stock = 0
                     // let punchaud1 = new Audio()
                     // punchaud1.src = "hitsound2.mp3"
@@ -21340,7 +21340,7 @@
                                 }
                             }
                             sender++
-                            if (sender % 1 == 0) {
+                            if (sender % 2 == 0) {
                                 if (boys[IDaddress]) {
                                     for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
                                         boys[IDaddress].nodes[f].self = 0
