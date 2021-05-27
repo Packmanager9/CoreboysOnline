@@ -140,7 +140,7 @@
                                     if (boys[t].id == JSON.parse(data).delete) {
                                         // boys.splice(t, 1)
                                         boys[t].inactive = 1
-                                        // boys[t].id = -1
+                                        boys[t].id = -1
                                     }
                                 }
                                 //console.log(data)
@@ -167,6 +167,10 @@
                                     if (t == ID) {
                                         // //console.log(ID)
                                         continue
+                                    }
+                                    let identites = []
+                                    for (let g = 0; g < boys.length; g++) {
+                                        identites.push(boys[g].id)
                                     }
                                     // if (boys[t].body.color != color) {
                                     if (boys[t] && boys[t].inactive != 1) {
@@ -205,6 +209,44 @@
                                                 let gp = new Gamepad(t)
 
                                                 boys[t]['gamepad'] = gp
+                                            } else {
+                                                if (!identites.includes(data.id)) {
+
+                                                    let newplayer
+                                                    if (data.name == "Coreboy") {
+                                                        newplayer = new Boy(data.id, data)
+                                                    }
+                                                    if (data.name == "Mass") {
+                                                        newplayer = new Mass(data.id, data)
+                                                    }
+                                                    if (data.name == "Blastgirl") {
+                                                        newplayer = new Blastgirl(data.id, data)
+                                                    }
+                                                    if (data.name == "Jox") {
+                                                        newplayer = new Jox(data.id, data)
+                                                    }
+                                                    if (data.name == "Adobrasig Man") {
+                                                        newplayer = new AsigMan(data.id, data)
+                                                    }
+                                                    if (data.name == "Princess GeGeGeGee") {
+                                                        newplayer = new Princess(data.id, data)
+                                                    }
+                                                    if (data.name == "Dummy") {
+                                                        newplayer = new Dummy(data.id, data)
+                                                    }
+                                                    if (data.name == "Scorched Mass") {
+                                                        newplayer = new ScorchedMass(data.id, data)
+                                                    }
+
+                                                    newplayer.id = data.id
+                                                    let gp = new Gamepad(data.id)
+                                                    newplayer.gamepad = gp
+                                                    boys.push(newplayer)
+                                                    drops.push(0)
+                                                    scores.push(0)
+                                                    boom.push(new Circle(0, 0, 1, "transparent"))
+
+                                                }
                                             }
                                         }
                                     } else {
@@ -727,19 +769,20 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
-                                this.string = this.color
-
-                                if (typeof this.string !== "string") {
-                                    this.string = "#FF0000"
+                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
+                                    this.string = this.color
+                                    if (typeof this.string !== "string") {
+                                        this.string = "#FF0000"
+                                    }
+                                    gard.addColorStop(0, this.string + `ff`)
+                                    gard.addColorStop(0.01, this.string + "a1")
+                                    gard.addColorStop(0.41, this.string + "94")
+                                    gard.addColorStop(1, this.string + "51")
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.fill()
+                                    canvas_context.stroke();
                                 }
-                                gard.addColorStop(0, this.string + `ff`)
-                                gard.addColorStop(0.01, this.string + "a1")
-                                gard.addColorStop(0.41, this.string + "94")
-                                gard.addColorStop(1, this.string + "51")
-                                canvas_context.fillStyle = gard
-                                canvas_context.fill()
-                                canvas_context.stroke();
                             } else {
                                 // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
@@ -929,16 +972,18 @@
                                 if (Math.random() < .0001) {
                                     console.log(this)
                                 }
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x, this.y, Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
-                                this.string = this.color
+                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
+                                    this.string = this.color
 
-                                gard.addColorStop(0, invertColor(this.string) + `51`)
-                                gard.addColorStop(0.01, invertColor(this.string) + "94")
-                                gard.addColorStop(0.41, invertColor(this.string) + "a1")
-                                gard.addColorStop(1, this.string + "ff")
-                                canvas_context.fillStyle = gard
-                                canvas_context.fill()
-                                canvas_context.stroke();
+                                    gard.addColorStop(0, invertColor(this.string) + `51`)
+                                    gard.addColorStop(0.01, invertColor(this.string) + "94")
+                                    gard.addColorStop(0.41, invertColor(this.string) + "a1")
+                                    gard.addColorStop(1, this.string + "ff")
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.fill()
+                                    canvas_context.stroke();
+                                }
                             } else {
                                 // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
@@ -1126,22 +1171,19 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), Math.ceil(this.y - (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
-                                this.string = this.color
-
-
-                                for (let t = 0; t < 13; t += 6) {
-                                    gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                                    gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
-                                    gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                                    gard.addColorStop((t + 4.5) / 18.1, "#000000" + "ff")
+                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y - (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
+                                    this.string = this.color
+                                    for (let t = 0; t < 13; t += 6) {
+                                        gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                        gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                        gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                        gard.addColorStop((t + 4.5) / 18.1, "#000000" + "ff")
+                                    }
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.fill()
+                                    canvas_context.stroke();
                                 }
-
-
-
-                                canvas_context.fillStyle = gard
-                                canvas_context.fill()
-                                canvas_context.stroke();
                             } else {
                                 // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
@@ -1329,16 +1371,18 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
-                                this.string = this.color
+                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
+                                    this.string = this.color
 
-                                gard.addColorStop(0, (this.string) + `ff`)
-                                gard.addColorStop(0.33, invertColor(this.string) + "ff")
-                                gard.addColorStop(0.66, (this.string) + "ff")
-                                gard.addColorStop(1, invertColor(this.string) + "ff")
-                                canvas_context.fillStyle = gard
-                                canvas_context.fill()
-                                canvas_context.stroke();
+                                    gard.addColorStop(0, (this.string) + `ff`)
+                                    gard.addColorStop(0.33, invertColor(this.string) + "ff")
+                                    gard.addColorStop(0.66, (this.string) + "ff")
+                                    gard.addColorStop(1, invertColor(this.string) + "ff")
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.fill()
+                                    canvas_context.stroke();
+                                }
                             } else {
                                 // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
@@ -1527,16 +1571,18 @@
 
 
 
-                                var gard = canvas_context.createRadialGradient(this.x, this.y, 0, this.x - (0), this.y - (0), Math.max(this.radius - canvas_context.lineWidth, 0))
-                                this.string = this.color
+                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
+                                    this.string = this.color
 
-                                gard.addColorStop(0, (this.string) + `ff`)
-                                gard.addColorStop(0.33, "#FF0000" + "ff")
-                                gard.addColorStop(0.66, (this.string) + "ff")
-                                gard.addColorStop(1, "#000000" + "ff")
-                                canvas_context.fillStyle = gard
-                                canvas_context.fill()
-                                canvas_context.stroke();
+                                    gard.addColorStop(0, (this.string) + `ff`)
+                                    gard.addColorStop(0.33, "#FF0000" + "ff")
+                                    gard.addColorStop(0.66, (this.string) + "ff")
+                                    gard.addColorStop(1, "#000000" + "ff")
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.fill()
+                                    canvas_context.stroke();
+                                }
                             } else {
                                 // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
@@ -21340,7 +21386,7 @@
                                 }
                             }
                             sender++
-                            if (sender % 2 == 0) {
+                            if (sender % 1 == 0) {
                                 if (boys[IDaddress]) {
                                     for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
                                         boys[IDaddress].nodes[f].self = 0
