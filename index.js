@@ -24,6 +24,16 @@ wss.on("connection", ws => {
     game.push(ws)
     ws.on("close", () => {
         //console.log("client left")
+        let deleter = game.indexOf(ws)
+
+        let sjon = {
+            "delete":`${deleter}`
+         }
+        for (let t = 0; t < game.length; t++) {
+            game[t].send(JSON.stringify(sjon))
+            console.log(sjon)
+        }
+
         game.splice(game.indexOf(ws))
     })
     ws.on("message", data => {
