@@ -6189,13 +6189,16 @@ class Mass {
                     if (j > 10000000) {
                         break
                     }
+                    if(this.id == ID){
                     this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
                     this.body.y += (this.body.y - boys[f].body.y) / (this.body.radius + boys[f].body.radius)
-                    boys[f].body.x -= (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
-                    boys[f].body.y -= (this.body.y - boys[f].body.y) / (this.body.radius + boys[f].body.radius)
                     this.fixupshoulder()
-                    boys[f].fixupshoulder()
-                    this.body.ymom *= .99
+                    }
+                    // boys[f].body.x -= (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
+                    // boys[f].body.y -= (this.body.y - boys[f].body.y) / (this.body.radius + boys[f].body.radius)
+                    // this.fixupshoulder()
+                    // boys[f].fixupshoulder()
+                    // this.body.ymom *= .99
                 }
             }
         }
