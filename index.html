@@ -2361,6 +2361,9 @@
                     }
 
                     function invertColorx(hex) {
+                        if(typeof hex == "undefined"){
+                            return getRandomColor()
+                        }
                         if (hex.indexOf('#') === 0) {
                             hex = hex.slice(1);
                         }
@@ -2380,6 +2383,9 @@
                     }
 
                     function invertColor(hex) {
+                        if(typeof hex == "undefined"){
+                            return getRandomColor()
+                        }
                         if (hex.indexOf('#') === 0) {
                             hex = hex.slice(1);
                         }
