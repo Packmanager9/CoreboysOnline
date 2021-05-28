@@ -4357,13 +4357,27 @@ this.struck = 1
                             }
                         }
                         doJump(object, speed) {
+                           
                             if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
                             if (this.inactive == 1) {
@@ -6113,19 +6127,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
-
-                                }
-                                if (typeof object != 'undefined') {
-                                    if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
-                                        if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
-                                            if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                object.ymom = -speed * 2
-                                                this.jumpcount = 100
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
                         }
                         playerMove(object) {
                             if (this.serverID == serverID) {
@@ -8882,9 +8898,22 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
-                        }
+                             }
                         doubleJump() {
                             if (this.inactive == 1) {
                                 return
@@ -11244,8 +11273,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
                             if (this.inactive == 1) {
@@ -13434,8 +13476,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
                             if (this.inactive == 1) {
@@ -14468,8 +14523,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
                             if (this.inactive == 1) {
@@ -16964,8 +17032,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
                             if (this.inactive == 1) {
@@ -19577,8 +19658,21 @@ this.struck = 1
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100 - this.jumpreduction
+                                }else{
+                                    if (typeof object != 'undefined') {
+                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {       
+                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                                                        object.ymom -= this.speed * 2
+                                                        this.jumping = 1
+                                                        this.jumpcount = 100 - this.jumpreduction
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            }
                         }
                         doubleJump() {
 
