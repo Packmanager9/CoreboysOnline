@@ -66,7 +66,7 @@
                 <script>
 
                     let HOST = location.origin.replace(/^http/, 'ws')
-                    ////console.log(HOST)
+                    //////console.log(HOST)
                     let ws = new WebSocket(HOST);
                     let connectionnumber = -1
                     let start = 0
@@ -75,14 +75,19 @@
                     let color = "#FFFFFF"
                     let hit = 0
                     let players = 0
+                    let serverID = Math.random()
+                    let localIDs = []
 
 
                     ws.addEventListener("open", () => {
                         ws.addEventListener("message", ({ data }) => {
                             if (start == 0) {
-                                //console.log(data)
-                                data = JSON.parse(data)
                                 ////console.log(data)
+                                data = JSON.parse(data)
+                                //////console.log(data)
+                                for(let t = 0;t<data.playerIDs.length;t++){
+                                data.playerIDs[t] = parseFloat(data.playerIDs[t])
+                                }
                                 if (data.length >= 0 && data.length < 5 && !(data.delete)) {
                                     start = 1
                                     connectionnumber = parseInt(data.slot)
@@ -113,15 +118,15 @@
                                     if (connectionnumber == 7) {
                                         color = "#bbbbbb"
                                     }
-                                    ////console.log(connectionnumber, "1", data.index)
+                                    //////console.log(connectionnumber, "1", data.index)
                                     players = parseInt(data.length)
-                                    // console.log(data.minarr)
-                                    for (let t = 0; t < parseInt(data.length); t++) {
-                                        CreatePlayer(t)
-                                    }
+                                    // //console.log(data.minarr)
+                                    // for (let t = 0; t < parseInt(data.length); t++) {
+                                            CreatePlayer(ID)
+                                    // }
                                 }
                             } else if (JSON.parse(data).delete) {
-                                //console.log("del")
+                                ////console.log("del")
 
                                 // if (JSON.parse(data).delete < ID) {
                                 //     // boys[JSON.parse(data).delete] = new Dummy(0)
@@ -133,28 +138,45 @@
                                 //         }
                                 //     }
                                 //     connectionnumber = parseInt(data.slot)
-                                //     //console.log(IDaddress)
+                                //     ////console.log(IDaddress)
                                 // }
 
+                                data = JSON.parse(data)
+                                for(let t = 0;t<(data).playerIDs.length;t++){
+                                data.playerIDs[t] = parseFloat((data).playerIDs[t])
+                                }
+
                                 for (let t = 0; t < boys.length; t++) {
-                                    if (boys[t].id == JSON.parse(data).delete) {
-                                        // boys.splice(t, 1)
-                                        boys[t].inactive = 1
-                                        boys[t].id = -1
+                                    //console.log(t, (data).playerIDs.includes(boys[t].serverID), (data).playerIDs, boys[t].serverID)
+                                    if (!(data).playerIDs.includes(boys[t].serverID)) {
+                                        localIDs.splice(localIDs.indexOf(boys[t].serverID))
+                                        boys.splice(t, 1)
+                                        // boys[t].inactive = 1
+                                        // boys[t].id = -1
                                     }
                                 }
-                                //console.log(data)
+
+                                for (let t = 0; t < boys.length; t++) {
+                                    if(boys[t].serverID == serverID){
+                                        ID = t
+                                        connectionnumber = t
+                                        IDaddress = t
+                                    }
+
+                                }
+                                ////console.log(data)
 
 
                             } else if ((data.length >= 0)) {
                                 // start = 0
                                 data = JSON.parse(data)
+                                data.serverID = parseFloat(data.serverID)
                                 if (hit == 0) {
                                     hit = 1
-                                    ////console.log("started running")
-                                    // ////console.log(data)
+                                    //////console.log("started running")
+                                    // //////console.log(data)
                                 }
-                                ////console.log(data, ID)
+                                //////console.log(data, ID)
                                 let dropouts = 0
                                 for (let t = 0; t < Math.max(data.players, boys.length); t++) {
                                     if (boys[t] && boys[t].inactive != 1) {
@@ -163,131 +185,84 @@
                                     }
                                 }
                                 // if (data.id != ID) {
-                                for (let t = 0; t < Math.max(data.players, boys.length); t++) {
-                                    if (t == ID) {
-                                        // //console.log(ID)
+
+                                let tempIDs = []
+                                for(let t = 0;t<boys.length;t++){
+                                    tempIDs.push(boys[t].serverID)
+                                }
+                                for (let t = 0; t < data.playerIDs.length; t++) {
+                                    if (serverID == data.serverID) {
                                         continue
                                     }
                                     let identites = []
                                     for (let g = 0; g < boys.length; g++) {
-                                        identites.push(boys[g].id)
+                                        identites.push(boys[g].serverID)
                                     }
-                                    // if (boys[t].body.color != color) {
-                                    if (boys[t] && boys[t].inactive != 1) {
-                                        // console.log(data)
-                                        if (data.frame > boys[t].frame - 100) {
 
-                                            if (boys[t].id == data.id) {
-                                                ////console.log(data)
+                                    // //console.log(data)
+                                    if (localIDs.includes(data.serverID)) {
+                                        //console.log(t, tempIDs.indexOf(data.serverID), (data.serverID), tempIDs)
                                                 if (data.name == "Coreboy") {
-                                                    boys[t] = new Boy(data.id, data)  //data.id?
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Boy(data.id, data)  //data.id?
                                                 }
                                                 if (data.name == "Mass") {
-                                                    boys[t] = new Mass(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Mass(data.id, data)
                                                 }
                                                 if (data.name == "Blastgirl") {
-                                                    boys[t] = new Blastgirl(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Blastgirl(data.id, data)
                                                 }
                                                 if (data.name == "Jox") {
-                                                    boys[t] = new Jox(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Jox(data.id, data)
                                                 }
                                                 if (data.name == "Adobrasig Man") {
-                                                    boys[t] = new AsigMan(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new AsigMan(data.id, data)
                                                 }
                                                 if (data.name == "Princess GeGeGeGee") {
-                                                    boys[t] = new Princess(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Princess(data.id, data)
                                                 }
                                                 if (data.name == "Dummy") {
-                                                    boys[t] = new Dummy(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new Dummy(data.id, data)
                                                 }
                                                 if (data.name == "Scorched Mass") {
-                                                    boys[t] = new ScorchedMass(data.id, data)
+                                                    boys[tempIDs.indexOf(data.serverID)] = new ScorchedMass(data.id, data)
                                                 }
-
-
-
-                                                let gp = new Gamepad(t)
-
-                                                boys[t]['gamepad'] = gp
-                                            } else {
-                                                if (!identites.includes(data.id)) {
-
-                                                    let newplayer
-                                                    if (data.name == "Coreboy") {
-                                                        newplayer = new Boy(data.id, data)
-                                                    }
-                                                    if (data.name == "Mass") {
-                                                        newplayer = new Mass(data.id, data)
-                                                    }
-                                                    if (data.name == "Blastgirl") {
-                                                        newplayer = new Blastgirl(data.id, data)
-                                                    }
-                                                    if (data.name == "Jox") {
-                                                        newplayer = new Jox(data.id, data)
-                                                    }
-                                                    if (data.name == "Adobrasig Man") {
-                                                        newplayer = new AsigMan(data.id, data)
-                                                    }
-                                                    if (data.name == "Princess GeGeGeGee") {
-                                                        newplayer = new Princess(data.id, data)
-                                                    }
-                                                    if (data.name == "Dummy") {
-                                                        newplayer = new Dummy(data.id, data)
-                                                    }
-                                                    if (data.name == "Scorched Mass") {
-                                                        newplayer = new ScorchedMass(data.id, data)
-                                                    }
-
-                                                    newplayer.id = data.id
-                                                    let gp = new Gamepad(data.id)
-                                                    newplayer.gamepad = gp
-                                                    boys.push(newplayer)
-                                                    drops.push(0)
-                                                    scores.push(0)
-                                                    boom.push(new Circle(0, 0, 1, "transparent"))
-
+                                                let gp = new Gamepad(0)
+                                                boys[tempIDs.indexOf(data.serverID)]['gamepad'] = gp
+                                           
+                                            }else if(!localIDs.includes(data.serverID)){
+                                        //console.log(t, tempIDs.indexOf(data.serverID), (data.serverID), tempIDs. localIDs)
+                                                localIDs.push(data.serverID)
+                                                let newplayer = {}
+                                                if (data.name == "Coreboy") {
+                                                    newplayer = new Boy(data.slot)  //data.id?
                                                 }
+                                                if (data.name == "Mass") {
+                                                    newplayer = new Mass(data.slot)
+                                                }
+                                                if (data.name == "Blastgirl") {
+                                                    newplayer = new Blastgirl(data.slot)
+                                                }
+                                                if (data.name == "Jox") {
+                                                    newplayer = new Jox(data.slot)
+                                                }
+                                                if (data.name == "Adobrasig Man") {
+                                                    newplayer = new AsigMan(data.slot)
+                                                }
+                                                if (data.name == "Princess GeGeGeGee") {
+                                                    newplayer = new Princess(data.slot)
+                                                }
+                                                if (data.name == "Dummy") {
+                                                    newplayer = new Dummy(data.slot)
+                                                }
+                                                if (data.name == "Scorched Mass") {
+                                                    newplayer = new ScorchedMass(data.slot)
+                                                }
+                                                newplayer.serverID = data.serverID
+                                                let gp = new Gamepad(0)
+                                                newplayer['gamepad'] = gp
+                                                boys.push(newplayer)
+
                                             }
-                                        }
-                                    } else {
-                                        // if (boys.length <= data.players) {
-                                        console.log(t)
-                                        let newplayer
-                                        if (data.name == "Coreboy") {
-                                            newplayer = new Boy(data.id, data)
-                                        }
-                                        if (data.name == "Mass") {
-                                            newplayer = new Mass(data.id, data)
-                                        }
-                                        if (data.name == "Blastgirl") {
-                                            newplayer = new Blastgirl(data.id, data)
-                                        }
-                                        if (data.name == "Jox") {
-                                            newplayer = new Jox(data.id, data)
-                                        }
-                                        if (data.name == "Adobrasig Man") {
-                                            newplayer = new AsigMan(data.id, data)
-                                        }
-                                        if (data.name == "Princess GeGeGeGee") {
-                                            newplayer = new Princess(data.id, data)
-                                        }
-                                        if (data.name == "Dummy") {
-                                            newplayer = new Dummy(data.id, data)
-                                        }
-                                        if (data.name == "Scorched Mass") {
-                                            newplayer = new ScorchedMass(data.id, data)
-                                        }
-
-                                        newplayer.id = data.id
-                                        boys[t] = (newplayer)
-                                        let gp = new Gamepad(data.id)
-                                        boys[t]['gamepad'] = gp
-                                        drops.push(0)
-                                        scores.push(0)
-                                        boom.push(new Circle(0, 0, 1, "transparent"))
-
-                                        // }
-                                    }
                                     // }
                                 }
                                 // }
@@ -299,7 +274,7 @@
                                     // } else if (connectionnumber == 1) {
                                     //     color = "#00FF00"
                                     // }else {
-                                    // ////console.log(connectionnumber, "2")
+                                    // //////console.log(connectionnumber, "2")
                                     //     color = "#FFFF00"
                                     // }
                                     // if(boys.length < data-1){
@@ -320,7 +295,7 @@
                                 }
                             }
                         })
-                        ws.send(ID)
+                        ws.send(serverID)
                     })
 
 
@@ -573,7 +548,7 @@
                                 canvas_context.fill()
                                 canvas_context.stroke();
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         track() {
@@ -784,7 +759,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -970,7 +945,7 @@
                                 canvas_context.fillStyle = this.color
 
                                 if (Math.random() < .0001) {
-                                    console.log(this)
+                                    //console.log(this)
                                 }
                                 if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
@@ -985,7 +960,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1185,7 +1160,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1384,7 +1359,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1584,7 +1559,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // ////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -2131,7 +2106,7 @@
                             TIP_engine.y = YS_engine * invscale
                             TIP_engine.body = TIP_engine
 
-                            ////////console.log(TIP_engine)
+                            //////////console.log(TIP_engine)
                             for (let t = 0; t < selectors.length; t++) {
                                 if (selectors[t].body.isPointInside(TIP_engine)) {
                                     selectors[t].body.anchored = 2
@@ -2188,7 +2163,7 @@
 
 
                     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-                        //         //////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         ////////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
                         if (object.self.shield == 0) {
                             if (keysPressed['s']) {
@@ -2302,7 +2277,7 @@
                     }
 
                     function gamepad_control_controller_proto_dj(object, speed = 1, controller) { // basic control for objects using the controler
-                        //         //////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         ////////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
 
                         if (keysPressed['w']) {
@@ -2337,7 +2312,7 @@
                         }
                     }
                     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-                        //         //////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         ////////////////////console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
                         if (typeof object.body != 'undefined') {
                             if (typeof (controller.gamepad.axesStatus[1]) != 'undefined') {
                                 if (typeof (controller.gamepad.axesStatus[0]) != 'undefined') {
@@ -2529,7 +2504,7 @@
                                     }
                                     this.axesStatus = axes;// assign received values
                                     this.buttonsStatus = pressed;
-                                    // //////////////////console.log(pressed); // return buttons for debugging purposes
+                                    // ////////////////////console.log(pressed); // return buttons for debugging purposes
                                     return pressed;
                                 },
                                 buttonPressed: function (button, hold) {
@@ -3808,6 +3783,7 @@
                     class Boy {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller //boys.length
                                 this.shielddraw = 0
@@ -3921,10 +3897,10 @@
                                     //     this[keys[t]][keys2[j]] = args[keys[t]][keys2[j]]
                                     //  }
                                 }
-                                // ////console.log(args)
+                                // //////console.log(args)
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
-                                // //console.log(this.shotdraw)
+                                // ////console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Circle(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -3987,7 +3963,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -3996,7 +3972,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -4109,7 +4085,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -4120,7 +4096,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -4238,7 +4214,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -4267,7 +4243,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -4296,7 +4272,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -4325,7 +4301,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -4431,7 +4407,7 @@
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -4508,10 +4484,10 @@
                             this.righthand.fired--
                             this.lefthand.fired--
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -4532,7 +4508,7 @@
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
                                     if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
                                         if (this.face == 1) {
                                             if (this.righthand.fired <= 0) {
@@ -5575,7 +5551,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -5751,7 +5727,7 @@
                             this.grounded = 0
                             this.frame++
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     this.shots[t].radius *= 1.02
                                     this.shots[t].ymom *= 1.02
@@ -5984,6 +5960,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.id = controller
+                                this.serverID = serverID
                                 this.jumpcount = 0
                                 this.gamepad = new Gamepad(controller)
                                 this.shotdraw = 0
@@ -6102,10 +6079,10 @@
                                     //     this[keys[t]][keys2[j]] = args[keys[t]][keys2[j]]
                                     //  }
                                 }
-                                // ////console.log(args)
+                                // //////console.log(args)
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
-                                // //console.log(this.shotdraw)
+                                // ////console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Shot(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -6168,7 +6145,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -6176,7 +6153,7 @@
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -6196,7 +6173,7 @@
                             }
                         }
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -6309,7 +6286,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -6320,7 +6297,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -6472,7 +6449,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -6501,7 +6478,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -6530,7 +6507,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -6559,7 +6536,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -6589,14 +6566,14 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
 
                                                 }
                                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                                                // ////console.log(this, boys[t])
+                                                // //////console.log(this, boys[t])
                                                 this.striker = t
                                                 if (boys[t].lefthand.fired > 14) {
                                                     if (this.shield == 1) {
@@ -6618,7 +6595,7 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
@@ -6646,7 +6623,7 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
@@ -6660,7 +6637,7 @@
                                         if (j > 1000) {
                                             break
                                         }
-                                        if (this.id == ID) {
+                                        if (this.serverID == serverID) {
                                             this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
                                             this.body.y += (this.body.y - boys[f].body.y) / (this.body.radius + boys[f].body.radius)
                                             this.fixupshoulder()
@@ -6684,7 +6661,7 @@
                                 this.lefthand.ymom = -this.speed * 2
                                 this.righthand.ymom = -this.speed * 2
                                 this.jumpcount = 100
-                                //////////console.log(this)
+                                ////////////console.log(this)
                             }
                         }
                         doubleJump() {
@@ -7139,7 +7116,7 @@
                                 if (this.safe == 0) {
                                     this.screwshot = 1
                                     if (this.body.x > (this.brick.center.x)) {
-                                        ////////////////console.log(this.brick.center.x, this.body.x)
+                                        //////////////////console.log(this.brick.center.x, this.body.x)
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
@@ -7544,7 +7521,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -7562,7 +7539,7 @@
                                     this.shieldpower = 100
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shotdraw = 0
                             }
                             if (this.breaktimer <= 0 && this.shield == 0) {
@@ -7760,15 +7737,15 @@
                             this.lefthand.fired--
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
-                                            if (this.id == ID) {
+                                            if (this.serverID == serverID) {
                                                 this.shieldpower -= .63
                                                 this.shield = 1
                                                 this.shielddraw = 1
@@ -7786,11 +7763,11 @@
 
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shotdraw = 0
                             }
                             if (this.breaktimer <= 0 && this.shield == 0) {
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
                                     if (this.righthand.fired <= 0) {
                                         if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
@@ -7907,7 +7884,7 @@
                                     }
                                 } else {
                                     if (Math.random() < .001) {
-                                        //////console.log(this.body.color, color)
+                                        ////////console.log(this.body.color, color)
                                     }
                                 }
                             }
@@ -7983,7 +7960,7 @@
                             }
                             this.grounded = 0
                             this.frame++
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     this.shots[t].move()
                                     this.shots[t].draw()
@@ -8196,7 +8173,7 @@
                             this.body.xmom *= .99
                             this.body.ymom *= .99
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t].frictiveMove()
                                 }
@@ -8251,6 +8228,7 @@
                     class Blastgirl {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
@@ -8432,7 +8410,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -8441,7 +8419,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -8554,7 +8532,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -8565,7 +8543,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -8718,7 +8696,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -8747,7 +8725,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -8776,7 +8754,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -8805,7 +8783,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -8835,7 +8813,7 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
@@ -8863,7 +8841,7 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
@@ -8891,7 +8869,7 @@
                                                     if (this.body.ymom > vsmashlimit) {
                                                         this.body.ymom = vsmashlimit
                                                     }
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
@@ -8905,7 +8883,7 @@
                                         if (j > 10000) {
                                             break
                                         }
-                                        if (this.id == ID) {
+                                        if (this.serverID == serverID) {
                                             this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
                                             this.body.y += (this.body.y - boys[f].body.y) / (this.body.radius + boys[f].body.radius)
                                             this.fixupshoulder()
@@ -8934,7 +8912,7 @@
                         }
 
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -9927,7 +9905,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -10141,11 +10119,11 @@
                             this.lefthand.fired--
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -10164,7 +10142,7 @@
                             }
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
 
 
@@ -10351,7 +10329,7 @@
                             }
                             this.grounded = 0
                             this.frame++
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (typeof this.shots[t].gravity == "number") {
                                         this.shots[t].ymom += this.shots[t].gravity
@@ -10605,6 +10583,7 @@
                     class Jox {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
@@ -10788,7 +10767,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -10796,7 +10775,7 @@
                             }
                         }
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -10909,7 +10888,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -10920,7 +10899,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -11068,7 +11047,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -11097,7 +11076,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -11126,7 +11105,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -11155,7 +11134,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -11274,7 +11253,7 @@
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -12157,7 +12136,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -12354,11 +12333,11 @@
                             this.lefthand.fired--
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -12377,7 +12356,7 @@
                             }
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
 
 
@@ -12546,7 +12525,7 @@
                             this.grounded = 0
                             this.frame++
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (typeof this.shots[t].gravity == "number") {
                                         this.shots[t].ymom += this.shots[t].gravity
@@ -12808,6 +12787,7 @@
                         constructor(controller, args = 0) {
                             if (args == 0) {
                                 this.shotdraw = 0
+                                this.serverID = serverID
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
                                 this.jumpreduction = 0
@@ -12988,7 +12968,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -12998,7 +12978,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -13111,7 +13091,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -13122,7 +13102,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         control() {
@@ -13220,7 +13200,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -13252,7 +13232,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -13284,7 +13264,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -13316,7 +13296,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -13443,7 +13423,7 @@
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -13772,6 +13752,7 @@
                     class ScorchedMass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
@@ -13957,7 +13938,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -13966,7 +13947,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -14079,7 +14060,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -14090,7 +14071,7 @@
                             copy.body.color = this.body.color
                             if (this.inactive == 1) {
                                 copy.inactive = 1
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -14244,7 +14225,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -14274,7 +14255,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -14305,7 +14286,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -14335,7 +14316,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -14453,11 +14434,11 @@
                                 this.lefthand.ymom = -this.speed * 2
                                 this.righthand.ymom = -this.speed * 2
                                 this.jumpcount = 100
-                                //////////console.log(this)
+                                ////////////console.log(this)
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -14918,7 +14899,7 @@
                                 if (this.safe == 0) {
                                     this.screwshot = 1
                                     if (this.body.x > (this.brick.center.x)) {
-                                        ////////////////console.log(this.brick.center.x, this.body.x)
+                                        //////////////////console.log(this.brick.center.x, this.body.x)
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
@@ -15344,7 +15325,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -15363,7 +15344,7 @@
                                 }
                             }
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shotdraw = 0
                             }
                             if (this.breaktimer <= 0 && this.shield == 0) {
@@ -15541,11 +15522,11 @@
                             this.body.fired--
                             this.lefthand.fired--
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -15564,11 +15545,11 @@
                             }
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shotdraw = 0
                             }
                             if (this.breaktimer <= 0 && this.shield == 0) {
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
 
                                     if (this.righthand.fired <= 0) {
@@ -15756,7 +15737,7 @@
                             }
                             this.grounded = 0
                             this.frame++
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 for (let t = 0; t < this.shots.length; t++) {
 
@@ -16038,6 +16019,7 @@
                     class AsigMan {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
@@ -16281,7 +16263,7 @@
                                 this.springs.push(this.rightarm)
 
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -16290,7 +16272,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -16403,13 +16385,13 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -16522,7 +16504,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -16537,7 +16519,7 @@
                                 copy.body.color = this.colorsto
                             } else {
                                 copy.body.color = this.body.color
-                            }
+                            }copy.serverID = this.serverID
                             return copy
                         }
                         control() {
@@ -16687,7 +16669,7 @@
                                                 }
                                                 if (this.countering > 0) {
                                                 } else {
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                 }
@@ -16719,7 +16701,7 @@
                                                 }
                                                 if (this.countering > 0) {
                                                 } else {
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                 }
@@ -16751,7 +16733,7 @@
                                                 }
                                                 if (this.countering > 0) {
                                                 } else {
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                 }
@@ -16783,7 +16765,7 @@
                                                 }
                                                 if (this.countering > 0) {
                                                 } else {
-                                                    if (this.id == ID) {
+                                                    if (this.serverID == serverID) {
                                                         this.body.move()
                                                     }
                                                 }
@@ -16820,7 +16802,7 @@
                                             }
                                             if (this.countering > 0) {
                                             } else {
-                                                if (this.id == ID) {
+                                                if (this.serverID == serverID) {
                                                     this.body.move()
                                                 }
                                             }
@@ -16852,7 +16834,7 @@
                                             }
                                             if (this.countering > 0) {
                                             } else {
-                                                if (this.id == ID) {
+                                                if (this.serverID == serverID) {
                                                     this.body.move()
                                                 }
                                             }
@@ -16882,7 +16864,7 @@
                                             }
                                             if (this.countering > 0) {
                                             } else {
-                                                if (this.id == ID) {
+                                                if (this.serverID == serverID) {
                                                     this.body.move()
                                                 }
                                             }
@@ -16925,7 +16907,7 @@
                         }
 
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -17013,10 +16995,10 @@
                             this.righthand3.fired--
                             this.lefthand3.fired--
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -17036,7 +17018,7 @@
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
 
                                     if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
@@ -17259,7 +17241,7 @@
                                 if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 35)) {
                                         this.wmove = 1
-                                        //////console.log("caseA")
+                                        ////////console.log("caseA")
                                     }
 
                                     if (this.fleeing == 0) {
@@ -17280,7 +17262,7 @@
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         if (Math.random() < .2) {
                                             this.wmove = 1
-                                            //////console.log("caseB")
+                                            ////////console.log("caseB")
                                         }
                                         if (Math.random() < .1) {
                                             this.dmove = 1
@@ -17402,7 +17384,7 @@
                                     this.dmove = 1
                                     this.downspike = 1
                                     this.wmove = 1
-                                    //////console.log("caseC")
+                                    ////////console.log("caseC")
                                 }
                                 if (this.under == 2) {
                                     this.amove = 1
@@ -17411,7 +17393,7 @@
                                     this.dmove = 0
                                     this.wmove = 1
                                     this.downspike = 1
-                                    //////console.log("caseD")
+                                    ////////console.log("caseD")
                                 }
                             }
                             this.exgrip = 0
@@ -17444,7 +17426,7 @@
                                 this.dmove = 1
                                 if (Math.random() < .5) {
                                     this.wmove = 1
-                                    //////console.log("caseE")
+                                    ////////console.log("caseE")
                                 }
                                 this.amove = 0
                                 this.amom = 0
@@ -17462,7 +17444,7 @@
                                 this.dmom = 0
                                 this.amove = 1
                                 this.wmove = 1
-                                //////console.log("caseF")
+                                ////////console.log("caseF")
                                 this.dmove = 0
                             } else {
                                 if (this.amomu > 0) {
@@ -17481,14 +17463,14 @@
                                     this.amove = 1
                                     this.dmove = 0
                                     this.wmove = 1
-                                    //////console.log("caseG")
+                                    ////////console.log("caseG")
                                     this.amomu = 0
                                     this.dmomu = 0
                                 } else {
                                     this.amove = 0
                                     this.dmove = 1
                                     this.wmove = 1
-                                    //////console.log("caseH")
+                                    ////////console.log("caseH")
                                     this.amomu = 0
                                     this.dmomu = 0
                                 }
@@ -17531,7 +17513,7 @@
                                                                 this.downspike = 1
                                                                 this.wmove = 1
                                                             }
-                                                            //////console.log("caseI", cancel)
+                                                            ////////console.log("caseI", cancel)
                                                         } else {
                                                             this.brick = this.bricksto
                                                         }
@@ -17547,7 +17529,7 @@
                                                                 this.downspike = 1
                                                                 this.wmove = 1
                                                             }
-                                                            //////console.log("caseJ", cancel)
+                                                            ////////console.log("caseJ", cancel)
                                                         } else {
                                                             this.brick = this.bricksto
                                                         }
@@ -17587,7 +17569,7 @@
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
-                                            //////console.log("caseK", cancel)
+                                            ////////console.log("caseK", cancel)
                                         }
                                     } else {
                                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -17602,7 +17584,7 @@
                                                 this.wmove = 1
                                             }
                                             //problem2
-                                            //////console.log("caseL", cancel)
+                                            ////////console.log("caseL", cancel)
                                         }
                                     }
 
@@ -17620,14 +17602,14 @@
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////console.log("caseM")
+                                        ////////console.log("caseM")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////console.log("caseN")
+                                        ////////console.log("caseN")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17660,7 +17642,7 @@
                                                         this.storeshield = 1
                                                     } else {
                                                         this.wmove = 1
-                                                        //////console.log("caseO")
+                                                        ////////console.log("caseO")
                                                     }
                                                 } else {
                                                     if (this.body.x < boys[t].shots[g].x) {
@@ -17718,7 +17700,7 @@
                                                         }
                                                         if (this.under == 0) {
                                                             this.wmove = 1
-                                                            //////console.log("caseP")
+                                                            ////////console.log("caseP")
                                                             this.downspike = 1
                                                         }
                                                     }
@@ -17733,14 +17715,14 @@
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////console.log("caseQ")
+                                        ////////console.log("caseQ")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////console.log("caseR")
+                                        ////////console.log("caseR")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17761,7 +17743,7 @@
                                                         this.storeshield = 1
                                                     } else {
                                                         this.wmove = 1
-                                                        //////console.log("caseS")
+                                                        ////////console.log("caseS")
                                                     }
                                                 } else {
                                                     if (this.body.x < boys[t].shots[g].x) {
@@ -17820,7 +17802,7 @@
                                                         }
                                                         if (this.under == 0) {
                                                             this.wmove = 1
-                                                            //////console.log("caseT")
+                                                            ////////console.log("caseT")
                                                             this.downspike = 1
                                                         }
                                                     }
@@ -17835,14 +17817,14 @@
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////console.log("caseU")
+                                        ////////console.log("caseU")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////console.log("caseV")
+                                        ////////console.log("caseV")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17970,7 +17952,7 @@
                                         if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                                             if (this.face == -1) {
                                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                                    // ////console.log(Math.abs(this.body.x - boys[t].body.x))
+                                                    // //////console.log(Math.abs(this.body.x - boys[t].body.x))
                                                     if (this.fleeing != 1) {
                                                         this.leftshot = 1
                                                     }
@@ -17984,7 +17966,7 @@
                                         if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                                             if (this.face == 1) {
                                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                                    // ////console.log(Math.abs(this.body.x - boys[t].body.x))
+                                                    // //////console.log(Math.abs(this.body.x - boys[t].body.x))
                                                     if (this.fleeing != 1) {
                                                         this.rightshot = 1
                                                     }
@@ -18218,7 +18200,7 @@
                                                     }
                                                     if (this.under == 0) {
                                                         this.wmove = 1
-                                                        //////console.log("caseX")
+                                                        ////////console.log("caseX")
                                                         this.downspike = 1
                                                     }
                                                 }
@@ -18233,7 +18215,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.countering <= -30 && this.lefthand.fired <= 0 && this.righthand.fired <= 0) {
@@ -18511,7 +18493,7 @@
                             } else {
                                 this.body.radius = this.radsto
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     this.shots[t].radius *= 1.02
                                     this.shots[t].ymom *= 1.02
@@ -18810,6 +18792,7 @@
                     class Princess {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.serverID = serverID
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
@@ -18992,7 +18975,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //console.log(this.righthand.fired)
+                                //     // ////console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -19001,7 +18984,7 @@
                         }
 
                         playerMove(object) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
 
                                 if (this.shield == 0) {
                                     if (keysPressed['s']) {
@@ -19114,7 +19097,7 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////console.log(this.body.color, color)
+                                    ////////console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -19125,7 +19108,7 @@
                             if (this.inactive == 1) {
                                 copy.inactive = this.inactive
                             }
-                            copy.body.color = this.body.color
+                            copy.body.color = this.body.colorcopy.serverID = this.serverID
                             return copy
                         }
                         fixupshoulder() {
@@ -19310,7 +19293,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -19339,7 +19322,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -19368,7 +19351,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -19397,7 +19380,7 @@
                                                         if (this.body.ymom > vsmashlimit) {
                                                             this.body.ymom = vsmashlimit
                                                         }
-                                                        if (this.id == ID) {
+                                                        if (this.serverID == serverID) {
                                                             this.body.move()
                                                         }
                                                         this.fixupshoulder()
@@ -19516,7 +19499,7 @@
                             }
                         }
                         doJump(object, speed) {
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
@@ -20498,7 +20481,7 @@
                                     this.storeshield = 0
                                 }
                             }
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             if (this.storeshield == 1) {
@@ -20688,11 +20671,11 @@
                             this.lefthand.fired--
 
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 this.shielddraw = 0
                             }
                             this.breaktimer--
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 if (this.gamepad.gamepad.buttonsStatus.includes('RB') || keysPressed['o']) {
                                     if (this.breaktimer < 0) {
                                         if (this.grounded == 1) {
@@ -20712,7 +20695,7 @@
 
                             if (this.breaktimer <= 0 && this.shield == 0) {
 
-                                if (this.id == ID) {
+                                if (this.serverID == serverID) {
 
 
                                     if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
@@ -20904,7 +20887,7 @@
                             this.grounded = 0
                             this.frame++
 
-                            if (this.id == ID) {
+                            if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (typeof this.shots[t].gravity == "number") {
                                         if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
@@ -21260,7 +21243,7 @@
                             if (flopper % 2 == 0) {
                                 for (let t = 0; t < boys.length; t++) {
                                     if (boys[t]) {
-                                        if (boys[t].id == ID) {
+                                        if (boys[t].serverID == serverID) {
                                             boys[t].enemycollide()
                                         }
                                     }
@@ -21268,7 +21251,7 @@
                             } else {
                                 for (let t = boys.length - 1; t >= 0; t--) {
                                     if (boys[t]) {
-                                        if (boys[t].id == ID) {
+                                        if (boys[t].serverID == serverID) {
                                             boys[t].enemycollide()
                                         }
                                     }
@@ -21349,6 +21332,11 @@
                                         // }
                                     }
                                 }
+                                if(boom.length<=t){
+                                    boom.push(new Circle(0,0,0,"transparent"))
+                                    drops.push(0)
+                                    scores.push(0)
+                                }
                                 boom[t].draw()
                             }
                             canvas_context.font = "60px arial"
@@ -21387,33 +21375,49 @@
                             }
                             sender++
                             if (sender % 1 == 0) {
-                                if (boys[IDaddress]) {
-                                    for (let f = 0; f < boys[IDaddress].nodes.length; f++) {
-                                        boys[IDaddress].nodes[f].self = 0
+                                for(let t = 0;t<boys.length;t++){
+                                    for (let f = 0; f < boys[t].nodes.length; f++) {
+                                        boys[t].nodes[f].self = 0
+                                        boys[t].nodes[f].anchored = 0
                                     }
-                                    if (boys[IDaddress].id == ID) {
-                                        boys[IDaddress].id = ID
+                                    if (boys[t].serverID == serverID) {
+                                        boys[t].id = ID
                                         let Json = {}
-                                        let keys = Object.keys(boys[IDaddress])
+                                        let keys = Object.keys(boys[t])
                                         for (let k = 0; k < keys.length; k++) {
-                                            if (!Object.keys(boys[IDaddress][keys[k]]).includes("self")) {
-                                                Json[keys[k]] = boys[IDaddress][keys[k]]
+                                            if (!Object.keys(boys[t][keys[k]]).includes("self")) {
+                                                Json[keys[k]] = boys[t][keys[k]]
                                             }
                                         }
-                                        // ////console.log(keys)
+                                        // //////console.log(keys)
                                         Json.brick = {}
                                         Json.bricksto = {}
                                         Json.wasfalse = []
                                         Json.target = {}
+                                        Json.serverID = serverID
+                                        Json.lefthands = {}
+                                        Json.righthands = {}
+                                        if(Json.lefthands2){
+                                            Json.lefthands2 = {}
+                                        }
+                                        if(Json.lefthands3){
+                                            Json.lefthands3 = {}
+                                        }
+                                        if(Json.righthands2){
+                                            Json.righthands2 = {}
+                                        }
+                                        if(Json.righthands3){
+                                            Json.righthands3 = {}
+                                        }
 
-
+                                        //console.log("sending")
                                         ws.send(JSON.stringify(Json))
                                         // for(let f = 0;f<boys[t].nodes.length;f++){
                                         //     boys[t].nodes[f].self =boys[t]
                                         // }
-                                        //console.log(boys[IDaddress].id, ID)
+                                        ////console.log(boys[IDaddress].id, ID)
                                     } else {
-                                        //console.log(boys[IDaddress].id, ID)
+                                        ////console.log(boys[IDaddress].id, ID)
                                     }
 
                                     // for (let t = boys.length - 1; t >= 0; t--) {

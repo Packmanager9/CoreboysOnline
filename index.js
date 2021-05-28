@@ -66,6 +66,14 @@ wss.on("connection", ws => {
                 "length": `${game.length}`
             }
             // sjon.minarr = minarr
+            let ids = []
+            for(let t = 0;t<game.length;t++){
+                if(t != game.indexOf(ws)){
+                    ids.push(game[t].serverID)
+                }
+            }
+            sjon.playerIDs = ids
+            
             game[t].send(JSON.stringify(sjon))
         }
     })
@@ -111,12 +119,20 @@ wss.on("connection", ws => {
             // sjon.minarr = minarr
             let storage = []
             for(let t = 0;t<game.length;t++){
-                if(t != games.indexOf(ws)){
+                if(t != game.indexOf(ws)){
                     storage.push(game[t].storage)
                 }
             }
             sjon.storage = storage
+            ws.serverID = data
             ws.publicID = data
+            let ids = []
+            for(let t = 0;t<game.length;t++){
+                if(t != game.indexOf(ws)){
+                    ids.push(game[t].serverID)
+                }
+            }
+            sjon.playerIDs = ids
             ws.send(JSON.stringify(sjon))
         } else {
             data = JSON.parse(data)
@@ -156,12 +172,23 @@ wss.on("connection", ws => {
                 }
             }
             // data.minarr = minarr
+            let ids = []
+            for(let t = 0;t<game.length;t++){
+                if(t != game.indexOf(ws)){
+                    ids.push(game[t].serverID)
+                }
+            }
+            data.playerIDs = ids
             data = JSON.stringify(data)
             for (let t = 0; t < game.length; t++) {
                 if (ws != game[t]) {
+                    data = JSON.parse(data)
+                    data.serverID = ws.serverID
+                    data = JSON.stringify(data)
                     game[t].send(data)
                 }else{
                     game[t].storage = JSON.parse(data)
+                    game[t].serverID = JSON.parse(data).serverID
                 }
             }
         }
