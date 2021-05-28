@@ -50,7 +50,7 @@
                 <script>
 
                     let HOST = location.origin.replace(/^http/, 'ws')
-                    ////////////// console.log(HOST)
+                    ////////////// //console.log(HOST)
                     let pick = -1
                     let ws = new WebSocket(HOST);
                     let connectionnumber = -1
@@ -68,15 +68,15 @@
                     ws.addEventListener("open", () => {
                         ws.addEventListener("message", ({ data }) => {
                             if(typeof JSON.parse(data).kill != "undefined"){
-                                // console.log(JSON.parse(data).kill)
+                                console.log(JSON.parse(data).kill)
                             }
                             if(typeof data.kill != "undefined"){
-                                // console.log(data.kill)
+                                console.log(data.kill)
                             }
                             if (start == 0) {
-                                //////////// console.log(data)
+                                //////////// //console.log(data)
                                 data = JSON.parse(data)
-                                ////////////// console.log(data)
+                                ////////////// //console.log(data)
                                 for (let t = 0; t < data.playerIDs.length; t++) {
                                     data.playerIDs[t] = parseFloat(data.playerIDs[t])
                                 }
@@ -90,9 +90,9 @@
                                     CreatePlayer(data.playerIDs.length)
                                 }
                             } else if(parseInt(JSON.parse(data).kill) == 1){
-                                // console.log("hit")
+                                // //console.log("hit")
                                 for(let t = 0;t<boys.length;t++){
-                                    if(boys[t].serverID == serverID){
+                                    if(boys[t].serverID == parseFloat(JSON.parse(data).index)){
                                         boys[t].knocks++
                                     }
                                 }
@@ -216,7 +216,7 @@
                                     boys[t].enemycollide()
                                 }
                             }
-                            // console.log(boys)
+                            // //console.log(boys)
                         })
                         ws.send(serverID)
                     })
@@ -471,7 +471,7 @@
                                 canvas_context.fill()
                                 canvas_context.stroke();
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         track() {
@@ -682,7 +682,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -868,7 +868,7 @@
                                 canvas_context.fillStyle = this.color
 
                                 if (Math.random() < .0001) {
-                                    ////////// console.log(this)
+                                    ////////// //console.log(this)
                                 }
                                 if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
@@ -883,7 +883,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1083,7 +1083,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1282,7 +1282,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -1482,7 +1482,7 @@
                                     canvas_context.stroke();
                                 }
                             } else {
-                                // //////////////////////////// console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                                // //////////////////////////// //console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
                         }
                         move() {
@@ -2029,7 +2029,7 @@
                             TIP_engine.y = YS_engine * invscale
                             TIP_engine.body = TIP_engine
 
-                            ////////////////// console.log(TIP_engine)
+                            ////////////////// //console.log(TIP_engine)
                             for (let t = 0; t < selectors.length; t++) {
                                 if (selectors[t].body.isPointInside(TIP_engine)) {
                                     selectors[t].body.anchored = 2
@@ -2086,7 +2086,7 @@
 
 
                     function gamepad_control_controller_proto(object, speed = 1, controller) { // basic control for objects using the controler
-                        //         //////////////////////////// console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         //////////////////////////// //console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
                         if (object.self.shield == 0) {
                             if (keysPressed['s']) {
@@ -2200,7 +2200,7 @@
                     }
 
                     function gamepad_control_controller_proto_dj(object, speed = 1, controller) { // basic control for objects using the controler
-                        //         //////////////////////////// console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         //////////////////////////// //console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
 
 
                         if (keysPressed['w']) {
@@ -2235,7 +2235,7 @@
                         }
                     }
                     function gamepad_control(object, speed = 1) { // basic control for objects using the controler
-                        //         //////////////////////////// console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
+                        //         //////////////////////////// //console.log(this.axesStatus[1]*this.axesStatus[0]) //debugging
                         if (typeof object.body != 'undefined') {
                             if (typeof (controller.gamepad.axesStatus[1]) != 'undefined') {
                                 if (typeof (controller.gamepad.axesStatus[0]) != 'undefined') {
@@ -2433,7 +2433,7 @@
                                     }
                                     this.axesStatus = axes;// assign received values
                                     this.buttonsStatus = pressed;
-                                    // //////////////////////////// console.log(pressed); // return buttons for debugging purposes
+                                    // //////////////////////////// //console.log(pressed); // return buttons for debugging purposes
                                     return pressed;
                                 },
                                 buttonPressed: function (button, hold) {
@@ -3830,10 +3830,10 @@
                                     //     this[keys[t]][keys2[j]] = args[keys[t]][keys2[j]]
                                     //  }
                                 }
-                                // ////////////// console.log(args)
+                                // ////////////// //console.log(args)
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
-                                // //////////// console.log(this.shotdraw)
+                                // //////////// //console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Circle(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -3896,7 +3896,7 @@
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -4018,11 +4018,15 @@
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new Boy(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -6028,10 +6032,10 @@ this.struck = 1
                                     //     this[keys[t]][keys2[j]] = args[keys[t]][keys2[j]]
                                     //  }
                                 }
-                                // ////////////// console.log(args)
+                                // ////////////// //console.log(args)
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
-                                // //////////// console.log(this.shotdraw)
+                                // //////////// //console.log(this.shotdraw)
                                 this.jumpcount = args['jumpcount']
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     this.nodes[t] = new Shot(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
@@ -6094,7 +6098,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -6235,11 +6239,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new Mass(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -6531,7 +6539,7 @@ this.struck = 1
 
                                                 }
                                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                                                // ////////////// console.log(this, boys[t])
+                                                // ////////////// //console.log(this, boys[t])
                                                 this.striker = boys[t].serverID
 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
@@ -6621,7 +6629,7 @@ this.struck = 1
                                 this.lefthand.ymom = -this.speed * 2
                                 this.righthand.ymom = -this.speed * 2
                                 this.jumpcount = 100
-                                //////////////////// console.log(this)
+                                //////////////////// //console.log(this)
                             }
                         }
                         doubleJump() {
@@ -7076,7 +7084,7 @@ this.struck = 1
                                 if (this.safe == 0) {
                                     this.screwshot = 1
                                     if (this.body.x > (this.brick.center.x)) {
-                                        ////////////////////////// console.log(this.brick.center.x, this.body.x)
+                                        ////////////////////////// //console.log(this.brick.center.x, this.body.x)
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
@@ -7844,7 +7852,7 @@ this.struck = 1
                                     }
                                 } else {
                                     if (Math.random() < .001) {
-                                        //////////////// console.log(this.body.color, color)
+                                        //////////////// //console.log(this.body.color, color)
                                     }
                                 }
                             }
@@ -8350,7 +8358,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -8472,11 +8480,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new Blastgirl(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -10724,7 +10736,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -10845,11 +10857,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new Jox(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -12941,7 +12957,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -13064,11 +13080,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new Dummy(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -13926,7 +13946,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -14048,11 +14068,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             let copy = new ScorchedMass(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
@@ -14433,7 +14457,7 @@ this.struck = 1
                                 this.lefthand.ymom = -this.speed * 2
                                 this.righthand.ymom = -this.speed * 2
                                 this.jumpcount = 100
-                                //////////////////// console.log(this)
+                                //////////////////// //console.log(this)
                             }
                         }
                         doJump(object, speed) {
@@ -14898,7 +14922,7 @@ this.struck = 1
                                 if (this.safe == 0) {
                                     this.screwshot = 1
                                     if (this.body.x > (this.brick.center.x)) {
-                                        ////////////////////////// console.log(this.brick.center.x, this.body.x)
+                                        ////////////////////////// //console.log(this.brick.center.x, this.body.x)
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
@@ -16267,7 +16291,7 @@ this.struck = 1
                                 this.springs.push(this.rightarm)
 
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -16389,7 +16413,7 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -16508,11 +16532,15 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
                         copy() {
+                            let obj = {}
+                            obj.kill = 1
+                            obj.striker = this.striker
+                            ws.send(JSON.stringify(obj))
                             if (this.inactive == 1) {
                                 return
                             }
@@ -17256,7 +17284,7 @@ this.struck = 1
                                 if (this != boys[t] && boys[t]) {
                                     if (Math.abs(this.body.x - boys[t].body.x) > 1 && this.body.y > (boys[t].body.y + 35)) {
                                         this.wmove = 1
-                                        //////////////// console.log("caseA")
+                                        //////////////// //console.log("caseA")
                                     }
 
                                     if (this.fleeing == 0) {
@@ -17277,7 +17305,7 @@ this.struck = 1
                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                         if (Math.random() < .2) {
                                             this.wmove = 1
-                                            //////////////// console.log("caseB")
+                                            //////////////// //console.log("caseB")
                                         }
                                         if (Math.random() < .1) {
                                             this.dmove = 1
@@ -17399,7 +17427,7 @@ this.struck = 1
                                     this.dmove = 1
                                     this.downspike = 1
                                     this.wmove = 1
-                                    //////////////// console.log("caseC")
+                                    //////////////// //console.log("caseC")
                                 }
                                 if (this.under == 2) {
                                     this.amove = 1
@@ -17408,7 +17436,7 @@ this.struck = 1
                                     this.dmove = 0
                                     this.wmove = 1
                                     this.downspike = 1
-                                    //////////////// console.log("caseD")
+                                    //////////////// //console.log("caseD")
                                 }
                             }
                             this.exgrip = 0
@@ -17441,7 +17469,7 @@ this.struck = 1
                                 this.dmove = 1
                                 if (Math.random() < .5) {
                                     this.wmove = 1
-                                    //////////////// console.log("caseE")
+                                    //////////////// //console.log("caseE")
                                 }
                                 this.amove = 0
                                 this.amom = 0
@@ -17459,7 +17487,7 @@ this.struck = 1
                                 this.dmom = 0
                                 this.amove = 1
                                 this.wmove = 1
-                                //////////////// console.log("caseF")
+                                //////////////// //console.log("caseF")
                                 this.dmove = 0
                             } else {
                                 if (this.amomu > 0) {
@@ -17478,14 +17506,14 @@ this.struck = 1
                                     this.amove = 1
                                     this.dmove = 0
                                     this.wmove = 1
-                                    //////////////// console.log("caseG")
+                                    //////////////// //console.log("caseG")
                                     this.amomu = 0
                                     this.dmomu = 0
                                 } else {
                                     this.amove = 0
                                     this.dmove = 1
                                     this.wmove = 1
-                                    //////////////// console.log("caseH")
+                                    //////////////// //console.log("caseH")
                                     this.amomu = 0
                                     this.dmomu = 0
                                 }
@@ -17528,7 +17556,7 @@ this.struck = 1
                                                                 this.downspike = 1
                                                                 this.wmove = 1
                                                             }
-                                                            //////////////// console.log("caseI", cancel)
+                                                            //////////////// //console.log("caseI", cancel)
                                                         } else {
                                                             this.brick = this.bricksto
                                                         }
@@ -17544,7 +17572,7 @@ this.struck = 1
                                                                 this.downspike = 1
                                                                 this.wmove = 1
                                                             }
-                                                            //////////////// console.log("caseJ", cancel)
+                                                            //////////////// //console.log("caseJ", cancel)
                                                         } else {
                                                             this.brick = this.bricksto
                                                         }
@@ -17584,7 +17612,7 @@ this.struck = 1
                                                 this.downspike = 1
                                                 this.wmove = 1
                                             }
-                                            //////////////// console.log("caseK", cancel)
+                                            //////////////// //console.log("caseK", cancel)
                                         }
                                     } else {
                                         let xdisL = Math.abs(this.brick.edgeleft.x - (this.body.x + (this.body.radius * 1.1)))
@@ -17599,7 +17627,7 @@ this.struck = 1
                                                 this.wmove = 1
                                             }
                                             //problem2
-                                            //////////////// console.log("caseL", cancel)
+                                            //////////////// //console.log("caseL", cancel)
                                         }
                                     }
 
@@ -17617,14 +17645,14 @@ this.struck = 1
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////////////// console.log("caseM")
+                                        //////////////// //console.log("caseM")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////////////// console.log("caseN")
+                                        //////////////// //console.log("caseN")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17657,7 +17685,7 @@ this.struck = 1
                                                         this.storeshield = 1
                                                     } else {
                                                         this.wmove = 1
-                                                        //////////////// console.log("caseO")
+                                                        //////////////// //console.log("caseO")
                                                     }
                                                 } else {
                                                     if (this.body.x < boys[t].shots[g].x) {
@@ -17715,7 +17743,7 @@ this.struck = 1
                                                         }
                                                         if (this.under == 0) {
                                                             this.wmove = 1
-                                                            //////////////// console.log("caseP")
+                                                            //////////////// //console.log("caseP")
                                                             this.downspike = 1
                                                         }
                                                     }
@@ -17730,14 +17758,14 @@ this.struck = 1
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////////////// console.log("caseQ")
+                                        //////////////// //console.log("caseQ")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////////////// console.log("caseR")
+                                        //////////////// //console.log("caseR")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17758,7 +17786,7 @@ this.struck = 1
                                                         this.storeshield = 1
                                                     } else {
                                                         this.wmove = 1
-                                                        //////////////// console.log("caseS")
+                                                        //////////////// //console.log("caseS")
                                                     }
                                                 } else {
                                                     if (this.body.x < boys[t].shots[g].x) {
@@ -17817,7 +17845,7 @@ this.struck = 1
                                                         }
                                                         if (this.under == 0) {
                                                             this.wmove = 1
-                                                            //////////////// console.log("caseT")
+                                                            //////////////// //console.log("caseT")
                                                             this.downspike = 1
                                                         }
                                                     }
@@ -17832,14 +17860,14 @@ this.struck = 1
                                         this.amove = 1
                                         this.dmove = 0
                                         this.wmove = 1
-                                        //////////////// console.log("caseU")
+                                        //////////////// //console.log("caseU")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     } else {
                                         this.amove = 0
                                         this.dmove = 1
                                         this.wmove = 1
-                                        //////////////// console.log("caseV")
+                                        //////////////// //console.log("caseV")
                                         this.amomu = 0
                                         this.dmomu = 0
                                     }
@@ -17967,7 +17995,7 @@ this.struck = 1
                                         if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                                             if (this.face == -1) {
                                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                                    // ////////////// console.log(Math.abs(this.body.x - boys[t].body.x))
+                                                    // ////////////// //console.log(Math.abs(this.body.x - boys[t].body.x))
                                                     if (this.fleeing != 1) {
                                                         this.leftshot = 1
                                                     }
@@ -17981,7 +18009,7 @@ this.struck = 1
                                         if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                                             if (this.face == 1) {
                                                 if (Math.abs(this.body.x - boys[t].body.x) < 212) {
-                                                    // ////////////// console.log(Math.abs(this.body.x - boys[t].body.x))
+                                                    // ////////////// //console.log(Math.abs(this.body.x - boys[t].body.x))
                                                     if (this.fleeing != 1) {
                                                         this.rightshot = 1
                                                     }
@@ -18215,7 +18243,7 @@ this.struck = 1
                                                     }
                                                     if (this.under == 0) {
                                                         this.wmove = 1
-                                                        //////////////// console.log("caseX")
+                                                        //////////////// //console.log("caseX")
                                                         this.downspike = 1
                                                     }
                                                 }
@@ -18995,7 +19023,7 @@ this.struck = 1
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 // if(this.righthand.fired > 0){
-                                //     // //////////// console.log(this.righthand.fired)
+                                //     // //////////// //console.log(this.righthand.fired)
                                 // }
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     // this.nodes[t].self = this
@@ -19117,7 +19145,7 @@ this.struck = 1
                                 }
                             } else {
                                 if (Math.random() < .001) {
-                                    //////////////// console.log(this.body.color, color)
+                                    //////////////// //console.log(this.body.color, color)
                                 }
                             }
                         }
@@ -21388,7 +21416,7 @@ this.struck = 1
                                                 Json[keys[k]] = boys[t][keys[k]]
                                             }
                                         }
-                                        // ////////////// console.log(keys)
+                                        // ////////////// //console.log(keys)
                                         Json.springs = []
                                         Json.links = []
                                         Json.rightarm = {}
@@ -21425,10 +21453,10 @@ this.struck = 1
                                             Json.rightarm3 = {}
                                         }
 
-                                        ////////// console.log("sending")
+                                        ////////// //console.log("sending")
                                         if (bumper == 0) {
                                             bumper = 1
-                                            //////// console.log(Json)
+                                            //////// //console.log(Json)
                                         }
                                         ws.send(JSON.stringify(Json))
 
@@ -21438,9 +21466,9 @@ this.struck = 1
                                         // for(let f = 0;f<boys[t].nodes.length;f++){
                                         //     boys[t].nodes[f].self =boys[t]
                                         // }
-                                        //////////// console.log(boys[IDaddress].id, ID)
+                                        //////////// //console.log(boys[IDaddress].id, ID)
                                     } else {
-                                        //////////// console.log(boys[IDaddress].id, ID)
+                                        //////////// //console.log(boys[IDaddress].id, ID)
                                     }
 
                                     // for (let t = boys.length - 1; t >= 0; t--) {
