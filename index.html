@@ -21189,6 +21189,7 @@
                     //, new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
                     let counter = 0
                     let sender = 0
+                    let bumper = 0
 
 
                     let massSelector = new Circle(700, 700, 200, "White")
@@ -21399,6 +21400,14 @@
                                             }
                                         }
                                         // //////console.log(keys)
+                                        Json.springs = []
+                                        Json.links = []
+                                        Json.rightarm = {}
+                                        Json.shild = {}
+                                        Json.gamepad = {}
+                                        Json.leftarm = {}
+                                        Json.rightcollar = {}
+                                        Json.leftcollar = {}
                                         Json.brick = {}
                                         Json.bricksto = {}
                                         Json.wasfalse = []
@@ -21406,20 +21415,32 @@
                                         Json.serverID = serverID
                                         Json.lefthands = {}
                                         Json.righthands = {}
-                                        if(Json.lefthands2){
+                                        if(typeof boys[t].lefthand2 != "undefined"){
+                                            Json.lefthand2 = {}
                                             Json.lefthands2 = {}
+                                            Json.leftarm2 = {}
                                         }
-                                        if(Json.lefthands3){
+                                        if(typeof boys[t].lefthand3 != "undefined"){
                                             Json.lefthands3 = {}
+                                            Json.lefthand3 = {}
+                                            Json.leftarm3 = {}
                                         }
-                                        if(Json.righthands2){
+                                        if(typeof boys[t].righthand2 != "undefined"){
                                             Json.righthands2 = {}
+                                            Json.righthand2 = {}
+                                            Json.rightarm2 = {}
                                         }
-                                        if(Json.righthands3){
+                                        if(typeof boys[t].righthand3 != "undefined"){
                                             Json.righthands3 = {}
+                                            Json.righthand3 = {}
+                                            Json.rightarm3 = {}
                                         }
 
                                         //console.log("sending")
+                                        if(bumper == 0){
+                                            bumper = 1
+                                            console.log(Json)
+                                        }
                                         ws.send(JSON.stringify(Json))
 
                                     for (let f = 0; f < boys[t].nodes.length; f++) {
