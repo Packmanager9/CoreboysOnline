@@ -69,6 +69,7 @@ wss.on("connection", ws => {
             let ids = []
             for(let t = 0;t<game.length;t++){
                 if(t != game.indexOf(ws)){
+                    // console.log(game[t].serverID)
                     ids.push(game[t].serverID)
                 }
             }
