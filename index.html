@@ -21382,8 +21382,10 @@
                             sender++
                             if (sender % 1 == 0) {
                                 for(let t = 0;t<boys.length;t++){
+                                    let sto = []
                                     for (let f = 0; f < boys[t].nodes.length; f++) {
                                         boys[t].nodes[f].self = 0
+                                        sto.push(boys[t].nodes[f].anchored)
                                         boys[t].nodes[f].anchored = 0
                                     }
                                     if (boys[t].serverID == serverID) {
@@ -21418,6 +21420,10 @@
 
                                         //console.log("sending")
                                         ws.send(JSON.stringify(Json))
+
+                                    for (let f = 0; f < boys[t].nodes.length; f++) {
+                                        boys[t].nodes[f].anchored = sto[f]
+                                    }
                                         // for(let f = 0;f<boys[t].nodes.length;f++){
                                         //     boys[t].nodes[f].self =boys[t]
                                         // }
