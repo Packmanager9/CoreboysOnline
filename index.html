@@ -80,58 +80,14 @@
 
                                     ID = connectionnumber
                                     IDaddress = connectionnumber
-                                    if (connectionnumber == 0) {
-                                        color = "#FF0000"
-                                    }
-                                    if (connectionnumber == 1) {
-                                        color = "#00FF00"
-                                    }
-                                    if (connectionnumber == 2) {
-                                        color = "#0000FF"
-                                    }
-                                    if (connectionnumber == 3) {
-                                        color = "#FFFF00"
-                                    }
-                                    if (connectionnumber == 4) {
-                                        color = "#FFAA00"
-                                    }
-                                    if (connectionnumber == 5) {
-                                        color = "#00FFFF"
-                                    }
-                                    if (connectionnumber == 6) {
-                                        color = "#FF00FF"
-                                    }
-                                    if (connectionnumber == 7) {
-                                        color = "#bbbbbb"
-                                    }
-                                    ////////////console.log(connectionnumber, "1", data.index)
                                     players = parseInt(data.length)
-                                    // ////////console.log(data.minarr)
-                                    // for (let t = 0; t < parseInt(data.length); t++) {
                                     CreatePlayer(data.playerIDs.length)
-                                    // }
                                 }
                             } else if (JSON.parse(data).delete) {
-                                //////////console.log("del")
-
-                                // if (JSON.parse(data).delete < ID) {
-                                //     // boys[JSON.parse(data).delete] = new Dummy(0)
-                                //     // IDaddress--
-                                //     // ID--
-                                //     for (let t = 0; t < boys.length; t++) {
-                                //         if (t <= JSON.parse(data).delete) {
-                                //             // boys[t].id--
-                                //         }
-                                //     }
-                                //     connectionnumber = parseInt(data.slot)
-                                //     //////////console.log(IDaddress)
-                                // }
-
                                 data = JSON.parse(data)
                                 for (let t = 0; t < (data).playerIDs.length; t++) {
                                     data.playerIDs[t] = parseFloat((data).playerIDs[t])
                                 }
-
                                 for (let g = 0; g < data.playerIDs.length; g++) {
                                     for (let t = 0; t < boys.length; t++) {
                                         if (!(data).playerIDs.includes(boys[t].serverID)) {
@@ -149,19 +105,9 @@
                                     }
 
                                 }
-                                //////////console.log(data)
-
-
                             } else if ((data.length >= 0)) {
-                                // start = 0
                                 data = JSON.parse(data)
                                 data.serverID = parseFloat(data.serverID)
-                                if (hit == 0) {
-                                    hit = 1
-                                    ////////////console.log("started running")
-                                    // ////////////console.log(data)
-                                }
-                                ////////////console.log(data, ID)
                                 let dropouts = 0
                                 for (let t = 0; t < Math.max(data.players, boys.length); t++) {
                                     if (boys[t] && boys[t].inactive != 1) {
@@ -169,8 +115,6 @@
                                         dropouts++
                                     }
                                 }
-                                // if (data.id != ID) {
-
                                 let tempIDs = []
                                 for (let t = 0; t < boys.length; t++) {
                                     tempIDs.push(boys[t].serverID)
@@ -183,10 +127,7 @@
                                     for (let g = 0; g < boys.length; g++) {
                                         identites.push(boys[g].serverID)
                                     }
-
-                                    // ////////console.log(data)
                                     if (localIDs.includes(data.serverID)) {
-                                        ////////console.log(t, tempIDs.indexOf(data.serverID), (data.serverID), tempIDs)
                                         if (data.name == "Coreboy") {
                                             boys[tempIDs.indexOf(data.serverID)] = new Boy(data.id, data)  //data.id?
                                         }
@@ -215,7 +156,6 @@
                                         boys[tempIDs.indexOf(data.serverID)]['gamepad'] = gp
 
                                     } else if (!localIDs.includes(data.serverID)) {
-                                        ////////console.log(t, tempIDs.indexOf(data.serverID), (data.serverID), tempIDs. localIDs)
                                         localIDs.push(data.serverID)
                                         let newplayer = {}
                                         if (data.name == "Coreboy") {
@@ -248,25 +188,9 @@
                                         boys.push(newplayer)
 
                                     }
-                                    // }
                                 }
-                                // }
                             } else {
                                 if (data.length >= 0) {
-                                    // connectionnumber = (data)
-                                    // if (connectionnumber == 0) {
-                                    //     color = "#FF0000"
-                                    // } else if (connectionnumber == 1) {
-                                    //     color = "#00FF00"
-                                    // }else {
-                                    // ////////////console.log(connectionnumber, "2")
-                                    //     color = "#FFFF00"
-                                    // }
-                                    // if(boys.length < data-1){
-                                    // for (let t = boys.length; t < data-1; t++) {
-                                    //     CreatePlayer(t)
-                                    // }
-                                    // }
                                 }
                             }
 
@@ -8003,18 +7927,6 @@
                             if (stock > 0) {
                                 canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
                             }
-                            // canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-                            // canvas_context.fillText(`Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-                            // // if (this != boys[0]) {
-                            //     canvas_context.fillText(`M ${Math.round(this.dmove)},${Math.round(this.amove)}`, this.body.x - 20, this.body.y - 100)
-                            //     canvas_context.fillText(`U ${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-                            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-                            //     canvas_context.fillText(`_ ${Math.round(this.dmom)},${Math.round(this.amom)}`, this.body.x - 20, this.body.y - 300)
-                            //     if (this.fleeing == 1) {
-                            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
-                            //     }
-                            // }
-
 
                             let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y + Math.sin(this.screwangle), invertColor(this.body.color), this.body.radius * .2)
 
@@ -8066,19 +7978,7 @@
                                 this.body.sxmom = 0
                                 this.body.symom = 0
                             }
-                            // if (this.controller == 0) {
                             if (boys.indexOf(this) <= humanPlayers) {
-                                // if (this.breaktimer < 0) {
-                                //     this.AImove(this.body, this.speed, this.gamepad)
-
-                                //     if (this.righthand.anchored == 0) {
-                                //         this.AImove(this.righthand, this.speed, this.gamepad)
-                                //     }
-                                //     if (this.lefthand.anchored == 0) {
-                                //         this.AImove(this.lefthand, this.speed, this.gamepad)
-                                //     }
-                                //     this.doubleJump()
-                                // }
                                 if (this.breaktimer < 0) {
                                     this.playerMove(this.body, this.speed, this.gamepad)
 
@@ -20960,14 +20860,6 @@
                             if (stock > 0) {
                                 canvas_context.fillText(`${Math.round(stock - (drops[boys.indexOf(this)]))}`, this.body.x - 20, this.body.y + 90)
                             }
-                            // if (this != boys[0]) {
-                            //     canvas_context.fillText(`${Math.round(this.dmomu)},${Math.round(this.amomu)}`, this.body.x - 20, this.body.y - 150)
-                            //     canvas_context.fillText(`Under:${Math.round(this.under)},Safe:${Math.round(this.safe)}`, this.body.x - 20, this.body.y - 200)
-                            //     canvas_context.fillText(`Height:${Math.round(this.brick.edgeright.y)}`, this.body.x - 20, this.body.y - 250)
-                            //     if (this.fleeing == 1) {
-                            //         canvas_context.fillText(`fleeing`, this.body.x - 20, this.body.y - 100)
-                            //     }
-                            // }
 
 
                         }
@@ -21093,18 +20985,6 @@
                             this.rightshoulder.xmom -= (this.rightshoulder.x - this.body.x) / 40
                             this.fixupshoulder()
 
-                            // this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth)
-                            // this.leftshoulder.y = this.body.y
-
-                            // this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth)
-                            // this.rightshoulder.y = this.body.y
-
-                            // this.leftshoulder.xmom *= 0
-                            // this.leftshoulder.ymom *= 0
-
-                            // this.rightshoulder.xmom *= 0
-                            // this.rightshoulder.ymom *= 0
-
                             for (let t = 0; t < this.springs.length; t++) {
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
@@ -21126,12 +21006,6 @@
                                     spot.draw()
                                 }
                             }
-                            // if (this.screwangle != 0) {
-                            //     let link1 = new Line(this.rightshoulder.x, this.rightshoulder.y, this.rightshoulder.x + 50, this.rightshoulder.y + 50, invertColor(this.body.color), 18)
-                            //     let link2 = new Line(this.leftshoulder.x, this.leftshoulder.y, this.leftshoulder.x - 50, this.leftshoulder.y + 50, invertColor(this.body.color), 18)
-                            //     link1.draw()
-                            //     link2.draw()
-                            // }
 
                         }
                     }
@@ -21146,33 +21020,10 @@
                     let go = 0
                     let boom = []// [new Circle(0, 0, 1, "transparent"), new Circle(0, 0, 1, "transparent")]
 
-                    for (let t = 0; t < 8; t++) {
+                    for (let t = 0; t < 100; t++) {
 
                         let selector = new Selector()
-                        if (t == 0) {
-                            selector.body.color = "#FF0000"
-                        }
-                        if (t == 1) {
-                            selector.body.color = "#00FF00"
-                        }
-                        if (t == 2) {
-                            selector.body.color = "#0000FF"
-                        }
-                        if (t == 3) {
-                            selector.body.color = "#FFFF00"
-                        }
-                        if (t == 4) {
-                            selector.body.color = "#FFAA00"
-                        }
-                        if (t == 5) {
-                            selector.body.color = "#00FFFF"
-                        }
-                        if (t == 6) {
-                            selector.body.color = "#FF00FF"
-                        }
-                        if (t == 7) {
-                            selector.body.color = "#bbbbbb"
-                        }
+                        selector.body.color = colors[t]
                         selectors.push(selector)
 
                     }
@@ -21230,51 +21081,16 @@
                         boom.push(new Circle(0, 0, 1, "transparent"))
                     }
                     function main() {
+
+                        for (let t = 0; t < boys.length; t++) {
+                                    if (boys[t].serverID == serverID) {
+                                        ID = t
+                                        connectionnumber = t
+                                        IDaddress = t
+                                    }
+
+                                }
                         if (counter == 1) {
-
-
-                            // let dupes = []
-                            // for (let t = 0; t < boys.length; t++) {
-                            //     dupes.push(boys[t].serverID)
-                            // }
-                            // let pickcount = 0
-                            // let picks = 0
-                            // let sorcery = []
-                            // for (let t = 0; t < boys.length; t++) {
-                            //     if (pickcount == 1) {
-                            //         if (boys[t].pick != pick) {
-                            //             if (boys[t].serverID == serverID) {
-                            //                 if (localIDs.length < boys.length) {
-                            //                     for (let k = 0; k < localIDs.length; k++) {
-                            //                         if (!dupes.includes(localIDs[k])) {
-                            //                             boys[t].serverID = localIDs[k]
-                            //                             dupes.push(localIDs[k])
-                            //                         }
-                            //                     }
-                            //                 }
-                            //             }
-                            //         } else {
-                            //                 sorcery.push(boys[t])
-                            //         }
-                            //     } else if (boys[t].serverID == serverID) {
-                            //         pickcount++
-                            //         if (boys[t].pick == pick) {
-                            //                 sorcery.push(boys[t])
-                            //         }
-                            //     }
-                            // }
-
-                            // //console.log(sorcery)
-                            // if(sorcery.length > 1){
-                            //     for (let t = 0; t < sorcery.length-1; t++) {
-                            //         for (let k = 0; k < localIDs.length; k++) {
-                            //                 if (!dupes.includes(localIDs[k])) {
-                            //                     sorcery[t].serverID = localIDs[k]
-                            //                 } 
-                            //         }
-                            //     }
-                            // }
-                            // sorcery = []
 
                             flopper++
                             canvas_context.clearRect(0, 0, canvas.width * 4, canvas.height * 4)
@@ -21357,12 +21173,6 @@
                                         } else {
                                             boom[t] = new Circle(0, 0, 0, "transparent")
                                         }
-                                        // if (Math.random() < .5) {
-                                        //     boys[t] = new Mass(t)
-                                        //     boys[t].body.color = getRandomColor()
-                                        // } else {
-
-                                        // if (t == 0) {
                                         boys[t].body.x = - 100000
                                         boys[t].body.y = - 100000
 
