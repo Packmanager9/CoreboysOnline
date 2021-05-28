@@ -67,16 +67,8 @@
 
                     ws.addEventListener("open", () => {
                         ws.addEventListener("message", ({ data }) => {
-                            if(typeof JSON.parse(data).kill != "undefined"){
-                                //////console.log(JSON.parse(data).kill)
-                            }
-                            if(typeof data.kill != "undefined"){
-                                //////console.log(data.kill)
-                            }
                             if (start == 0) {
-                                //////////// ////////console.log(data)
                                 data = JSON.parse(data)
-                                ////////////// ////////console.log(data)
                                 for (let t = 0; t < data.playerIDs.length; t++) {
                                     data.playerIDs[t] = parseFloat(data.playerIDs[t])
                                 }
@@ -90,10 +82,18 @@
                                     CreatePlayer(data.playerIDs.length)
                                 }
                             } else if(parseInt(JSON.parse(data).kill) == 1){
-                                // ////////console.log("hit")
                                 for(let t = 0;t<boys.length;t++){
                                     if(boys[t].serverID == parseFloat(JSON.parse(data).index)){
                                         boys[t].knocks++
+                                    }
+                                }
+                            } else if(parseInt(JSON.parse(data).counter) == 1){
+                                console.log(data)
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == parseFloat(JSON.parse(data).index)){
+                                        boys[t].body.xmom += parseFloat(JSON.parse(data).xmom)
+                                        boys[t].body.ymom += parseFloat(JSON.parse(data).ymom)
+                                        boys[t].damage += parseFloat(JSON.parse(data).damage)
                                     }
                                 }
                             } else if (JSON.parse(data).delete) {
@@ -2606,7 +2606,7 @@
                                                     let j = 0
                                                     while (this.shape.doesPerimeterTouch(circle)) {
                                                         j++
-                                                        if (j > 10000) {
+                                                        if (j > 500) {
                                                             break
                                                         }
                                                         if (circle == player.body) {
@@ -2684,7 +2684,7 @@
                                                 let j = 0
                                                 while (this.shape.doesPerimeterTouch(circle)) {
                                                     j++
-                                                    if (j > 10000) {
+                                                    if (j > 500) {
                                                         break
                                                     }
                                                     if (circle == player.body) {
@@ -3059,7 +3059,7 @@
                             let j = 0
                             while (this.shape.doesPerimeterTouch(circle)) {
                                 j++
-                                if (j > 10000) {
+                                if (j > 500) {
                                     break
                                 }
 
@@ -4342,7 +4342,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -6604,7 +6604,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 1000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         if (this.serverID == serverID) {
@@ -8845,7 +8845,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         if (this.serverID == serverID) {
@@ -11211,7 +11211,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -13402,7 +13402,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -14435,7 +14435,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)
@@ -16917,6 +16917,12 @@ this.struck = 1
                                         }
                                     }
                                     if (this.countering > 0) {
+                                        let obj = {}
+                                        obj.ymom = (this.body.ymom - storage.ymom)
+                                        obj.xmom = (this.body.xmom - storage.xmom)
+                                        obj.damage = (this.damage - storage.damage)
+                                        obj.counter = 1
+                                        obj.striker = boys[t].serverID
                                         boys[t].body.ymom -= (this.body.ymom - storage.ymom)
                                         boys[t].body.xmom -= (this.body.xmom - storage.xmom)
                                         boys[t].damage += (this.damage - storage.damage)
@@ -16925,6 +16931,7 @@ this.struck = 1
                                         this.body.ymom = storage.ymom
                                         this.body.xmom = storage.xmom
                                         this.damage = storage.damage
+                                        ws.send(JSON.stringify(obj))
                                     }
                                 }
                             }
@@ -16935,7 +16942,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[t].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[t].body.x) / (this.body.radius + boys[t].body.radius)
@@ -18774,7 +18781,7 @@ this.struck = 1
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j > 10000) {
+                                                    if (j > 500) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -19267,7 +19274,7 @@ return copy
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
-                                                    if (j > 10000) {
+                                                    if (j > 500) {
                                                         break
                                                     }
                                                     if (this.nodes[k].anchored != 1) {
@@ -19537,7 +19544,7 @@ this.struck = 1
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
-                                        if (j > 10000) {
+                                        if (j > 500) {
                                             break
                                         }
                                         this.body.x += (this.body.x - boys[f].body.x) / (this.body.radius + boys[f].body.radius)

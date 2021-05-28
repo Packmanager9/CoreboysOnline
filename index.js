@@ -79,18 +79,27 @@ wss.on("connection", ws => {
         }
     })
     ws.on("message", data => {
-        
-        if(JSON.parse(data).kill == 1){
-            // console.log("kill")
+         if(JSON.parse(data).counter == 1){
+            let sjon = {
+                "counter": `1`,
+                "ymom": `${JSON.parse(data).ymom}`,
+                "xmom": `${JSON.parse(data).xmom}`,
+                "damage": `${JSON.parse(data).damage}`
+            }
+            sjon.index = JSON.parse(data).striker
+            for (let t = 0; t < game.length; t++) {
+                if (parseFloat(JSON.parse(data).striker) == game[t].serverID) {
+                    game[t].send(JSON.stringify(sjon))
+                }
+            }
+            // console.log(sjon)
+        }else if(JSON.parse(data).kill == 1){
             let sjon = {
                 "kill": `1`
             }
             sjon.index = JSON.parse(data).striker
             for (let t = 0; t < game.length; t++) {
-                if (JSON.parse(data).striker == game[t].serverID) {
                     game[t].send(JSON.stringify(sjon))
-                    // console.log(JSON.stringify(sjon))
-                }
             }
 
         }else {
