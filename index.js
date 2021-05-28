@@ -125,6 +125,7 @@ wss.on("connection", ws => {
                 }
             }
             sjon.storage = storage
+            ws.storage = storage
             ws.serverID = data
             ws.publicID = data
             let ids = []
@@ -176,7 +177,7 @@ wss.on("connection", ws => {
             let ids = []
             for(let t = 0;t<game.length;t++){
                 if(t != game.indexOf(ws)){
-                    ids.push(game[t].serverID)
+                    ids.push(parseFloat(game[t].serverID))
                 }
             }
             data.playerIDs = ids

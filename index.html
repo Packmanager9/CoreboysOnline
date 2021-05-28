@@ -74,7 +74,7 @@
                                 for (let t = 0; t < data.playerIDs.length; t++) {
                                     data.playerIDs[t] = parseFloat(data.playerIDs[t])
                                 }
-                                if (data.length >= 0 && data.length < 5 && !(data.delete)) {
+                                if (data.length >= 0 && data.length < 1005 && !(data.delete)) {
                                     start = 1
                                     connectionnumber = parseInt(data.slot)
 
@@ -203,6 +203,7 @@
                                     boys[t].enemycollide()
                                 }
                             }
+                                console.log(boys)
                         })
                         ws.send(serverID)
                     })
@@ -2451,7 +2452,7 @@
                     class Stage {
 
                         constructor() {
-                            this.bricks = [new Brick(1440 * (invscale * .4), 1760 * (invscale * .4), 1410 * (invscale * .4)), new Brick(2400 * (invscale * .4), 1470 * (invscale * .4), 1000 * (invscale * .4)), new Brick(1430 * (invscale * .4), 1200 * (invscale * .4), 400 * (invscale * .4)), new Brick(500 * (invscale * .4), 1470 * (invscale * .4), 750 * (invscale * .4))]
+                            this.bricks = [new Brick(1490 * (invscale * .4), 1760 * (invscale * .4), 1410 * (invscale * .4)), new Brick(2450 * (invscale * .4), 1470 * (invscale * .4), 1000 * (invscale * .4)), new Brick(1480 * (invscale * .4), 1200 * (invscale * .4), 400 * (invscale * .4)), new Brick(550 * (invscale * .4), 1470 * (invscale * .4), 750 * (invscale * .4))]
                             // this.bricks = [new Brick(1440, 1760, 200), new Brick(1040, 1760, 200), new Brick(640, 1760, 200), new Brick(240, 1760, 200)]
                             // for(let t = 0;t<5;t++){
                             //     this.bricks.push(new Brick(Math.random()*invscale*canvas.width, Math.random()*invscale*canvas.height, 300))
@@ -12135,7 +12136,7 @@
                                                     }
                                                     this.grounded = 0
                                                     this.jumping = 1
-                                                    this.body.fired = 20
+                                                    this.body.fired = 31 // 20
                                                     this.blasting = 20
                                                 }
                                             }
@@ -12155,7 +12156,7 @@
                                                     }
                                                     this.grounded = 0
                                                     this.jumping = 1
-                                                    this.body.fired = 20
+                                                    this.body.fired = 31 // 20
                                                     this.blasting = 20
                                                 }
                                             }
@@ -12273,7 +12274,7 @@
                                                         }
                                                         this.grounded = 0
                                                         this.jumping = 1
-                                                        this.body.fired = 20
+                                                        this.body.fired = 31 // 20
                                                         this.blasting = 20
                                                     }
                                                 }
@@ -12291,7 +12292,7 @@
                                                         }
                                                         this.grounded = 0
                                                         this.jumping = 1
-                                                        this.body.fired = 20
+                                                        this.body.fired = 31 // 20
                                                         this.blasting = 20
                                                     }
                                                 }
