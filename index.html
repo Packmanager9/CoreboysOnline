@@ -5810,13 +5810,14 @@
                                 this.body.ymom = vsmashlimit
                             }
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
-                            }
-
                             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
                             this.righthand.xmom += (this.righthand.x - this.body.x) / 80
                             this.leftshoulder.xmom -= (this.leftshoulder.x - this.body.x) / 40
@@ -10415,11 +10416,13 @@
                             this.body.xmom *= .99
                             this.body.ymom *= .99
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
-                            }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
 
                             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
@@ -12629,13 +12632,14 @@
                             this.body.xmom *= .99
                             this.body.ymom *= .99
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
-                            }
-
                             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
                             this.righthand.xmom += (this.righthand.x - this.body.x) / 80
                             this.leftshoulder.xmom -= (this.leftshoulder.x - this.body.x) / 40
@@ -15861,13 +15865,14 @@
                             this.body.xmom *= .99
                             this.body.ymom *= .99
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
-                            }
-
                             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
                             this.righthand.xmom += (this.righthand.x - this.body.x) / 80
                             this.leftshoulder.xmom -= (this.leftshoulder.x - this.body.x) / 40
@@ -18595,13 +18600,14 @@
                                 this.body.ymom = vsmashlimit
                             }
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
-                            }
-
                             if (this.lefthand.anchored <= 0) {
 
                                 this.lefthand.xmom += (this.lefthand.x - this.body.x) / 80
@@ -20972,13 +20978,14 @@
                             this.body.xmom *= .99
                             this.body.ymom *= .99
 
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].frictiveMove()
+                            if (this.serverID == serverID) {
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].frictiveMove()
+                                }
+                                for (let t = 0; t < this.nodes.length; t++) {
+                                    this.nodes[t].smove()
+                                }
                             }
-                            for (let t = 0; t < this.nodes.length; t++) {
-                                this.nodes[t].smove()
-                            }
-
                             this.lefthand.xmom += (this.lefthand.x - this.body.x) / 40
                             this.righthand.xmom += (this.righthand.x - this.body.x) / 40
                             this.leftshoulder.xmom -= (this.leftshoulder.x - this.body.x) / 40
@@ -21059,7 +21066,7 @@
                     function CreatePlayer(t) {
                         let coreboy
                         let chooser = Math.floor(Math.random() * 7)
-                        
+
                         if (chooser == 0) {
                             coreboy = new Mass(t)
                         } else if (chooser == 1) {
@@ -21083,13 +21090,13 @@
                     function main() {
 
                         for (let t = 0; t < boys.length; t++) {
-                                    if (boys[t].serverID == serverID) {
-                                        ID = t
-                                        connectionnumber = t
-                                        IDaddress = t
-                                    }
+                            if (boys[t].serverID == serverID) {
+                                ID = t
+                                connectionnumber = t
+                                IDaddress = t
+                            }
 
-                                }
+                        }
                         if (counter == 1) {
 
                             flopper++
@@ -21400,14 +21407,14 @@
                                                 coreboy.body.color = selectors[t].body.color
                                             }
 
-                                            for(let u = 0;u<boys.length;u++){
-                                                if(boys[u].serverID == serverID){
-                                                coreboy.id = ID
-                                                boys[u] = coreboy
-                                                boom.push(new Circle(0, 0, 1, "transparent"))
-                                                scores.push(0)
-                                                drops.push(0)
-                                                wet--
+                                            for (let u = 0; u < boys.length; u++) {
+                                                if (boys[u].serverID == serverID) {
+                                                    coreboy.id = ID
+                                                    boys[u] = coreboy
+                                                    boom.push(new Circle(0, 0, 1, "transparent"))
+                                                    scores.push(0)
+                                                    drops.push(0)
+                                                    wet--
                                                 }
                                             }
                                         }
