@@ -4165,7 +4165,7 @@ this.id = Math.random()
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -6452,7 +6452,7 @@ this.id = Math.random()
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -8709,7 +8709,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -11102,7 +11102,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -13307,7 +13307,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -14382,7 +14382,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -16873,7 +16873,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
@@ -19558,7 +19558,7 @@ this.shotIDs.push(boys[t].shots[k].id)
                             for(let t = 0;t<this.shots.length;t++){
                                 for(let k = 0;k<boys.length;k++){
                                     let line = new LineOP(this.shots[t], boys[k].body)
-                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                    if(line.hypotenuse() < (this.shots[t].radius+boys[k].body.radius)){
                                         this.shots[t].marked = 1
                                     }
                                 }
