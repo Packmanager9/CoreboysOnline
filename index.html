@@ -19905,7 +19905,7 @@
                                 this.shotdraw = 0
                                 this.id = controller
                                 this.gamepad = new Gamepad(controller)
-                                this.jumpreduction = 30
+                                this.jumpreduction = 45
                                 this.shild = new Circle(0, 0, 0, "transparent")
                                 this.shot = new Brick(-1, -1, 1, 1)
                                 this.striker = 10000
@@ -21749,26 +21749,26 @@
                                 if (this.screwshot == 1) {
                                     if (this.righthand.fired <= 0) {
                                         if (this.righthand.anchored == 0) {
-                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
+                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .9)
                                             this.shot.gravity = -.7
                                             this.shots.push(this.shot)
                                             this.fleeing = 0
                                             this.rightshoulder.xmom = 0
                                             this.rightshoulder.ymom = 0
                                             this.righthand.fired = 30
-                                            this.body.ymom -= this.speed / 3
+                                            this.body.ymom -= this.speed / 2.5
                                         }
                                     }
                                     if (this.lefthand.fired <= 0) {
                                         if (this.lefthand.anchored == 0) {
-                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .4)
+                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .9)
                                             this.shot.gravity = -.7
                                             this.shots.push(this.shot)
                                             this.fleeing = 0
                                             this.leftshoulder.xmom = 0
                                             this.leftshoulder.ymom = 0
                                             this.lefthand.fired = 30
-                                            this.body.ymom -= this.speed / 3
+                                            this.body.ymom -= this.speed / 2.5
                                         }
                                     }
                                 }
@@ -21966,27 +21966,27 @@
                                     if (this.gamepad.gamepad.buttonsStatus.includes('Y') || (keysPressed['i'] || keysPressed['ArrowUp'])) {
                                         if (this.righthand.fired <= 0) {
                                             if (this.righthand.anchored == 0) {
-                                                this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
+                                                this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .9)
                                                 this.shot.gravity = -.7
                                                 this.shots.push(this.shot)
                                                 this.fleeing = 0
                                                 this.rightshoulder.xmom = 0
                                                 this.rightshoulder.ymom = 0
                                                 this.righthand.fired = 30
-                                                this.body.ymom -= this.speed / 3
+                                                this.body.ymom -= this.speed / 2.5
                                                 this.idify()
                                             }
                                         }
                                         if (this.lefthand.fired <= 0) {
                                             if (this.lefthand.anchored == 0) {
-                                                this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .4)
+                                                this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .9)
                                                 this.shot.gravity = -.7
                                                 this.shots.push(this.shot)
                                                 this.fleeing = 0
                                                 this.leftshoulder.xmom = 0
                                                 this.leftshoulder.ymom = 0
                                                 this.lefthand.fired = 30
-                                                this.body.ymom -= this.speed / 3
+                                                this.body.ymom -= this.speed / 2.5
                                                 this.idify()
                                             }
                                         }
@@ -22126,7 +22126,7 @@
                             if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (typeof this.shots[t].gravity == "number") {
-                                        if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
+                                        if (this.shots[t].ymom > -(vsmashlimit / 1.15)) {
                                             this.shots[t].ymom += this.shots[t].gravity / 1.2
                                             this.shots[t].radius -= .5
                                             if (this.shots[t].radius < 10) {
@@ -24213,7 +24213,7 @@
                                 if (this.screwshot == 1) {
                                     if (this.righthand.fired <= 0) {
                                         if (this.righthand.anchored == 0) {
-                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .4)
+                                            this.shot = new Shot(this.rightshoulder.x, this.rightshoulder.y, 30, "#AA00FF", this.speed * -.2, -this.speed * .9)
                                             this.shot.gravity = -.7
                                             this.shots.push(this.shot)
                                             this.fleeing = 0
@@ -24225,7 +24225,7 @@
                                     }
                                     if (this.lefthand.fired <= 0) {
                                         if (this.lefthand.anchored == 0) {
-                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .4)
+                                            this.shot = new Shot(this.leftshoulder.x, this.leftshoulder.y, 30, "#AA00FF", - this.speed * -.2, -this.speed * .9)
                                             this.shot.gravity = -.7
                                             this.shots.push(this.shot)
                                             this.fleeing = 0
@@ -24618,7 +24618,7 @@
                             if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (typeof this.shots[t].gravity == "number") {
-                                        if (this.shots[t].ymom > -(vsmashlimit / 1.4)) {
+                                        if (this.shots[t].ymom > -(vsmashlimit / 1.15)) {
                                             this.shots[t].ymom += this.shots[t].gravity / 1.2
                                             this.shots[t].radius -= .5
                                             if (this.shots[t].radius < 10) {
