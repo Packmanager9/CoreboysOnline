@@ -4422,6 +4422,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -6747,6 +6783,43 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -6911,7 +6984,7 @@
                                                     }
                                                 }
                                             } else if (boys[t].lefthands.doesPerimeterTouch(this.body) || boys[t].lefthand.doesPerimeterTouch(this.body)) {
-                                                // ////////////// //////////console.log(this, boys[t])
+                                                // ////////////// ////////////console.log(this, boys[t])
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
@@ -9042,6 +9115,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -11479,6 +11588,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -13715,6 +13860,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -14822,6 +15003,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -17494,6 +17711,42 @@
                                         }
                                     }
                                     boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                     boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                     if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
                                         this.striker = boys[t].serverID
@@ -20087,6 +20340,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -22499,6 +22788,42 @@
                                             }
                                             boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                             boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
+                                            if (typeof boys[t].middlehand != "undefined") {
+                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                                    this.striker = boys[t].serverID
+                                                    this.struck = 1
+                                                    if (boys[t].middlehand.fired > 14) {
+                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                            if (this.shield == 1) {
+                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                            } else {
+                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.breaktimer = 0
+                                                            }
+                                                            boys[t].middlehand.fired = 14
+
+                                                            this.shotIDs.push(boys[t].middlehand.id)
+                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                                this.lefthand.anchored = -20
+                                                                this.righthand.anchored = -20
+                                                            }
+                                                            if (this.body.ymom < -vsmashlimit) {
+                                                                this.body.ymom = -vsmashlimit
+                                                            }
+                                                            if (this.body.ymom > vsmashlimit) {
+                                                                this.body.ymom = vsmashlimit
+                                                            }
+                                                            if (this.serverID == serverID) {
+                                                                this.body.move()
+                                                            }
+                                                            this.fixupshoulder()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -23983,10 +24308,22 @@
                                                     this.lefthand.ymom = this.punchspeed * 8
                                                     this.lefthand.xmom = this.punchspeed * -19.1
                                                     this.lefthand.fired = 19
-                                                    this.body.xmom += 5
                                                     this.idify()
                                                 }
                                             }
+                                        }
+                                        if (this.middlehand.fired <= 0) {
+                                            if (this.face == 1) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.middlehand.xmom = this.punchspeed * 19.1
+                                                }
+                                            }
+                                            if (this.face == -1) {
+                                                    this.middlehand.xmom = this.punchspeed * -19.1
+                                            }
+                                                    this.idify()
+                                                    this.middlehand.ymom = this.punchspeed * -4
+                                                    this.middlehand.fired = 20
                                         }
                                     }
 
@@ -24039,6 +24376,7 @@
                                                 this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                                                 this.righthand.xmom = -this.punchspeed * -5.1
                                                 this.righthand.fired = 19
+                                                this.body.ymom -= this.speed*.1
                                                 this.idify()
                                             }
                                         }
@@ -24049,6 +24387,7 @@
                                                 this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                                                 this.lefthand.xmom = this.punchspeed * -5.1
                                                 this.lefthand.fired = 19
+                                                this.body.ymom -= this.speed*.1
                                                 this.idify()
                                             }
                                         }
@@ -24058,6 +24397,8 @@
                                                 this.middlehand.ymom = -(this.punchspeed * 21)
                                                 this.middlehand.ymom = this.punchspeed * 21 
                                                 this.middlehand.fired = 19
+                                                this.body.ymom -= this.speed*.1
+                                                this.idify()
                                         }
 
 
