@@ -244,16 +244,16 @@ wss.on("connection", ws => {
                 }
                 data.playerIDs = ids
 
-                data = JSON.stringify(data)
+                // data = JSON.stringify(data)
                 for (let t = 0; t < game.length; t++) {
                     if (ws != game[t]) {
-                        data = JSON.parse(data)
+                        // data = JSON.parse(data)
                         data.serverID = ws.serverID
-                        data = JSON.stringify(data)
-                        game[t].send(data)
+                        let datapacket = JSON.stringify(data)
+                        game[t].send(datapacket)
                     } else {
-                        game[t].storage = JSON.parse(data)
-                        game[t].serverID = JSON.parse(data).serverID
+                        game[t].storage = (data)
+                        game[t].serverID = (data).serverID
                     }
                 }
 
