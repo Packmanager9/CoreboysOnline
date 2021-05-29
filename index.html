@@ -251,11 +251,15 @@
 
                             if (flopper % 2 == 0) {
                                 for (let t = 0; t < boys.length; t++) {
-                                    boys[t].enemycollide()
+                                    if(boys[t].serverID == serverID){
+                                        boys[t].enemycollide()
+                                    }
                                 }
                             } else {
                                 for (let t = boys.length - 1; t >= 0; t--) {
+                                    if(boys[t].serverID == serverID){
                                     boys[t].enemycollide()
+                                    }
                                 }
                             }
                             // ////////console.log(boys)
@@ -295,6 +299,7 @@
                     class Point {
                         constructor(x, y) {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = 0
                         }
@@ -373,6 +378,7 @@
                     class Triangle {
                         constructor(x, y, color, length, fill = 0, strokeWidth = 0, leg1Ratio = 1, leg2Ratio = 1, heightRatio = 1) {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.color = color
                             this.length = length
@@ -427,6 +433,7 @@
                     class Rectangle {
                         constructor(x, y, width, height, color, fill = 1, stroke = 0, strokeWidth = 1) {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.height = height
                             this.width = width
@@ -473,6 +480,7 @@
                     class Circle {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = parseFloat(radius)
                             this.color = color
@@ -670,6 +678,7 @@
                     class Shot {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.marked = parseFloat(marked)
                             this.radius = parseFloat(radius)
@@ -871,6 +880,7 @@
                     class Shotb {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = parseFloat(radius)
                             this.color = color
@@ -1072,6 +1082,7 @@
                     class ShotP {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = parseFloat(radius)
                             this.color = color
@@ -1272,6 +1283,7 @@
                     class ShotC {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = parseFloat(radius)
                             this.color = color
@@ -1471,6 +1483,7 @@
                     class ShotD {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
+this.id = Math.random()
                             this.y = parseFloat(y)
                             this.radius = parseFloat(radius)
                             this.color = color
@@ -3758,6 +3771,7 @@
                     class Boy {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -3886,7 +3900,10 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+            
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -4144,7 +4161,18 @@
 
                             }
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -4155,8 +4183,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                                        this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -5968,6 +5997,7 @@
                     class Mass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -6102,7 +6132,10 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+            
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -6415,7 +6448,18 @@
                             // this.rightshoulder.y = this.body.y
 
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -6426,8 +6470,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -8234,6 +8279,7 @@
                     class Blastgirl {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -8364,7 +8410,9 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -8657,7 +8705,18 @@
                             // this.rightshoulder.y = this.body.y
 
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -8668,8 +8727,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -10623,6 +10683,7 @@
                     class Jox {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -10755,7 +10816,9 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new ShotC(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -11035,7 +11098,18 @@
                             // this.rightshoulder.y = this.body.y
 
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -11046,8 +11120,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         if (this.reflecting <= 0) {
                                                             this.striker = boys[t].serverID
                                                             this.struck = 1
@@ -12859,6 +12934,7 @@
                     class Dummy {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -12989,7 +13065,10 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Shotb(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+                                
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -13224,7 +13303,18 @@
                                 this.body.ymom = -vsmashlimit
                             }
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -13233,8 +13323,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -13857,6 +13948,7 @@
                     class ScorchedMass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -13991,7 +14083,10 @@
                                     this.nodes[t] = new ShotD(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
                                 }
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new ShotD(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+                             
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -14283,7 +14378,18 @@
                             // this.rightshoulder.y = this.body.y
 
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -14294,8 +14400,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -16157,6 +16264,7 @@
                     class AsigMan {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -16320,7 +16428,10 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Circle(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+                               
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -16413,124 +16524,124 @@
                             }
                         }
 
-                        playerMove(object) {
-                            if (this.serverID == serverID) {
+                        // playerMove(object) {
+                        //     if (this.serverID == serverID) {
 
-                                if (this.shield == 0) {
-                                    if (keysPressed['s']) {
-                                        this.righthand.anchored = 0
-                                        this.lefthand.anchored = 0
-                                    } else if ((this.gamepad.gamepad.axesStatus[1] * this.speed) > this.speed * .5) {
-                                        this.righthand.anchored = 0
-                                        this.lefthand.anchored = 0
-                                    }
+                        //         if (this.shield == 0) {
+                        //             if (keysPressed['s']) {
+                        //                 this.righthand.anchored = 0
+                        //                 this.lefthand.anchored = 0
+                        //             } else if ((this.gamepad.gamepad.axesStatus[1] * this.speed) > this.speed * .5) {
+                        //                 this.righthand.anchored = 0
+                        //                 this.lefthand.anchored = 0
+                        //             }
 
-                                    if (keysPressed['w']) {
-                                        if (this.grounded == 1) {
-                                            this.jumping = 1
-                                            object.ymom -= this.speed * 2
-                                        } else {
-                                            if (this.lefthand.anchored == 1) {
-                                                this.degripl()
-                                                this.jumping = 1
-                                                object.ymom -= this.speed
-                                            }
-                                            if (this.righthand.anchored == 1) {
-                                                this.degripr()
-                                                this.jumping = 1
-                                                object.ymom -= this.speed
-                                            }
-                                        }
-                                    }
-                                    if (keysPressed['d']) {
-                                        this.face = 1
-                                        object.x += this.speed
-                                        if (this.righthand.anchored == 1) {
-                                            this.degripr()
-                                            this.jumping = 1
-                                        }
-                                    }
-                                    // if (keysPressed['s']) {
-                                    //     object.y += this.speed
-                                    //     this.degrip()
-                                    // }
-                                    if (keysPressed['a']) {
-                                        this.face = -1
-                                        object.x -= this.speed
-                                        if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                            this.degripl()
-                                            this.jumping = 1
-                                        }
-                                    }
-
-
-                                    if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
-                                        if (this.gamepad.gamepad.axesStatus[0] > .05) {
-                                            this.face = 1
-                                        }
-
-                                        if (this.gamepad.gamepad.axesStatus[0] < -.05) {
-                                            this.face = -1
-                                        }
-                                    }
-
-                                    if (typeof object != 'undefined') {
-                                        if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
-                                            if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
-                                                // object.y += (this.gamepad.gamepad.axesStatus[1] * this.speed)
-                                                // if((this.gamepad.gamepad.axesStatus[1] * this.speed)  < this.speed*-.5){             
-                                                if (this.grounded == 1) {
-                                                    object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
-                                                    if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
-                                                        object.ymom -= this.speed * 2
-                                                        this.jumping = 1
-                                                    }
-                                                } else {
+                        //             if (keysPressed['w']) {
+                        //                 if (this.grounded == 1) {
+                        //                     this.jumping = 1
+                        //                     object.ymom -= this.speed * 2
+                        //                 } else {
+                        //                     if (this.lefthand.anchored == 1) {
+                        //                         this.degripl()
+                        //                         this.jumping = 1
+                        //                         object.ymom -= this.speed
+                        //                     }
+                        //                     if (this.righthand.anchored == 1) {
+                        //                         this.degripr()
+                        //                         this.jumping = 1
+                        //                         object.ymom -= this.speed
+                        //                     }
+                        //                 }
+                        //             }
+                        //             if (keysPressed['d']) {
+                        //                 this.face = 1
+                        //                 object.x += this.speed
+                        //                 if (this.righthand.anchored == 1) {
+                        //                     this.degripr()
+                        //                     this.jumping = 1
+                        //                 }
+                        //             }
+                        //             // if (keysPressed['s']) {
+                        //             //     object.y += this.speed
+                        //             //     this.degrip()
+                        //             // }
+                        //             if (keysPressed['a']) {
+                        //                 this.face = -1
+                        //                 object.x -= this.speed
+                        //                 if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                        //                     this.degripl()
+                        //                     this.jumping = 1
+                        //                 }
+                        //             }
 
 
-                                                    if (this.gamepad.gamepad.axesStatus[0] < -.5) {
-                                                        if (this.lefthand.anchored == 1) {
-                                                            this.degripl()
-                                                            this.jumping = 1
-                                                            object.ymom -= this.speed
-                                                        } else {
-                                                            object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
-                                                        }
-                                                    }
-                                                    if (this.gamepad.gamepad.axesStatus[0] > .5) {
-                                                        this.face = 1
-                                                        if (this.righthand.anchored == 1) {
-                                                            this.degripr()
-                                                            this.jumping = 1
-                                                            object.ymom -= this.speed
-                                                        } else {
-                                                            object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
-                                                        }
-                                                    }
+                        //             if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
+                        //                 if (this.gamepad.gamepad.axesStatus[0] > .05) {
+                        //                     this.face = 1
+                        //                 }
+
+                        //                 if (this.gamepad.gamepad.axesStatus[0] < -.05) {
+                        //                     this.face = -1
+                        //                 }
+                        //             }
+
+                        //             if (typeof object != 'undefined') {
+                        //                 if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
+                        //                     if (typeof (this.gamepad.gamepad.axesStatus[0]) != 'undefined') {
+                        //                         // object.y += (this.gamepad.gamepad.axesStatus[1] * this.speed)
+                        //                         // if((this.gamepad.gamepad.axesStatus[1] * this.speed)  < this.speed*-.5){             
+                        //                         if (this.grounded == 1) {
+                        //                             object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                        //                             if ((this.gamepad.gamepad.axesStatus[1] * this.speed) < this.speed * -.5) {
+                        //                                 object.ymom -= this.speed * 2
+                        //                                 this.jumping = 1
+                        //                             }
+                        //                         } else {
 
 
-                                                    if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
-                                                        if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                                            this.degripr()
-                                                            this.degripl()
-                                                            this.jumping = 1
-                                                            object.ymom -= this.speed
-                                                        }
+                        //                             if (this.gamepad.gamepad.axesStatus[0] < -.5) {
+                        //                                 if (this.lefthand.anchored == 1) {
+                        //                                     this.degripl()
+                        //                                     this.jumping = 1
+                        //                                     object.ymom -= this.speed
+                        //                                 } else {
+                        //                                     object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                        //                                 }
+                        //                             }
+                        //                             if (this.gamepad.gamepad.axesStatus[0] > .5) {
+                        //                                 this.face = 1
+                        //                                 if (this.righthand.anchored == 1) {
+                        //                                     this.degripr()
+                        //                                     this.jumping = 1
+                        //                                     object.ymom -= this.speed
+                        //                                 } else {
+                        //                                     object.x += (this.gamepad.gamepad.axesStatus[0] * this.speed)
+                        //                                 }
+                        //                             }
 
-                                                    }
-                                                }
-                                                // }
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                if (Math.random() < .001) {
-                                    //////////////// ////////console.log(this.body.color, color)
-                                }
-                            }
-                        }
+
+                        //                             if (this.gamepad.gamepad.axesStatus[1] < -.5) {
+                        //                                 this.face = -1
+                        //                                 if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                        //                                     this.degripr()
+                        //                                     this.degripl()
+                        //                                     this.jumping = 1
+                        //                                     object.ymom -= this.speed
+                        //                                 }
+
+                        //                             }
+                        //                         }
+                        //                         // }
+                        //                     }
+                        //                 }
+                        //             }
+                        //         }
+                        //     } else {
+                        //         if (Math.random() < .001) {
+                        //             //////////////// ////////console.log(this.body.color, color)
+                        //         }
+                        //     }
+                        // }
 
                         playerMove(object) {
                             if (this.serverID == serverID) {
@@ -16758,7 +16869,18 @@
 
                             }
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -16773,8 +16895,9 @@
                                 if (this != boys[t] && boys[t]) {
 
                                     for (let k = 0; k < boys[t].shots.length; k++) {
-                                        if (boys[t].shots[k].marked != 1) {
-                                            if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+                                        if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
+                                                    if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (this.shield == 1) {
@@ -18970,6 +19093,7 @@
                     class Princess {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
                                 this.knocks = 0
@@ -19101,7 +19225,10 @@
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
+                                    let idsto = this.shots[t].id
                                     this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t].id =idsto
+                             
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
@@ -19427,7 +19554,18 @@
                             // this.rightshoulder.y = this.body.y
 
                         }
+                        shotcleaner(){
+                            for(let t = 0;t<this.shots.length;t++){
+                                for(let k = 0;k<boys.length;k++){
+                                    let line = new LineOP(this.shots[t], boys[k].body)
+                                    if(line.sqrDis() < (this.shots[t].radius+boys[k].body.radius)*(this.shots[t].radius+boys[k].body.radius)){
+                                        this.shots[t].marked = 1
+                                    }
+                                }
+                            }
+                        }
                         enemycollide() {
+                            this.shotcleaner()
                             if (this.inactive == 1) {
                                 return
                             }
@@ -19438,8 +19576,9 @@
                                     for (let t = 0; t < boys.length; t++) {
                                         if (this != boys[t] && boys[t]) {
                                             for (let k = 0; k < boys[t].shots.length; k++) {
-                                                if (boys[t].shots[k].marked != 1) {
+                                                 if (boys[t].shots[k].marked != 1 && !this.shotIDs.includes(boys[t].shots[k].id)) {
                                                     if (boys[t].shots[k].doesPerimeterTouch(this.body)) {
+this.shotIDs.push(boys[t].shots[k].id)
                                                         this.striker = boys[t].serverID
                                                         this.struck = 1
                                                         if (this.shield == 1) {
@@ -21712,7 +21851,7 @@
                                             delete Json.righthand3
                                             delete Json.rightarm3
                                         }
-
+                                        delete Json.shotIDs 
                                         ////////// ////////console.log("sending")
                                         if (bumper == 0) {
                                             bumper = 1
