@@ -4272,7 +4272,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -6612,7 +6611,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -8954,7 +8952,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -11445,7 +11442,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -13781,7 +13777,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -14871,7 +14866,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -17447,7 +17441,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -20195,7 +20188,6 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -22615,7 +22607,7 @@
                                             if (this.lefthand.anchored == 1) {
                                                 this.degripl()
                                                 this.jumping = 1
-                                                object.ymom -= this.speed
+                                                object.ymom -= this.speed // not as high as the axes?
                                             }
                                             if (this.righthand.anchored == 1) {
                                                 this.degripr()
@@ -22692,7 +22684,7 @@
 
 
                                                     if (this.gamepad.gamepad.axesStatus[1] < -.5) {
-                                                        this.face = -1
+                                                        // this.face = -1
                                                         if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                             this.degripr()
                                                             this.degripl()
@@ -23178,8 +23170,8 @@
                             if (this.serverID == serverID) {
                                 if (keysPressed['w']) {
                                     this.jumping = 1
-                                    object.ymom = -speed * 2
-                                    this.jumpcount = 100
+                                    object.ymom = -this.speed * 2
+                                    this.jumpcount = 100 - this.jumpreduction
                                 } else {
                                     if (typeof object != 'undefined') {
                                         if (typeof (this.gamepad.gamepad.axesStatus[1]) != 'undefined') {
