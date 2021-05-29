@@ -22337,7 +22337,7 @@
                                 }
 
                                 this.armlength = 28
-                                this.shoulderwidth = 50
+                                this.shoulderwidth = 20
                                 this.damage = 0
                                 this.nodes = []
                                 this.springs = []
@@ -22352,7 +22352,7 @@
                                 this.nodes.push(this.body)
                                 this.leftshoulder = new ShotR(this.body.x - (this.body.radius + this.shoulderwidth), 350, 17, "#FF0000", 0, 0, .999)
                                 this.rightshoulder = new ShotR(this.body.x + (this.body.radius + this.shoulderwidth), 350, 17, "#FF0000", 0, 0, .999)
-                                this.middleshoulder = new ShotR(this.body.x , 350-(this.shoulderwidth+this.body.radius), 17, "#FF0000", 0, 0, .999)
+                                this.middleshoulder = new ShotR(this.body.x , 350-(this.shoulderwidth+this.body.radius), 12, "#FF0000", 0, 0, .999)
                                 this.lefthand = new ShotR(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85)
                                 this.righthand = new ShotR(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85)
                                 this.middlehand = new ShotR(this.middleshoulder.x, (this.middleshoulder.y + this.armlength), 33, "#FF0000", 0, 0, .85)
@@ -22376,7 +22376,7 @@
                                 this.links.push(this.middlearm)
                                 this.leftarm = new SpringOP(this.leftshoulder, this.lefthand, this.armlength, 8)
                                 this.rightarm = new SpringOP(this.rightshoulder, this.righthand, this.armlength, 8)
-                                this.middlearm = new SpringOP(this.middleshoulder, this.middlehand, this.armlength*1.5, 8)
+                                this.middlearm = new SpringOP(this.middleshoulder, this.middlehand, this.armlength*1.2, 8)
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 this.springs.push(this.middlearm)
@@ -22643,7 +22643,7 @@
                                 this.leftshoulder.y = this.body.y - (this.shoulderwidth * .7)
 
                                 this.middleshoulder.x = this.body.x 
-                                this.middleshoulder.y = this.body.y - (this.shoulderwidth * 1)
+                                this.middleshoulder.y = this.body.y - ((this.shoulderwidth * 1 )+ this.body.radius)
 
                                 this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
                                 this.rightshoulder.y = this.body.y - (this.shoulderwidth * .7)
@@ -22673,7 +22673,7 @@
 
 
                                 // this.middlehand.x = this.middlehand.x + (this.middleshoulder.x - (this.body.x))
-                                    this.middlehand.y -= this.middleshoulder.y - (this.body.y - (this.shoulderwidth * 1))
+                                    this.middlehand.y -= this.middleshoulder.y - (this.body.y - ((this.shoulderwidth * 1) + this.body.radius))
                                     this.middleshoulder.xmom *= 0
                                     this.middleshoulder.ymom *= 0
 
@@ -24412,7 +24412,9 @@
                                                 this.screwangle = Math.PI * 1.5
                                                 this.screwtimer = 40
                                                 this.body.fired = 40
-                                                this.pounding = 1
+                                                if(this.grounded != 1){
+                                                    this.pounding = 1
+                                                }
                                                 this.idify()
                                             }
                                         }
