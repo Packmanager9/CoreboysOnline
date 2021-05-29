@@ -4096,6 +4096,8 @@
                                     //  }
                                 }
                                 // ////////////// //////////console.log(args)
+                                this.armlength = 30
+                                this.shoulderwidth = 8
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
                                 // //////////// //////////console.log(this.shotdraw)
@@ -6252,9 +6254,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 this.fightcontrol()
@@ -6330,8 +6331,8 @@
                                 this.charge = 0
                                 this.shots = []
                                 this.controller = controller
-                                this.armlength = 34  // 40
-                                this.shoulderwidth = 18
+                                this.armlength = 30
+                                this.shoulderwidth = 8
                                 this.damage = 0
                                 this.nodes = []
                                 this.springs = []
@@ -6433,6 +6434,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 30
+                                this.shoulderwidth = 8
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -8634,9 +8637,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             // if (this.controller == 0) {
 
                             if (boys.indexOf(this) <= humanPlayers) {
@@ -8795,6 +8797,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 15
+                                this.shoulderwidth = 58
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -11111,9 +11115,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 // this.AI()
@@ -11272,6 +11275,8 @@
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
+                                this.armlength = 12
+                                this.shoulderwidth = 12
 
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     let idsto = this.nodes[t].id
@@ -13460,9 +13465,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 // this.AI()
@@ -13619,6 +13623,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 1
+                                this.shoulderwidth = 1
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -14541,9 +14547,8 @@
                             this.leftshoulder.xmom -= (this.leftshoulder.x - this.body.x) / 40
                             this.rightshoulder.xmom -= (this.rightshoulder.x - this.body.x) / 40
                             this.fixupshoulder()
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (this.breaktimer > 0) {
                                 for (let t = 0; t < 5; t++) {
                                     let spot = new Circle(this.body.x + ((Math.random() - .5) * this.body.radius * 2), this.body.y - (this.body.radius + 4), 3, "yellow")
@@ -14709,6 +14714,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 34  // 40
+                                this.shoulderwidth = 18
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -16939,9 +16946,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             // if (this.controller == 0) {
 
                             if (boys.indexOf(this) <= humanPlayers) {
@@ -17118,6 +17124,8 @@
                                 for (let t = 0; t < keys.length; t++) {
                                     this[keys[t]] = args[keys[t]]
                                 }
+
+                                this.radsto = 50
                                 this.shotdraw = args['shotdraw']
                                 this.brick = new Brick(1, 1, 1, 1)
                                 this.jumpcount = args['jumpcount']
@@ -17136,6 +17144,9 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+
+this.armlength = 40
+this.shoulderwidth = 33
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -19863,9 +19874,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 this.fightcontrol()
@@ -20031,6 +20041,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 45
+                                this.shoulderwidth = 45
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -22324,9 +22336,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 // this.AI()
@@ -22505,6 +22516,8 @@
                                 }
                                 this.id = args["id"]
                                 this.frame = args['frame']
+                                this.armlength = 28
+                                this.shoulderwidth = 20
                                 this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
@@ -24866,9 +24879,8 @@
                                 this.springs[t].beam.color = invertColor(this.body.color)
                                 this.springs[t].balance()
                             }
-                            for (let t = 0; t < this.hitboxes.length; t++) {
-
-                            }
+                            //for (let t = 0; t < this.hitboxes.length; t++) {
+//                            }
                             if (boys.indexOf(this) <= humanPlayers) {
 
                                 // this.AI()
@@ -25307,9 +25319,42 @@
                                         }
                                         delete Json.shotIDs
                                         ////////// //////////console.log("sending")
+
+
+                                        delete Json.color
+                                        delete Json.armlength
+                                        delete Json.shoulderwidth
+                                        delete Json.struck
+                                        delete Json.dmomu
+                                        delete Json.amomu
+                                        delete Json.amom
+                                        delete Json.dmom
+                                        delete Json.hitboxes
+                                        delete Json.dmove
+                                        delete Json.amove
+                                        delete Json.safesto
+                                        delete Json.bodyx
+                                        delete Json.grounded
+                                        delete Json.id
+                                        delete Json.jumpreduction
+                                        delete Json.countering
+                                        // delete Json.radsto
+                                        delete Json.shot
+                                        delete Json.recovering
+                                        delete Json.fleeing
+                                        delete Json.controller
+                                        delete Json.speed
+                                        delete Json.punchspeed
+                                        delete Json.jumping
+                                        delete Json.gravity
+
+
+
+
+
                                         if (bumper == 0) {
                                             bumper = 1
-                                            //////// //////////console.log(Json)
+                                            // console.log(Object.keys(Json))
                                         }
                                         ws.send(JSON.stringify(Json))
 
