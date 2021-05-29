@@ -4623,6 +4623,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -4647,10 +4648,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -4660,6 +4663,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -4676,6 +4680,7 @@
                                             }
                                         }
                                     }
+                                }
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
                                         j++
@@ -6996,6 +7001,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -7022,10 +7028,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -7035,6 +7043,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -7050,6 +7059,7 @@
                                                     }
                                                     this.fixupshoulder()
                                                 }
+                                            }
                                             }
                                         }
                                     }
@@ -9332,6 +9342,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -9358,10 +9369,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -9371,6 +9384,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -9385,6 +9399,7 @@
                                                         this.body.move()
                                                     }
                                                     this.fixupshoulder()
+                                                }
                                                 }
                                             }
                                         }
@@ -11812,6 +11827,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -11836,10 +11852,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -11849,6 +11867,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -11862,6 +11881,7 @@
                                                     this.body.move()
                                                     this.fixupshoulder()
                                                 }
+                                            }
                                             }
                                         }
                                     }
@@ -14104,6 +14124,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         //shieldaud1.play()
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
@@ -14131,10 +14152,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         //shieldaud1.play()
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -14147,6 +14170,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -14160,6 +14184,7 @@
                                                     this.body.move()
                                                     this.fixupshoulder()
                                                 }
+                                            }
                                             }
                                         }
                                     }
@@ -15238,6 +15263,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         //shieldaud1.play()
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
@@ -15263,10 +15289,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         //shieldaud1.play()
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
@@ -15277,6 +15305,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -15290,6 +15319,7 @@
                                                     this.body.move()
                                                     this.fixupshoulder()
                                                 }
+                                            }
                                             }
                                         }
                                     }
@@ -17823,6 +17853,7 @@
                                         this.striker = boys[t].serverID
                                         this.struck = 1
                                         if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
 
                                             if (this.shield == 1) {
                                                 this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
@@ -17853,10 +17884,12 @@
                                             this.fixupshoulder()
                                         }
                                     }
+                                }
                                     if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                         this.striker = boys[t].serverID
                                         this.struck = 1
                                         if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                             if (this.shield == 1) {
                                                 this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                             } else {
@@ -17865,6 +17898,7 @@
                                                 this.damage += (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 2
                                             }
                                             boys[t].body.fired = 0
+                                            this.shotIDs.push(boys[t].body.id)
                                             if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                 this.lefthand.anchored = -20
                                                 this.righthand.anchored = -20
@@ -17882,6 +17916,7 @@
                                                 }
                                             }
                                             this.fixupshoulder()
+                                        }
                                         }
                                     }
                                     if (this.countering > 0) {
@@ -20582,6 +20617,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -20606,10 +20642,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                            }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -20619,6 +20657,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -20634,6 +20673,7 @@
                                                 }
                                             }
                                         }
+                                    }
                                     }
                                     let j = 0
                                     while (boys[f].body.doesPerimeterTouch(this.body)) {
@@ -23036,6 +23076,7 @@
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].lefthand.fired > 14) {
+                                                    if (!this.shotIDs.includes(boys[t].lefthand.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].lefthand.xmom) + Math.abs(boys[t].lefthand.ymom)) / 11
                                                     } else {
@@ -23060,10 +23101,12 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                             if (boys[t].screwangle != 0 && boys[t].body.doesPerimeterTouch(this.body)) {
                                                 this.striker = boys[t].serverID
                                                 this.struck = 1
                                                 if (boys[t].body.fired > 0) {
+                                                    if (!this.shotIDs.includes(boys[t].body.id)) {
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].body.xmom) + Math.max(20, Math.abs(boys[t].body.ymom))) / 3
                                                     } else {
@@ -23073,6 +23116,7 @@
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].body.fired = 0
+                                                    this.shotIDs.push(boys[t].body.id)
                                                     if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
                                                         this.lefthand.anchored = -20
                                                         this.righthand.anchored = -20
@@ -23087,6 +23131,7 @@
                                                     this.fixupshoulder()
                                                 }
                                             }
+                                        }
                                         }
                                     }
                                     let j = 0
