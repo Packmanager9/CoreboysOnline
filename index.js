@@ -23,6 +23,26 @@ wss.on("connection", ws => {
     game.push(ws)
     let pair = [game.length, -1]
     ws.pair = pair
+    // setTimeout(function(){
+
+    //     let ids = []
+    //    let sjon = {
+    //         'clean': '1'
+    //     }
+
+    // for (let t = 0; t < game.length; t++) {
+    //     if (t != game.indexOf(ws)) {
+    //         ids.push(game[t].serverID)
+    //     }
+    // }
+    // sjon.playerIDs = ids
+
+    // let data = JSON.stringify(sjon)
+    // for (let t = 0; t < game.length; t++) {
+    // game[t].send(data)
+    // }
+    // console.log("sent")
+    // }, 3000);
     ws.on("close", () => {
         let deleter = ws.index
 
@@ -69,13 +89,31 @@ wss.on("connection", ws => {
             let ids = []
             for (let t = 0; t < game.length; t++) {
                 if (t != game.indexOf(ws)) {
-                    // console.log(game[t].serverID)
                     ids.push(game[t].serverID)
                 }
             }
             sjon.playerIDs = ids
 
             game[t].send(JSON.stringify(sjon))
+
+
+
+         ids = []
+         sjon = {
+                'clean': '1'
+            }
+
+        for (let t = 0; t < game.length; t++) {
+            if (t != game.indexOf(ws)) {
+                ids.push(game[t].serverID)
+            }
+        }
+        sjon.playerIDs = ids
+
+        let data = JSON.stringify(sjon)
+        for (let t = 0; t < game.length; t++) {
+        game[t].send(data)
+        }
         }
     })
     ws.on("message", data => {
@@ -205,6 +243,7 @@ wss.on("connection", ws => {
                     }
                 }
                 data.playerIDs = ids
+
                 data = JSON.stringify(data)
                 for (let t = 0; t < game.length; t++) {
                     if (ws != game[t]) {
@@ -217,6 +256,7 @@ wss.on("connection", ws => {
                         game[t].serverID = JSON.parse(data).serverID
                     }
                 }
+
             }
         }
     })
