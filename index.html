@@ -22452,13 +22452,13 @@
 
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     let idsto = this.nodes[t].id
-                                    this.nodes[t] = new ShotP(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
+                                    this.nodes[t] = new ShotR(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
                                     this.nodes[t].id = idsto
                                 }
 
                                 for (let t = 0; t < this.shots.length; t++) {
                                     let idsto = this.shots[t].id
-                                    this.shots[t] = new Shot(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t] = new ShotR(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                     this.shots[t].id = idsto
 
                                 }
