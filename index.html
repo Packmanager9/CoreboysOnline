@@ -1334,11 +1334,20 @@
                                 if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y + (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
                                     this.string = this.color
-                                    for (let t = 0; t < 13; t += 6) {
+                                    if(this.color != "#00FF00"){
+                                        for (let t = 0; t < 13; t += 6) {
                                         gard.addColorStop(t / 18.1, (this.string) + `ff`)
                                         gard.addColorStop((t + 1.5) / 18.1, "#00FF00" + "ff")
                                         gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
                                         gard.addColorStop((t + 4.5) / 18.1, "#00FF00" + "ff")
+                                    }
+                                    }else{
+                                    for (let t = 0; t < 13; t += 6) {
+                                        gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                        gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                        gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                        gard.addColorStop((t + 4.5) / 18.1, "#000000" + "ff")
+                                    }
                                     }
                                     canvas_context.fillStyle = gard
                                     canvas_context.fill()
