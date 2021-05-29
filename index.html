@@ -21424,6 +21424,25 @@
                                 }
 
 
+
+                                for(let k = 0;k<boys.length;k++){
+
+
+
+                            let sel = 0
+                            for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == boys[k].serverID){
+                                if(sel == 1){
+                                    boys.splice(t,1)
+                                }
+                                        sel = 1
+                                    }
+                                }
+
+                                }
+
+
+
                             for(let t = 0;t<boys.length;t++){
                                 // if(counters[t]>50){
                                 //     if(boys[t].serverID != serverID){
