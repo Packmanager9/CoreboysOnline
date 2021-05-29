@@ -24515,6 +24515,32 @@
                                                 this.body.fired = 40
                                                 if (this.grounded != 1) {
                                                     this.pounding = 1
+                                                }else{
+                                                    if (this.righthand.fired <= 0) {
+                                                if (this.righthand.anchored == 0) {
+                                                    this.righthand.ymom = this.punchspeed * 8
+                                                    this.righthand.xmom = this.punchspeed * 19.1
+                                                    this.righthand.fired = 19
+                                                    this.body.xmom -= 5
+                                                    this.idify()
+                                            }
+                                        }
+                                        if (this.lefthand.fired <= 0) {
+                                                if (this.lefthand.anchored == 0) {
+                                                    this.lefthand.ymom = this.punchspeed * 8
+                                                    this.lefthand.xmom = this.punchspeed * -19.1
+                                                    this.lefthand.fired = 19
+                                                    this.idify()
+                                                }
+                                        }
+
+                                        if (this.middlehand.fired <= 0) {
+                                            this.middleshoulder.xmom = 0
+                                            this.middleshoulder.ymom = 0
+                                            this.middlehand.fired = 21
+                                            this.middlehand.ymom = this.punchspeed * -20
+                                            this.idify()
+                                        }
                                                 }
                                                 this.idify()
                                             }
