@@ -22184,7 +22184,7 @@
                             //     link.draw()
                             // }
                             if (this.shielddraw == 1) {
-                                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP((new LineOP(this.body, this.middlehand)).hypotenuse(),this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.middlehand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
+                                this.shild = new Circle(this.body.x, this.body.y, (Math.max((new LineOP(this.body, this.lefthand)).hypotenuse(), (new LineOP(this.body, this.righthand)).hypotenuse())) + this.lefthand.radius, this.body.color + Math.min(Math.round(this.shieldpower + 11), 99))
                                 this.shild.draw()
                             }
                             canvas_context.font = "42px arial"
