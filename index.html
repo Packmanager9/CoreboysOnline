@@ -2800,14 +2800,14 @@
                                 }
                             }
 
-                            if (circle !== player.rightshoulder && circle !== player.leftshoulder && circle !== player.rightshoulder2 && circle !== player.leftshoulder2 && circle !== player.rightshoulder3 && circle !== player.leftshoulder3 && circle !== player.middleshoulder ) {
+                            if (circle !== player.rightshoulder && circle !== player.leftshoulder && circle !== player.rightshoulder2 && circle !== player.leftshoulder2 && circle !== player.rightshoulder3 && circle !== player.leftshoulder3 && circle !== player.middleshoulder) {
                                 if (circle.x <= this.edgeright.x + circle.radius) {
                                     if (circle.x + circle.radius >= this.edgeleft.x) {  //fasd
                                         if (this.shape.doesPerimeterTouch(circle)) {
                                             if (circle == player.body) {
                                                 if (circle.y < this.center.y) {
                                                     player.grounded = 1
-                                                
+
                                                 }
                                             }
                                             if (circle.ymom > 4) {
@@ -4386,7 +4386,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -5598,6 +5598,8 @@
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
 
@@ -6039,20 +6041,26 @@
                                     this.shots[t].radius *= 1.02
                                     this.shots[t].ymom *= 1.02
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                     if (this.shots[t].radius > 35) {
                                         this.shots[t].marked = 1
                                     }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
@@ -6747,7 +6755,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -6819,7 +6827,7 @@
                                                     }
                                                 }
                                             }
-                                            
+
                                             if (typeof boys[t].lefthand2 != "undefined") {
                                                 boys[t].lefthands2 = castBetween(boys[t].leftshoulder2, boys[t].lefthand2, 20, boys[t].leftshoulder2.radius)
                                                 boys[t].righthands2 = castBetween(boys[t].rightshoulder2, boys[t].righthand2, 20, boys[t].rightshoulder2.radius)
@@ -8383,18 +8391,24 @@
                             if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             } else {
 
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
@@ -9079,7 +9093,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -10151,6 +10165,8 @@
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
 
@@ -10609,6 +10625,8 @@
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
 
@@ -10858,11 +10876,15 @@
                                         }
                                     }
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
@@ -11545,7 +11567,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -13176,16 +13198,22 @@
                                         }
                                     }
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
@@ -13823,7 +13851,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -14966,7 +14994,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -16640,11 +16668,15 @@
                                         }
                                         this.shots[t].move()
                                     }
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
                             this.detonate = 0
@@ -16652,6 +16684,8 @@
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked == 1) {
                                         this.shots.splice(t, 1)
+                                    } else {
+                                        this.shots[t].marked--
                                     }
                                 }
                             }
@@ -17529,7 +17563,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -17711,42 +17745,42 @@
                                         }
                                     }
                                     boys[t].righthands = castBetween(boys[t].rightshoulder, boys[t].righthand, 20, boys[t].rightshoulder.radius)
-                                            if (typeof boys[t].middlehand != "undefined") {
-                                                boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
-                                                if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
-                                                    this.striker = boys[t].serverID
-                                                    this.struck = 1
-                                                    if (boys[t].middlehand.fired > 14) {
-                                                        if (!this.shotIDs.includes(boys[t].middlehand.id)) {
-                                                            if (this.shield == 1) {
-                                                                this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
-                                                            } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.breaktimer = 0
-                                                            }
-                                                            boys[t].middlehand.fired = 14
-
-                                                            this.shotIDs.push(boys[t].middlehand.id)
-                                                            if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                                                this.lefthand.anchored = -20
-                                                                this.righthand.anchored = -20
-                                                            }
-                                                            if (this.body.ymom < -vsmashlimit) {
-                                                                this.body.ymom = -vsmashlimit
-                                                            }
-                                                            if (this.body.ymom > vsmashlimit) {
-                                                                this.body.ymom = vsmashlimit
-                                                            }
-                                                            if (this.serverID == serverID) {
-                                                                this.body.move()
-                                                            }
-                                                            this.fixupshoulder()
-                                                        }
+                                    if (typeof boys[t].middlehand != "undefined") {
+                                        boys[t].middlehands = castBetween(boys[t].middleshoulder, boys[t].middlehand, 20, boys[t].middleshoulder.radius)
+                                        if (boys[t].middlehands.doesPerimeterTouch(this.body) || boys[t].middlehand.doesPerimeterTouch(this.body)) {
+                                            this.striker = boys[t].serverID
+                                            this.struck = 1
+                                            if (boys[t].middlehand.fired > 14) {
+                                                if (!this.shotIDs.includes(boys[t].middlehand.id)) {
+                                                    if (this.shield == 1) {
+                                                        this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
+                                                    } else {
+                                                        this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.breaktimer = 0
                                                     }
+                                                    boys[t].middlehand.fired = 14
+
+                                                    this.shotIDs.push(boys[t].middlehand.id)
+                                                    if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
+                                                        this.lefthand.anchored = -20
+                                                        this.righthand.anchored = -20
+                                                    }
+                                                    if (this.body.ymom < -vsmashlimit) {
+                                                        this.body.ymom = -vsmashlimit
+                                                    }
+                                                    if (this.body.ymom > vsmashlimit) {
+                                                        this.body.ymom = vsmashlimit
+                                                    }
+                                                    if (this.serverID == serverID) {
+                                                        this.body.move()
+                                                    }
+                                                    this.fixupshoulder()
                                                 }
                                             }
+                                        }
+                                    }
                                     boys[t].lefthands = castBetween(boys[t].leftshoulder, boys[t].lefthand, 20, boys[t].leftshoulder.radius)
                                     if (boys[t].righthands.doesPerimeterTouch(this.body) || boys[t].righthand.doesPerimeterTouch(this.body)) {
                                         this.striker = boys[t].serverID
@@ -18922,6 +18956,8 @@
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
 
@@ -19515,20 +19551,26 @@
                                     this.shots[t].radius *= 1.02
                                     this.shots[t].ymom *= 1.02
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                     if (this.shots[t].radius > 35) {
                                         this.shots[t].marked = 1
                                     }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
 
                             for (let t = 0; t < this.shots.length; t++) {
                                 if (this.shots[t].marked == 1) {
                                     this.shots.splice(t, 1)
+                                } else {
+                                    this.shots[t].marked--
                                 }
                             }
                             this.leftarm = new LineOP(this.leftshoulder, this.lefthand, invertColor(this.body.color), 8)
@@ -20304,7 +20346,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -22053,11 +22095,15 @@
                                         }
                                     }
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
 
@@ -22065,6 +22111,8 @@
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked == 1) {
                                         this.shots.splice(t, 1)
+                                    } else {
+                                        this.shots[t].marked--
                                     }
                                 }
                             }
@@ -22352,7 +22400,7 @@
                                 this.nodes.push(this.body)
                                 this.leftshoulder = new ShotR(this.body.x - (this.body.radius + this.shoulderwidth), 350, 17, "#FF0000", 0, 0, .999)
                                 this.rightshoulder = new ShotR(this.body.x + (this.body.radius + this.shoulderwidth), 350, 17, "#FF0000", 0, 0, .999)
-                                this.middleshoulder = new ShotR(this.body.x , 350-(this.shoulderwidth+this.body.radius), 12, "#FF0000", 0, 0, .999)
+                                this.middleshoulder = new ShotR(this.body.x, 350 - (this.shoulderwidth + this.body.radius), 12, "#FF0000", 0, 0, .999)
                                 this.lefthand = new ShotR(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85)
                                 this.righthand = new ShotR(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85)
                                 this.middlehand = new ShotR(this.middleshoulder.x, (this.middleshoulder.y + this.armlength), 33, "#FF0000", 0, 0, .85)
@@ -22376,7 +22424,7 @@
                                 this.links.push(this.middlearm)
                                 this.leftarm = new SpringOP(this.leftshoulder, this.lefthand, this.armlength, 8)
                                 this.rightarm = new SpringOP(this.rightshoulder, this.righthand, this.armlength, 8)
-                                this.middlearm = new SpringOP(this.middleshoulder, this.middlehand, this.armlength*1.2, 8)
+                                this.middlearm = new SpringOP(this.middleshoulder, this.middlehand, this.armlength * 1.2, 8)
                                 this.springs.push(this.leftarm)
                                 this.springs.push(this.rightarm)
                                 this.springs.push(this.middlearm)
@@ -22511,9 +22559,9 @@
                                     if (keysPressed['w']) {
                                         if (this.grounded == 1) {
                                             this.jumping = 1
-                                //console.log(object.ymom,this.body.ymom)
+                                            //console.log(object.ymom,this.body.ymom)
                                             object.ymom -= this.speed * 2
-                                //console.log(object.ymom,this.body.ymom)
+                                            //console.log(object.ymom,this.body.ymom)
                                         } else {
                                             if (this.lefthand.anchored == 1) {
                                                 this.degripl()
@@ -22639,48 +22687,48 @@
                                 return
                             }
 
-                                this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
-                                this.leftshoulder.y = this.body.y - (this.shoulderwidth * .7)
+                            this.leftshoulder.x = this.body.x - (this.body.radius + this.shoulderwidth * .3)
+                            this.leftshoulder.y = this.body.y - (this.shoulderwidth * .7)
 
-                                this.middleshoulder.x = this.body.x 
-                                this.middleshoulder.y = this.body.y - ((this.shoulderwidth * 1 )+ this.body.radius)
+                            this.middleshoulder.x = this.body.x
+                            this.middleshoulder.y = this.body.y - ((this.shoulderwidth * 1) + this.body.radius)
 
-                                this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
-                                this.rightshoulder.y = this.body.y - (this.shoulderwidth * .7)
-                                
-
-                                this.leftshoulder.color = this.body.color
-                                this.rightshoulder.color = this.body.color
-                                this.middleshoulder.color = this.body.color
-                                this.lefthand.color = this.body.color
-                                this.righthand.color = this.body.color
-                                this.middlehand.color = this.body.color
+                            this.rightshoulder.x = this.body.x + (this.body.radius + this.shoulderwidth * .3)
+                            this.rightshoulder.y = this.body.y - (this.shoulderwidth * .7)
 
 
-
-                                if (this.lefthand.anchored == 0) {
-                                    this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
-                                    this.lefthand.y -= this.leftshoulder.y - (this.body.y - (this.shoulderwidth * .7))
-                                    this.leftshoulder.xmom *= 0
-                                    this.leftshoulder.ymom *= 0
-                                }
-                                if (this.righthand.anchored == 0) {
-                                    this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
-                                    this.righthand.y -= this.rightshoulder.y - (this.body.y - (this.shoulderwidth * .7))
-                                    this.rightshoulder.xmom *= 0
-                                    this.rightshoulder.ymom *= 0
-                                }
+                            this.leftshoulder.color = this.body.color
+                            this.rightshoulder.color = this.body.color
+                            this.middleshoulder.color = this.body.color
+                            this.lefthand.color = this.body.color
+                            this.righthand.color = this.body.color
+                            this.middlehand.color = this.body.color
 
 
-                                // this.middlehand.x = this.middlehand.x + (this.middleshoulder.x - (this.body.x))
-                                    this.middlehand.y -= this.middleshoulder.y - (this.body.y - ((this.shoulderwidth * 1) + this.body.radius))
-                                    this.middleshoulder.xmom *= 0
-                                    this.middleshoulder.ymom *= 0
 
-                                
-                                if (this.body.ymom < -vsmashlimit) {
-                                    this.body.ymom = -vsmashlimit
-                                }
+                            if (this.lefthand.anchored == 0) {
+                                this.lefthand.x = this.lefthand.x + (this.leftshoulder.x - (this.body.x - (this.body.radius + this.shoulderwidth * .3)))
+                                this.lefthand.y -= this.leftshoulder.y - (this.body.y - (this.shoulderwidth * .7))
+                                this.leftshoulder.xmom *= 0
+                                this.leftshoulder.ymom *= 0
+                            }
+                            if (this.righthand.anchored == 0) {
+                                this.righthand.x = this.righthand.x + (this.rightshoulder.x - (this.body.x + (this.body.radius + this.shoulderwidth * .3)))
+                                this.righthand.y -= this.rightshoulder.y - (this.body.y - (this.shoulderwidth * .7))
+                                this.rightshoulder.xmom *= 0
+                                this.rightshoulder.ymom *= 0
+                            }
+
+
+                            // this.middlehand.x = this.middlehand.x + (this.middleshoulder.x - (this.body.x))
+                            this.middlehand.y -= this.middleshoulder.y - (this.body.y - ((this.shoulderwidth * 1) + this.body.radius))
+                            this.middleshoulder.xmom *= 0
+                            this.middleshoulder.ymom *= 0
+
+
+                            if (this.body.ymom < -vsmashlimit) {
+                                this.body.ymom = -vsmashlimit
+                            }
 
 
 
@@ -22688,8 +22736,8 @@
                             for (let t = 0; t < this.nodes.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     if (t != k) {
-                                        if (this.nodes[t] != this.rightshoulder && this.nodes[t] != this.leftshoulder&& this.nodes[t] != this.middleshoulder) {
-                                            if (this.nodes[k] != this.rightshoulder && this.nodes[k] != this.leftshoulder&& this.nodes[k] != this.middleshoulder) {
+                                        if (this.nodes[t] != this.rightshoulder && this.nodes[t] != this.leftshoulder && this.nodes[t] != this.middleshoulder) {
+                                            if (this.nodes[k] != this.rightshoulder && this.nodes[k] != this.leftshoulder && this.nodes[k] != this.middleshoulder) {
                                                 let j = 0
                                                 while (this.nodes[t].doesPerimeterTouch(this.nodes[k])) {
                                                     j++
@@ -22752,7 +22800,7 @@
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 1
+                                        this.shots[t].marked = 2
                                     }
                                 }
                             }
@@ -23074,7 +23122,7 @@
                         }
                         doJump(object, speed) {
                             if (this.serverID == serverID) {
-                                if (keysPressed['w']) { 
+                                if (keysPressed['w']) {
                                     this.jumping = 1
                                     object.ymom = -speed * 2
                                     this.jumpcount = 100
@@ -24319,11 +24367,11 @@
                                                 }
                                             }
                                             if (this.face == -1) {
-                                                    this.middlehand.xmom = this.punchspeed * -19.1
+                                                this.middlehand.xmom = this.punchspeed * -19.1
                                             }
-                                                    this.idify()
-                                                    this.middlehand.ymom = this.punchspeed * -4
-                                                    this.middlehand.fired = 20
+                                            this.idify()
+                                            this.middlehand.ymom = this.punchspeed * -4
+                                            this.middlehand.fired = 20
                                         }
                                     }
 
@@ -24344,24 +24392,24 @@
                                                 this.rightshoulder.xmom = 0
                                                 this.rightshoulder.ymom = 0
                                                 this.righthand.fired = 19
-                                                this.righthand.ymom = this.punchspeed* -20
-                                                this.righthand.xmom = this.punchspeed* -4
+                                                this.righthand.ymom = this.punchspeed * -20
+                                                this.righthand.xmom = this.punchspeed * -4
                                                 this.idify()
                                             }
                                         }
                                         if (this.middlehand.fired <= 0) {
-                                                this.middleshoulder.xmom = 0
-                                                this.middleshoulder.ymom = 0
-                                                this.middlehand.fired = 21
-                                                this.middlehand.ymom = this.punchspeed* -20
-                                                this.idify()
+                                            this.middleshoulder.xmom = 0
+                                            this.middleshoulder.ymom = 0
+                                            this.middlehand.fired = 21
+                                            this.middlehand.ymom = this.punchspeed * -20
+                                            this.idify()
                                         }
                                         if (this.lefthand.fired <= 0) {
                                             if (this.lefthand.anchored == 0) {
                                                 this.leftshoulder.xmom = 0
                                                 this.leftshoulder.ymom = 0
-                                                this.lefthand.ymom = this.punchspeed* -20
-                                                this.lefthand.xmom = this.punchspeed* 4
+                                                this.lefthand.ymom = this.punchspeed * -20
+                                                this.lefthand.xmom = this.punchspeed * 4
                                                 this.lefthand.fired = 19
                                                 this.idify()
                                             }
@@ -24376,7 +24424,7 @@
                                                 this.righthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                                                 this.righthand.xmom = -this.punchspeed * -5.1
                                                 this.righthand.fired = 19
-                                                this.body.ymom -= this.speed*.1
+                                                this.body.ymom -= this.speed * .1
                                                 this.idify()
                                             }
                                         }
@@ -24387,18 +24435,18 @@
                                                 this.lefthand.ymom = this.punchspeed * 21 + (this.body.ymom * 2)
                                                 this.lefthand.xmom = this.punchspeed * -5.1
                                                 this.lefthand.fired = 19
-                                                this.body.ymom -= this.speed*.1
+                                                this.body.ymom -= this.speed * .1
                                                 this.idify()
                                             }
                                         }
                                         if (this.middlehand.fired <= 0) {
-                                                this.middleshoulder.xmom = 0
-                                                this.middleshoulder.ymom = 0
-                                                this.middlehand.ymom = -(this.punchspeed * 21)
-                                                this.middlehand.ymom = this.punchspeed * 21 
-                                                this.middlehand.fired = 19
-                                                this.body.ymom -= this.speed*.1
-                                                this.idify()
+                                            this.middleshoulder.xmom = 0
+                                            this.middleshoulder.ymom = 0
+                                            this.middlehand.ymom = -(this.punchspeed * 21)
+                                            this.middlehand.ymom = this.punchspeed * 21
+                                            this.middlehand.fired = 19
+                                            this.body.ymom -= this.speed * .1
+                                            this.idify()
                                         }
 
 
@@ -24412,7 +24460,7 @@
                                                 this.screwangle = Math.PI * 1.5
                                                 this.screwtimer = 40
                                                 this.body.fired = 40
-                                                if(this.grounded != 1){
+                                                if (this.grounded != 1) {
                                                     this.pounding = 1
                                                 }
                                                 this.idify()
@@ -24527,16 +24575,20 @@
                                         }
                                     }
                                     this.shots[t].move()
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
 
-                                        this.shots[t].life--
-                                        if (this.shots[t].life <= 0) {
-                                            this.shots[t].marked = 1
-                                        }
+                                    this.shots[t].life--
+                                    if (this.shots[t].life <= 0) {
+                                        this.shots[t].marked = 1
+                                    }
                                 }
                             } else {
                                 for (let t = 0; t < this.shots.length; t++) {
-                                    this.shots[t].draw()
+                                    if (this.shots[t].marked <= 0) {
+                                        this.shots[t].draw()
+                                    }
                                 }
                             }
 
@@ -24544,6 +24596,8 @@
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked == 1) {
                                         this.shots.splice(t, 1)
+                                    } else {
+                                        this.shots[t].marked--
                                     }
                                 }
                             }
@@ -24567,10 +24621,10 @@
                                     canvas_context.fill()
                                     canvas_context.stroke();
                                     canvas_context.lineWidth = this.strokeWidth
-                                    canvas_context.strokeStyle ="#000000"
+                                    canvas_context.strokeStyle = "#000000"
                                     canvas_context.beginPath();
                                     canvas_context.arc(((link.x1 + link.x2 + this.body.x) * (1 / 3)) + Math.cos(this.screwangle), link.y1 - this.body.radius * .1, this.body.radius * .35, (this.screwangle * this.face) + (this.face / 2), (Math.PI * 1) + (this.screwangle * this.face) + (this.face / 2), false)
-                                    canvas_context.fillStyle ="#00FF00"
+                                    canvas_context.fillStyle = "#00FF00"
                                     canvas_context.fill()
                                     canvas_context.stroke();
                                 }
@@ -24670,11 +24724,11 @@
                                 }
                                 this.body.ymom += this.gravity
                             } else {
-                                if(this.pounding == 1){
+                                if (this.pounding == 1) {
                                     this.pounding = 0
-                                    let shot1 = new ShotC(this.body.x, this.body.y+this.body.radius, 20, "#00FF00", this.speed * 2, 0)
+                                    let shot1 = new ShotC(this.body.x, this.body.y + this.body.radius, 20, "#00FF00", this.speed * 2, 0)
                                     shot1.life = 50
-                                    let shot2 = new ShotC(this.body.x, this.body.y+this.body.radius, 20, "#00FF00", - this.speed *2, 0)
+                                    let shot2 = new ShotC(this.body.x, this.body.y + this.body.radius, 20, "#00FF00", - this.speed * 2, 0)
                                     shot2.life = 50
                                     this.shots.push(shot1)
                                     this.shots.push(shot2)
@@ -24697,7 +24751,7 @@
                             }
                             if (this.righthand.anchored <= -1) {
                                 this.righthand.anchored++
-                            } 
+                            }
                             this.righthand.ymom += this.gravity
                             this.lefthand.ymom += this.gravity
                             this.middlehand.ymom += this.gravity
@@ -24787,7 +24841,7 @@
                     let scorchSelector = new ShotD(2700, 700, 200, "#0000FF")
                     let asigSelector = new Circle(950, 1110, 200, "#FFAA00")
                     let prinSelector = new ShotP(1450, 1110, 200, "#FFFF00")
-                    let rhophoSelector  = new ShotR(1950, 1110, 200, "#00FFFF")
+                    let rhophoSelector = new ShotR(1950, 1110, 200, "#00FFFF")
                     characterbuttons.push(massSelector)
                     characterbuttons.push(boySelector)
                     characterbuttons.push(blastSelector)
@@ -25237,18 +25291,18 @@
                             canvas_context.fillStyle = "black"
                             canvas_context.fillText(`Adobrasig Man`, asigSelector.x - (asigSelector.radius * .8), asigSelector.y - (asigSelector.radius * .1))
 
-canvas_context.font = "60px arial"
-canvas_context.fillStyle = "#000000"
-canvas_context.strokeStyle = "#FFFFFF"
-canvas_context.lineWidth = 6
-canvas_context.strokeText(`Princess`, prinSelector.x - (prinSelector.radius * .60), prinSelector.y - (prinSelector.radius * .4))
-canvas_context.strokeText(`GeGeGeGee`, prinSelector.x - (prinSelector.radius * .85), prinSelector.y - (prinSelector.radius * .15))
-canvas_context.fillText(`Princess`, prinSelector.x - (prinSelector.radius * .6), prinSelector.y - (prinSelector.radius * .4))
-canvas_context.fillText(`GeGeGeGee`, prinSelector.x - (prinSelector.radius * .85), prinSelector.y - (prinSelector.radius * .15))
+                            canvas_context.font = "60px arial"
+                            canvas_context.fillStyle = "#000000"
+                            canvas_context.strokeStyle = "#FFFFFF"
+                            canvas_context.lineWidth = 6
+                            canvas_context.strokeText(`Princess`, prinSelector.x - (prinSelector.radius * .60), prinSelector.y - (prinSelector.radius * .4))
+                            canvas_context.strokeText(`GeGeGeGee`, prinSelector.x - (prinSelector.radius * .85), prinSelector.y - (prinSelector.radius * .15))
+                            canvas_context.fillText(`Princess`, prinSelector.x - (prinSelector.radius * .6), prinSelector.y - (prinSelector.radius * .4))
+                            canvas_context.fillText(`GeGeGeGee`, prinSelector.x - (prinSelector.radius * .85), prinSelector.y - (prinSelector.radius * .15))
 
-canvas_context.font = "60px arial"
-canvas_context.fillStyle = "black"
-canvas_context.fillText(`Rhopho`, rhophoSelector.x - (rhophoSelector.radius * .54), rhophoSelector.y - (rhophoSelector.radius * .5))
+                            canvas_context.font = "60px arial"
+                            canvas_context.fillStyle = "black"
+                            canvas_context.fillText(`Rhopho`, rhophoSelector.x - (rhophoSelector.radius * .54), rhophoSelector.y - (rhophoSelector.radius * .5))
 
 
                             for (let t = 0; t < selectors.length; t++) {
@@ -25294,7 +25348,7 @@ canvas_context.fillText(`Rhopho`, rhophoSelector.x - (rhophoSelector.radius * .5
                                                 coreboy = new Princess(boys.length)
                                                 pick = k
                                                 coreboy.body.color = selectors[t].body.color
-                                            }else if (k == 7) {
+                                            } else if (k == 7) {
                                                 coreboy = new Rhopho(boys.length)
                                                 pick = k
                                                 coreboy.body.color = selectors[t].body.color
