@@ -109,7 +109,8 @@
                                                 if (!(data).playerIDs.includes(boys[y].serverID)) {
                                                     if (boys[y].serverID != serverID) {
                                                         ////console.log(localIDs,)
-                                                        localIDs.splice(localIDs.indexOf(boys[y].serverID))
+                                                        console.log("caseA", boys[y])
+                                                        localIDs.splice(localIDs.indexOf(boys[y].serverID)) //sus
                                                         boys.splice(y, 1)
                                                         ////console.log("snip")
                                                     }
@@ -143,7 +144,8 @@
                                     for (let g = 0; g < data.playerIDs.length; g++) {
                                         for (let t = 0; t < boys.length; t++) {
                                             if (!(data).playerIDs.includes(boys[t].serverID)) {
-                                                localIDs.splice(localIDs.indexOf(boys[t].serverID))
+                                                console.log("caseB", boys[t])
+                                                localIDs.splice(localIDs.indexOf(boys[t].serverID))//sus
                                                 boys.splice(t, 1)
                                                 ////console.log("snip")
                                             }
@@ -181,6 +183,7 @@
                                         identites.push(boys[g].serverID)
                                     }
                                     if (localIDs.includes(data.serverID)) {
+                                        console.log("caseG")
                                         counters[tempIDs.indexOf(data.serverID)] = 0
                                         if (data.name == "Coreboy") {
                                             boys[tempIDs.indexOf(data.serverID)] = new Boy(data.id, data)  //data.id?
@@ -218,6 +221,7 @@
                                     } else if (!localIDs.includes(data.serverID)) {
                                         counters[tempIDs.indexOf(data.serverID)] = 0
                                         localIDs.push(data.serverID)
+                                        console.log("caseC", data)
                                         let newplayer = {}
                                         if (data.name == "Coreboy") {
                                             newplayer = new Boy(data.slot)  //data.id?
@@ -4528,7 +4532,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Boy(this.controller)
+                           console.log("caseF")
+
+let copy = new Boy(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -6910,7 +6916,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Mass(this.controller)
+                           console.log("caseF")
+
+let copy = new Mass(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -9295,7 +9303,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Blastgirl(this.controller)
+                           console.log("caseF")
+
+let copy = new Blastgirl(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -11827,7 +11837,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Jox(this.controller)
+                           console.log("caseF")
+
+let copy = new Jox(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -14204,7 +14216,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Dummy(this.controller)
+                           console.log("caseF")
+
+let copy = new Dummy(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -15335,7 +15349,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new ScorchedMass(this.controller)
+                           console.log("caseF")
+
+let copy = new ScorchedMass(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             copy.body.color = this.body.color
@@ -17959,7 +17975,9 @@
                             if (this.inactive == 1) {
                                 return
                             }
-                            let copy = new AsigMan(this.controller)
+                           console.log("caseF")
+
+let copy = new AsigMan(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             if (typeof this.colorsto != "undefined") {
@@ -20745,7 +20763,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Princess(this.controller)
+                           console.log("caseF")
+
+let copy = new Princess(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             if (this.inactive == 1) {
@@ -23283,7 +23303,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Rhopho(this.controller)
+                           console.log("caseF")
+
+let copy = new Rhopho(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             if (this.inactive == 1) {
@@ -25895,7 +25917,9 @@
                             obj.kill = 1
                             obj.striker = this.striker
                             ws.send(JSON.stringify(obj))
-                            let copy = new Banandroid(this.controller)
+                           console.log("caseF")
+
+let copy = new Banandroid(this.controller)
                             copy.id = this.id
                             copy.frame = this.frame
                             if (this.inactive == 1) {
@@ -28264,6 +28288,7 @@
                         let coreboy
                         let chooser = Math.floor(Math.random() * 7)
 
+                        console.log("caseE")
                         if (chooser == 0) {
                             coreboy = new Mass(t)
                         } else if (chooser == 1) {
@@ -28331,22 +28356,19 @@
                                 }
                             }
 
-                            let sel = 0
-                            for (let t = 0; t < boys.length; t++) {
-                                if (boys[t].serverID == serverID) {
-                                    if (sel == 1) {
-                                        boys.splice(t, 1)
-                                    }
-                                    sel = 1
-                                }
-                            }
+                            // let sel = 0
+                            // for (let t = 0; t < boys.length; t++) {
+                            //     if (boys[t].serverID == serverID) {
+                            //         if (sel == 1) {
+                            //             boys.splice(t, 1)
+                            //         }
+                            //         sel = 1
+                            //     }
+                            // }
 
 
 
                             for (let k = 0; k < boys.length; k++) {
-
-
-
                                 let sel = 0
                                 for (let t = 0; t < boys.length; t++) {
                                     if (boys[t].serverID == boys[k].serverID) {
@@ -28356,7 +28378,6 @@
                                         sel = 1
                                     }
                                 }
-
                             }
 
 
@@ -28468,6 +28489,8 @@
                                 if (boys[t]) {
                                     boys[t].body.color = colors[t]
                                     boys[t].draw()
+                                }else{
+                                    console.log(boys)
                                 }
                             }
 
@@ -28772,7 +28795,9 @@
                                     for (let k = 0; k < characterbuttons.length; k++) {
                                         if (characterbuttons[k].isPointInside(selectors[t].body)) {
                                             let coreboy
+                                                console.log("caseD")
                                             if (k == 0) {
+                                                
                                                 coreboy = new Mass(boys.length)
                                                 pick = k
                                                 coreboy.body.color = selectors[t].body.color
