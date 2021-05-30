@@ -183,7 +183,7 @@
                                         identites.push(boys[g].serverID)
                                     }
                                     if (localIDs.includes(data.serverID)) {
-                                        console.log("caseG")
+                                        // console.log("caseG")
                                         counters[tempIDs.indexOf(data.serverID)] = 0
                                         if (data.name == "Coreboy") {
                                             boys[tempIDs.indexOf(data.serverID)] = new Boy(data.id, data)  //data.id?
@@ -28337,7 +28337,9 @@ let copy = new Banandroid(this.controller)
                     ////console.log(miss, miss2)
 
                     function main() {
-
+                        if(keysPressed['v']){
+                            console.log(boys)
+                        }
                         for (let t = 0; t < boys.length; t++) {
                             if (boys[t].serverID == serverID) {
                                 ID = t
@@ -28346,6 +28348,7 @@ let copy = new Banandroid(this.controller)
                             }
 
                         }
+                        
                         if (counter == 1) {
 
                             for (let t = 0; t < boys.length; t++) {
