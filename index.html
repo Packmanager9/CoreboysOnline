@@ -25683,7 +25683,7 @@
                                 this.frame = args['frame']
                                 this.armlength = 28
                                 this.shoulderwidth = 20
-                                this.body = this.nodes[0]
+                                // this.body = this.nodes[0]
                                 //this.body.fired = this.nodes[0].fired //overwriting new logic?
                                 if (this.controller == 0) {
                                     this.body.color = "#FF0000"
@@ -28628,43 +28628,6 @@
                                             //what about colllar? arm? shoulder?
                                         }
 
-
-                                        if (typeof boys[t].bananahand != "undefined") {
-                                            boys[t].bananahands = castBetween(boys[t].bananashoulder, boys[t].bananahand, 20, boys[t].bananashoulder.radius)
-                                            if (boys[t].bananahands.doesPerimeterTouch(this.body) || boys[t].bananahand.doesPerimeterTouch(this.body)) {
-                                                this.striker = boys[t].serverID
-                                                this.struck = 1
-                                                if (boys[t].bananahand.fired > 14) {
-                                                    if (!this.shotIDs.includes(boys[t].bananahand.id)) {
-                                                        if (this.shield == 1) {
-                                                            this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
-                                                        } else {
-                                                            this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                            this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                            this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                            this.breaktimer = 0
-                                                        }
-                                                        boys[t].bananahand.fired = 14
-
-                                                        this.shotIDs.push(boys[t].bananahand.id)
-                                                        if (this.righthand.anchored == 1 || this.lefthand.anchored == 1) {
-                                                            this.lefthand.anchored = -20
-                                                            this.righthand.anchored = -20
-                                                        }
-                                                        if (this.body.ymom < -vsmashlimit) {
-                                                            this.body.ymom = -vsmashlimit
-                                                        }
-                                                        if (this.body.ymom > vsmashlimit) {
-                                                            this.body.ymom = vsmashlimit
-                                                        }
-                                                        if (this.serverID == serverID) {
-                                                            this.body.move()
-                                                        }
-                                                        this.fixupshoulder()
-                                                    }
-                                                }
-                                            }
-                                        }
                                         if (typeof boys[t].middlehand != "undefined") {
                                             delete Json.middlehand
                                             delete Json.middlearm
