@@ -538,7 +538,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         track() {
 
@@ -751,7 +751,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -954,7 +954,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -1156,7 +1156,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -1367,7 +1367,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -1579,7 +1579,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -1758,7 +1758,7 @@
                             } else {
                                 // //////////////////////////// ////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
                             }
-                            canvas_context.closePath()
+                            // canvas_context.closePath()
                         }
                         move() {
                             if (this.reflect == 1) {
@@ -4673,9 +4673,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -4709,9 +4709,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -7089,9 +7089,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -7125,9 +7125,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -9475,9 +9475,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -9511,9 +9511,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -12002,9 +12002,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -12038,9 +12038,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -14326,9 +14326,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -14362,9 +14362,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -15515,9 +15515,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -15551,9 +15551,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -18279,9 +18279,9 @@
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                     } else {
-                                                        this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                        this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                        this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].bananahand.fired = 14
@@ -18315,9 +18315,9 @@
                                                     if (this.shield == 1) {
                                                         this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                     } else {
-                                                        this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                        this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                        this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                        this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                         this.breaktimer = 0
                                                     }
                                                     boys[t].middlehand.fired = 14
@@ -20962,9 +20962,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -20998,9 +20998,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -23462,9 +23462,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -23498,9 +23498,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
@@ -26090,9 +26090,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].bananahand.xmom * (this.damage / 200)) + (boys[t].bananahand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].bananahand.ymom * (this.damage / 200)) + (boys[t].bananahand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].bananahand.xmom) + Math.abs(boys[t].bananahand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].bananahand.fired = 14
@@ -26126,9 +26126,9 @@
                                                             if (this.shield == 1) {
                                                                 this.shieldpower -= (Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 11
                                                             } else {
-                                                                this.body.xmom = .3333 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.body.ymom = .3333 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
-                                                                this.damage += .3333 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.xmom = 1 * ((boys[t].middlehand.xmom * (this.damage / 200)) + (boys[t].middlehand.xmom * baselaunch)) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.body.ymom = 1 * (((boys[t].middlehand.ymom * (this.damage / 200)) + (boys[t].middlehand.ymom * baselaunch)) * 1) * Math.max((1 + (boys[t].blasting / 80)), 1)
+                                                                this.damage += 1 * ((Math.abs(boys[t].middlehand.xmom) + Math.abs(boys[t].middlehand.ymom)) / 7) * Math.max((1 + (boys[t].blasting / 80)), 1)
                                                                 this.breaktimer = 0
                                                             }
                                                             boys[t].middlehand.fired = 14
