@@ -253,7 +253,8 @@ wss.on("connection", ws => {
                         game[t].send(datapacket)
                     } else {
                         game[t].storage = (data)
-                        game[t].serverID = (data).serverID
+                        game[t].serverID = parseFloat((data).serverID)
+                        // console.log((data).serverID)
                     }
                 }
 
