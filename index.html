@@ -726,7 +726,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
                                     this.string = this.color
                                     if (typeof this.string !== "string") {
@@ -930,7 +930,7 @@
                                 if (Math.random() < .0001) {
                                     ////////// //////////console.log(this)
                                 }
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.ceil(Math.max(this.radius - canvas_context.lineWidth, 0)))
                                     this.string = this.color
 
@@ -1130,7 +1130,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y - (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
                                     this.string = this.color
                                     for (let t = 0; t < 13; t += 6) {
@@ -1331,7 +1331,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y + (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
                                     this.string = this.color
                                     if (this.color != "#00FF00") {
@@ -1519,7 +1519,7 @@
                                 canvas_context.fillStyle = this.color
 
 
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
                                     this.string = this.color
 
@@ -1720,7 +1720,7 @@
 
 
 
-                                if (typeof this.x == "number" && typeof this.y == "number" && typeof this.radius == "number") {
+                                if ( isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                     var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.round(this.y), Math.max(this.radius - canvas_context.lineWidth, 0))
                                     this.string = this.color
 
