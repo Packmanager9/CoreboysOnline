@@ -29103,15 +29103,15 @@
                                     // canvas_context.stroke();
 
 
-                                    // canvas_context.fillStyle = invertColorx(this.body.color)
-                                    // let x = ((link.x1 + link.x2 + this.body.x) * (1 / 3)) - ((this.body.radius * .6) * (this.face))
-                                    // if (this.face == 1) {
-                                    //     x += this.body.radius * .7
-                                    // }
-                                    // if (this.face == -1) {
-                                    //     x -= this.body.radius * .7
-                                    // }
-                                    // canvas_context.fillRect(x - 10, (link.y1 - this.body.radius * .1) - 10, 20, 20)
+                                    canvas_context.fillStyle = invertColorx(this.body.color)
+                                    let x = ((link.x1 + link.x2 + this.body.x) * (1 / 3)) - ((this.body.radius * .6) * (this.face))
+                                    if (this.face == 1) {
+                                        x += this.body.radius * .7
+                                    }
+                                    if (this.face == -1) {
+                                        x -= this.body.radius * .7
+                                    }
+                                    canvas_context.fillRect(x - 10, (link.y1 - this.body.radius * .1) - 10, 20, 20)
                                 }
                             }
 
