@@ -1928,6 +1928,224 @@
                             return false
                         }
                     }
+                    class ShotE {
+                        constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, angle = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
+                            this.x = parseFloat(x)
+                            this.id = Math.random()
+                            this.y = parseFloat(y)
+                            this.radius = parseFloat(radius)
+                            this.color = color
+                            this.xmom = parseFloat(xmom)
+                            this.ymom = parseFloat(ymom)
+                            this.friction = parseFloat(friction)
+                            this.reflect = parseInt(reflect)
+                            this.strokeWidth = parseFloat(strokeWidth)
+                            this.strokeColor = strokeColor
+                            this.anchored = 0
+                            this.anchor = {}
+                            this.sxmom = 0
+                            this.symom = 0
+                            this.fired = parseFloat(fired)
+                            this.marked = parseFloat(marked)
+                            this.angle = parseFloat(angle)
+                        }
+                        smove() {
+                            this.x += this.sxmom
+                            this.y += this.symom
+                        }
+                        reversePointinside(point) {
+
+                            this.areaY = point.y - this.y
+                            this.areaX = point.x - this.x
+                            if (((this.areaX * this.areaX) + (this.areaY * this.areaY)) <= (point.radius * point.radius)) {
+                                return true
+                            }
+                            return false
+                        }
+                        draw() {
+                            this.angle +=.04
+                            if (typeof this.radius !== 'number') {
+                                return
+                            }
+                            if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
+                            canvas_context.lineWidth = this.radius*.1
+                            }else{
+                            canvas_context.lineWidth = 10   
+                            }
+                            canvas_context.strokeStyle = this.color
+                            // canvas_context.beginPath();
+                            if (this.radius > 0) {
+                                // for (let t = 0; t < Math.PI * 2; t +=(Math.PI/10)) {
+                                //     canvas_context.beginPath();
+                                //     canvas_context.arc(this.x, this.y, this.radius, t+this.angle, t + (Math.PI/20)+this.angle, false)
+                                //     canvas_context.strokeStyle = this.color
+                                //     canvas_context.stroke()
+                                // }
+
+
+                                if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.radius), Math.round(this.radius), 0, Math.round(this.radius), Math.ceil(this.radius + (this.radius * 0)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
+                                    this.string = this.color
+                                    if (this.color != "#FFAAAA") {
+                                        for (let t = 0; t < 13; t += 6) {
+                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                            gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                            gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
+                                        }
+                                    } else {
+                                        for (let t = 0; t < 13; t += 6) {
+                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                            gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                            gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
+                                        }
+
+                                    }
+
+
+
+                                    tempcanvas.width = this.radius * 2
+                                    tempcanvas.height = this.radius * 2
+
+
+                                    // temp_context.save();
+                                    temp_context.fillStyle = gard
+                                    temp_context.beginPath();
+                                    temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
+                                    temp_context.fill()
+                                    temp_context.globalCompositeOperation = 'destination-out'
+                                    temp_context.beginPath();
+                                    temp_context.fillStyle = '#888888'
+                                    temp_context.arc(this.radius, this.radius , this.radius * .5, 0, 2 * Math.PI)
+                                    temp_context.fill()
+                                    // temp_context.restore()
+                                    canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
+                                    // canvas_context.stroke();
+                                    temp_context.globalCompositeOperation = 'source-over'
+                                }
+                            } else {
+                                // //////////////////////////// //////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
+                            }
+                            // canvas_context.closePath()
+                        }
+                        move() {
+                            if (this.reflect == 1) {
+                                if (this.x + this.radius > canvas.width) {
+                                    if (this.xmom > 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y + this.radius > canvas.height) {
+                                    if (this.ymom > 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                                if (this.x - this.radius < 0) {
+                                    if (this.xmom < 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y - this.radius < 0) {
+                                    if (this.ymom < 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                            }
+                            if (this.anchored !== 1) {
+                                this.x += this.xmom
+                                this.y += this.ymom
+                            } else {
+                                this.x = this.anchor.x
+                                this.y = this.anchor.y
+                                this.xmom = 0
+                                this.ymom = 0
+                            }
+                        }
+                        unmove() {
+                            if (this.reflect == 1) {
+                                if (this.x + this.radius > canvas.width) {
+                                    if (this.xmom > 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y + this.radius > canvas.height) {
+                                    if (this.ymom > 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                                if (this.x - this.radius < 0) {
+                                    if (this.xmom < 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y - this.radius < 0) {
+                                    if (this.ymom < 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                            }
+                            this.x -= this.xmom
+                            this.y -= this.ymom
+                        }
+                        frictiveMove() {
+                            if (this.anchored !== 1) {
+                                this.x += this.xmom
+                                this.y += this.ymom
+                            } else {
+                                this.x = this.anchor.x
+                                this.y = this.anchor.y
+                                this.xmom = 0
+                                this.ymom = 0
+                            }
+                            this.xmom *= this.friction
+                            this.ymom *= this.friction
+                        }
+                        frictiveunMove() {
+                            if (this.reflect == 1) {
+                                if (this.x + this.radius > canvas.width) {
+                                    if (this.xmom > 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y + this.radius > canvas.height) {
+                                    if (this.ymom > 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                                if (this.x - this.radius < 0) {
+                                    if (this.xmom < 0) {
+                                        this.xmom *= -1
+                                    }
+                                }
+                                if (this.y - this.radius < 0) {
+                                    if (this.ymom < 0) {
+                                        this.ymom *= -1
+                                    }
+                                }
+                            }
+                            this.xmom /= this.friction
+                            this.ymom /= this.friction
+                            this.x -= this.xmom
+                            this.y -= this.ymom
+                        }
+                        isPointInside(point) {
+                            this.areaY = point.y - this.y
+                            this.areaX = point.x - this.x
+                            if (((this.areaX * this.areaX) + (this.areaY * this.areaY)) <= (this.radius * this.radius)) {
+                                return true
+                            }
+                            return false
+                        }
+                        doesPerimeterTouch(point) {
+                            this.areaY = point.y - this.y
+                            this.areaX = point.x - this.x
+                            if (((this.areaX * this.areaX) + (this.areaY * this.areaY)) <= ((this.radius + point.radius) * (this.radius + point.radius))) {
+                                return true
+                            }
+                            return false
+                        }
+                    }
                     class ShotC {
                         constructor(x, y, radius, color, xmom = 0, ymom = 0, friction = 1, marked = 0, fired = 0, reflect = 0, strokeWidth = 0, strokeColor = "transparent") {
                             this.x = parseFloat(x)
@@ -28657,10 +28875,10 @@ let copy = new Banandroid(this.controller)
                                 }
 
                                 this.nodes.push(this.body)
-                                this.leftshoulder = new ShotF(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
-                                this.rightshoulder = new ShotF(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
-                                this.lefthand = new ShotF(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 27, "magenta", 0, 0, .85) //26
-                                this.righthand = new ShotF(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85) //26
+                                this.leftshoulder = new ShotE(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "magenta", 0, 0, .999)
+                                this.rightshoulder = new ShotE(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
+                                this.lefthand = new ShotE(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 27, "magenta", 0, 0, .85) //26
+                                this.righthand = new ShotE(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 27, "#FF0000", 0, 0, .85) //26
                                 this.nodes.push(this.leftshoulder)
                                 this.nodes.push(this.rightshoulder)
                                 this.nodes.push(this.righthand)
@@ -28710,7 +28928,11 @@ let copy = new Banandroid(this.controller)
 
                                 for (let t = 0; t < this.nodes.length; t++) {
                                     let idsto = this.nodes[t].id
-                                    this.nodes[t] = new ShotF(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired,this.nodes[t].angle)
+                                    if(t == 0){
+                                        this.nodes[t] = new ShotF(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired,this.nodes[t].angle)
+                                    }else{
+                                        this.nodes[t] = new ShotE(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired,this.nodes[t].angle)
+                                    }
                                     if(isNaN(this.nodes[t].ymom) || isNaN(this.nodes[t].xmom)){
                                         //////console.log("vanish break", this.nodes[t])
                                     }
@@ -28719,7 +28941,7 @@ let copy = new Banandroid(this.controller)
 
                                 for (let t = 0; t < this.shots.length; t++) {
                                     let idsto = this.shots[t].id
-                                    this.shots[t] = new ShotF(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
+                                    this.shots[t] = new ShotE(this.shots[t].x, this.shots[t].y, this.shots[t].radius, this.shots[t].color, this.shots[t].xmom, this.shots[t].ymom, this.shots[t].friction, this.shots[t].marked)
                                     this.shots[t].id = idsto
 
                                 }
@@ -29611,7 +29833,7 @@ let copy = new Banandroid(this.controller)
 
                                     if (this.gamepad.gamepad.buttonsStatus.includes('X') || (keysPressed['j'] || keysPressed['ArrowLeft'])) {
                                         if (this.shotclock <= 0) {
-                                                this.shot = new ShotF(this.body.x, this.body.y, 25, "#FFAAAA", 0, -(this.speed * 3.5))
+                                                this.shot = new ShotE(this.body.x, this.body.y, 25, "#FFAAAA", 0, -(this.speed * 3.5))
                                                 this.shot.gravity = 2.5
                                                 this.shot.accum = 0
                                                 this.shots.push(this.shot)
@@ -30816,30 +31038,30 @@ let copy = new Banandroid(this.controller)
                                 // this.links[t].draw()
                             }
 
-                                let leftnodetop = new Circle(this.lefthand.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, "red")
+                                let leftnodetop = new Circle(this.lefthand.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
                                 leftnodetop.draw()
 
-                                let leftnodebottom = new Circle(this.lefthand.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, "green")
+                                let leftnodebottom = new Circle(this.lefthand.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
                                 leftnodebottom.draw()
 
-                                let leftnodetops = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, "red")
+                                let leftnodetops = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
                                 leftnodetops.draw()
 
-                                let leftnodebottoms = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, "red")
+                                let leftnodebottoms = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
                                 leftnodebottoms.draw()
 
 
 
-                                let rightnodetop = new Circle(this.righthand.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, "red")
+                                let rightnodetop = new Circle(this.righthand.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
                                 rightnodetop.draw()
 
-                                let rightnodebottom = new Circle(this.righthand.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, "red")
+                                let rightnodebottom = new Circle(this.righthand.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
                                 rightnodebottom.draw()
 
-                                let rightnodetops = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, "red")
+                                let rightnodetops = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
                                 rightnodetops.draw()
 
-                                let rightnodebottoms = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, "red")
+                                let rightnodebottoms = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
                                 rightnodebottoms.draw()
 
 
