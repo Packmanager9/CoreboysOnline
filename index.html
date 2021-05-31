@@ -38,6 +38,8 @@
                     zones to select your fighter.</li>
                 <li> Each fighter has different moves, WASD/left control stick to move, IJKL/Arrow keys/ABXY (on
                     controller) to fight. O/RB to shield.</li>
+                    <input type="text" id="fname" name="fname" value=""><br>
+  
             </ul>
         </aside>
 
@@ -3341,6 +3343,7 @@
                     // }
 
                     let setup_canvas = document.getElementById('canvas') //getting canvas from document
+                    let formname = document.getElementById('fname') //getting canvas from document
                     let tempcanvas = document.getElementById('tempcanvas')
                     let temp_context = tempcanvas.getContext("2d")
                     tempcanvas.style.background = "#000000"
@@ -6816,6 +6819,9 @@ let copy = new Boy(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
 
@@ -9228,6 +9234,9 @@ let copy = new Mass(this.controller)
                         draw() {
                             if (this.inactive == 1) {
                                 return
+                            }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
                             }
                             this.grounded = 0
                             this.frame++
@@ -11764,6 +11773,9 @@ let copy = new Blastgirl(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
                             if (this.serverID == serverID) {
@@ -14144,6 +14156,9 @@ let copy = new Jox(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
 
@@ -15341,6 +15356,9 @@ let copy = new Dummy(this.controller)
                                 return
                             }
 
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
                             this.safe = 0
@@ -17709,6 +17727,9 @@ let copy = new ScorchedMass(this.controller)
                         draw() {
                             if (this.inactive == 1) {
                                 return
+                            }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
                             }
                             this.grounded = 0
                             this.frame++
@@ -20673,6 +20694,9 @@ let copy = new AsigMan(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
                             this.countering--
@@ -23257,6 +23281,9 @@ let copy = new Princess(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.blasting--
                             if (this.grounded == 1) {
                                 if (this.screwtimer > 5) {
@@ -25826,6 +25853,9 @@ let copy = new Rhopho(this.controller)
 
                             if (this.inactive == 1) {
                                 return
+                            }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
                             }
                             this.body.anchored = 0
                             this.middlehand.anchored = 0
@@ -28501,6 +28531,9 @@ let copy = new Banandroid(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.body.anchored = 0
                             this.middlehand.anchored = 0
                             this.bananahand.anchored = 0
@@ -31015,6 +31048,10 @@ let copy = new Banandroid(this.controller)
                             if (this.inactive == 1) {
                                 return
                             }
+
+                            if (this.serverID == serverID) {
+                                this.playername = formname.value
+                            }
                             this.grounded = 0
                             this.frame++
 
@@ -31686,7 +31723,12 @@ let copy = new Banandroid(this.controller)
                                     } else {
                                         canvas_context.font = "60px arial"
                                         canvas_context.fillStyle = boys[t].body.color
-                                        canvas_context.fillText(`${boys[t].name + " "} ${boys[t].knocks}/${boys[t].drops}`, 20, ((t - dropouts) * 61) + 70)
+                                        if(boys[t].playername != ""){
+                                            canvas_context.fillText(`${boys[t].name + " (" + boys[t].playername + ")"} ${boys[t].knocks}/${boys[t].drops}`, 20, ((t - dropouts) * 61) + 70)
+                                                                              }else{
+                                                                                canvas_context.fillText(`${boys[t].name} ${boys[t].knocks}/${boys[t].drops}`, 20, ((t - dropouts) * 61) + 70)
+
+                                                                              }
                                     }
                                 }
                             }
