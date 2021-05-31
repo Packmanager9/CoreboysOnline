@@ -399,6 +399,39 @@
                             canvas_context.lineWidth = linewidthstorage
                         }
                     }
+                    class LineOPx {
+                        constructor(object, target, color, width) {
+                            this.object = object
+                            this.target = target
+                            this.color = color
+                            this.width = width
+                        }
+                        hypotenuse() {
+                            let xdif = this.object.x - this.target.x
+                            let ydif = this.object.y - this.target.y
+                            let hypotenuse = (xdif * xdif) + (ydif * ydif)
+                            return Math.sqrt(hypotenuse)
+                        }
+                        sqrDis() {
+                            let xdif = this.object.x - this.target.x
+                            let ydif = this.object.y - this.target.y
+                            let hypotenuse = (xdif * xdif) + (ydif * ydif)
+                            return (hypotenuse)
+                        }
+                        angle() {
+                            return Math.atan2(this.object.y - this.target.y, this.object.x - this.target.x)
+                        }
+                        draw() {
+                            let linewidthstorage = canvas_context.lineWidth
+                            canvas_context.strokeStyle = this.color
+                            canvas_context.lineWidth = this.width
+                            // canvas_context.beginPath()
+                            canvas_context.moveTo(this.object.x, this.object.y)
+                            canvas_context.lineTo(this.target.x, this.target.y)
+                            // canvas_context.stroke()
+                            canvas_context.lineWidth = linewidthstorage
+                        }
+                    }
                     class Triangle {
                         constructor(x, y, color, length, fill = 0, strokeWidth = 0, leg1Ratio = 1, leg2Ratio = 1, heightRatio = 1) {
                             this.x = parseFloat(x)
@@ -28931,7 +28964,7 @@ let copy = new Banandroid(this.controller)
                                     if(t == 0){
                                         this.nodes[t] = new ShotF(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired,this.nodes[t].angle)
                                     }else{
-                                        this.nodes[t] = new ShotE(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired,this.nodes[t].angle)
+                                        this.nodes[t] = new ShotE(this.nodes[t].x, this.nodes[t].y, this.nodes[t].radius, this.nodes[t].color, this.nodes[t].xmom, this.nodes[t].ymom, this.nodes[t].friction, 0, this.nodes[t].fired)
                                     }
                                     if(isNaN(this.nodes[t].ymom) || isNaN(this.nodes[t].xmom)){
                                         //////console.log("vanish break", this.nodes[t])
@@ -30988,7 +31021,7 @@ let copy = new Banandroid(this.controller)
                             if (this.serverID == serverID) {
                                 for (let t = 0; t < this.shots.length; t++) {
 
-                                    if (typeof this.shots[t].gravity == "number") {
+                                    if (this.shots[t].gravity > 0) {
                                         this.shots[t].accum += this.shots[t].gravity
                                     }
                                     if(this.shots[t].accum >= Math.abs(this.shots[t].ymom)){
@@ -31033,36 +31066,48 @@ let copy = new Banandroid(this.controller)
                             this.rightarm = new LineOP(this.rightshoulder, this.righthand, invertColor(this.body.color), 8)
                             this.collideStage()
                             let storageangles = [this.leftarm.angle(), this.rightarm.angle()]
-                            for (let t = 0; t < this.links.length; t++) {
-                                this.links[t].color = invertColor(this.body.color)
-                                // this.links[t].draw()
-                            }
+                            // for (let t = 0; t < this.links.length; t++) {
+                            //     this.links[t].color = invertColor(this.body.color)
+                            //     // this.links[t].draw()
+                            // }
+                            let l2 = this.leftshoulder.radius*2
 
-                                let leftnodetop = new Circle(this.lefthand.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
-                                leftnodetop.draw()
+                            let cos1 = Math.cos(storageangles[0]-(Math.PI/2))*l2
+                            let cos2 = Math.cos(storageangles[0]+(Math.PI/2))*l2
+                            let sin2 = Math.sin(storageangles[0]+(Math.PI/2))*l2
+                            let sin1 = Math.sin(storageangles[0]-(Math.PI/2))*l2
 
-                                let leftnodebottom = new Circle(this.lefthand.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.lefthand.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
-                                leftnodebottom.draw()
+                                let leftnodetop = new Circle(this.lefthand.x+(cos2), this.lefthand.y+(sin2), 10, this.body.color)
+                                // leftnodetop.draw()
 
-                                let leftnodetops = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]+(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
-                                leftnodetops.draw()
+                                let leftnodebottom = new Circle(this.lefthand.x+(cos1), this.lefthand.y+(sin1), 10, this.body.color)
+                                // leftnodebottom.draw()
 
-                                let leftnodebottoms = new Circle(this.leftshoulder.x+(Math.cos(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), this.leftshoulder.y+(Math.sin(storageangles[0]-(Math.PI/2))*this.leftshoulder.radius*2), 10, this.body.color)
-                                leftnodebottoms.draw()
+                                let leftnodetops = new Circle(this.leftshoulder.x+(cos2), this.leftshoulder.y+(sin2), 10, this.body.color)
+                                // leftnodetops.draw()
+
+                                let leftnodebottoms = new Circle(this.leftshoulder.x+(cos1), this.leftshoulder.y+(sin1), 10, this.body.color)
+                                // leftnodebottoms.draw()
 
 
 
-                                let rightnodetop = new Circle(this.righthand.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
-                                rightnodetop.draw()
 
-                                let rightnodebottom = new Circle(this.righthand.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.righthand.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
-                                rightnodebottom.draw()
+                            let cos3 = Math.cos(storageangles[1]-(Math.PI/2))*l2
+                            let cos4 = Math.cos(storageangles[1]+(Math.PI/2))*l2
+                            let sin3 = Math.sin(storageangles[1]+(Math.PI/2))*l2
+                            let sin4 = Math.sin(storageangles[1]-(Math.PI/2))*l2
 
-                                let rightnodetops = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]+(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
-                                rightnodetops.draw()
+                                let rightnodetop = new Circle(this.righthand.x+(cos4), this.righthand.y+(sin3), 10, this.body.color)
+                                // rightnodetop.draw()
 
-                                let rightnodebottoms = new Circle(this.rightshoulder.x+(Math.cos(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), this.rightshoulder.y+(Math.sin(storageangles[1]-(Math.PI/2))*this.rightshoulder.radius*2), 10, this.body.color)
-                                rightnodebottoms.draw()
+                                let rightnodebottom = new Circle(this.righthand.x+(cos3), this.righthand.y+(sin4), 10, this.body.color)
+                                // rightnodebottom.draw()
+
+                                let rightnodetops = new Circle(this.rightshoulder.x+(cos4), this.rightshoulder.y+(sin3), 10, this.body.color)
+                                // rightnodetops.draw()
+
+                                let rightnodebottoms = new Circle(this.rightshoulder.x+(cos3), this.rightshoulder.y+(sin4), 10, this.body.color)
+                                // rightnodebottoms.draw()
 
 
 
@@ -31071,49 +31116,56 @@ let copy = new Banandroid(this.controller)
                                 leftshape1.shapes.unshift(this.leftshoulder)
                                 leftshape2.shapes.push(this.lefthand)
                                 // console.log(leftshape1, leftshape2)
+                                this.invcolor = invertColor(this.body.color) 
+                                canvas_context.lineWidth = 8
+                                canvas_context.strokeStyle = this.invcolor
+                            canvas_context.beginPath()
 
                                 for(let t = 0;t<leftshape1.shapes.length;t++){
                                     // if(t>0){
-                                    let link = new LineOP(leftshape1.shapes[t],leftshape2.shapes[t], invertColor(this.body.color), 8)
+                                    let link = new LineOPx(leftshape1.shapes[t],leftshape2.shapes[t], this.invcolor, 8)
                                     link.draw()
                                     // }
                                     if(t>0){
-                                        let link = new LineOP(leftshape1.shapes[t],leftshape2.shapes[t-1], invertColor(this.body.color), 8)
+                                        let link = new LineOPx(leftshape1.shapes[t],leftshape2.shapes[t-1], this.invcolor, 8)
                                         link.draw()
                                     }
 
                                 }
-                                let linkl = new LineOP(this.lefthand, leftshape2.shapes[leftshape2.shapes.length-2], invertColor(this.body.color), 8)
+                                let linkl = new LineOPx(this.lefthand, leftshape2.shapes[leftshape2.shapes.length-2], this.invcolor, 8)
                                         linkl.draw()
 
+                                        canvas_context.stroke()
                                 let rightshape1 =  (castBetween(rightnodetop, rightnodetops, 3, 4))
                                 let rightshape2 =  (castBetween(rightnodebottom, rightnodebottoms, 4, 4))
                                 rightshape1.shapes.unshift(this.rightshoulder)
                                 rightshape2.shapes.push(this.righthand)
                                 // console.log(rightshape1, rightshape2)
+                            canvas_context.beginPath()
 
                                 for(let t = 0;t<rightshape1.shapes.length;t++){
                                     // if(t>0){
-                                    let link = new LineOP(rightshape1.shapes[t],rightshape2.shapes[t], invertColor(this.body.color), 8)
+                                    let link = new LineOPx(rightshape1.shapes[t],rightshape2.shapes[t], this.invcolor, 8)
                                     link.draw()
                                     // }
                                     if(t>0){
-                                        let link = new LineOP(rightshape1.shapes[t],rightshape2.shapes[t-1], invertColor(this.body.color), 8)
+                                        let link = new LineOPx(rightshape1.shapes[t],rightshape2.shapes[t-1], this.invcolor, 8)
                                         link.draw()
                                     }
 
                                 }
-                                let linkr = new LineOP(this.righthand, rightshape2.shapes[rightshape2.shapes.length-2], invertColor(this.body.color), 8)
+                                let linkr = new LineOPx(this.righthand, rightshape2.shapes[rightshape2.shapes.length-2], this.invcolor, 8)
                                         linkr.draw()
 
 
+                            canvas_context.stroke()
 
                             for (let t = 0; t < this.nodes.length; t++) {
                                 this.nodes[t].draw()
                             }
 
                             // if (this.controller == 0) {
-                            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, invertColor(this.body.color), this.body.radius * .2)
+                            let link = new Line(this.body.x, this.body.y, this.body.x + (((this.body.radius * .8) * this.face)), this.body.y, this.invcolor, this.body.radius * .2)
 
                             // canvas_context.lineWidth = 0
                             // canvas_context.strokeStyle = invertColor(this.body.color)
