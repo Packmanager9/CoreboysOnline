@@ -3,6 +3,17 @@
 
 const express = require('express');
 const { Server, defaultMaxListeners } = require('ws');
+var Extensions = require('websocket-extensions'),
+deflate    = require('permessage-deflate'),
+zlib       = require('zlib');
+
+deflate = deflate.configure({
+level: zlib.constants.Z_BEST_COMPRESSION,
+maxWindowBits: 13
+});
+
+var exts = new Extensions();
+exts.add(deflate);
 
 const PORT = process.env.PORT || 3000;
 const INDEX = '/index.html';
