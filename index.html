@@ -4635,7 +4635,7 @@ let copy = new Boy(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -6341,9 +6341,17 @@ let copy = new Boy(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -7056,7 +7064,7 @@ let copy = new Mass(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -8740,10 +8748,17 @@ let copy = new Mass(this.controller)
                                     }
                                 }
                             } else {
-
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -9447,7 +9462,7 @@ let copy = new Blastgirl(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -11278,9 +11293,17 @@ let copy = new Blastgirl(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -11972,7 +11995,7 @@ let copy = new Jox(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -13651,9 +13674,17 @@ let copy = new Jox(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -14307,7 +14338,7 @@ let copy = new Dummy(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -15501,7 +15532,7 @@ let copy = new ScorchedMass(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -17223,9 +17254,17 @@ let copy = new ScorchedMass(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -18125,7 +18164,7 @@ let copy = new AsigMan(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -20164,9 +20203,17 @@ let copy = new AsigMan(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -20959,7 +21006,7 @@ let copy = new Princess(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -22756,9 +22803,17 @@ let copy = new Princess(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -23464,7 +23519,7 @@ let copy = new Rhopho(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -25325,9 +25380,17 @@ let copy = new Rhopho(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
@@ -26098,7 +26161,7 @@ let copy = new Banandroid(this.controller)
                                         if (boys[k] == this) {
                                             continue
                                         }
-                                        this.shots[t].marked = 2
+                                        this.shots[t].marked = 5
                                     }
                                 }
                             }
@@ -27995,9 +28058,17 @@ let copy = new Banandroid(this.controller)
                                     }
                                 }
                             } else {
+                                let shotdummy = {}
+                                for(let t = 0;t<boys.length;t++){
+                                    if(boys[t].serverID == serverID){
+                                        shotdummy = boys[t]
+                                    }
+                                }
                                 for (let t = 0; t < this.shots.length; t++) {
                                     if (this.shots[t].marked <= 0) {
-                                        this.shots[t].draw()
+                                        if(!shotdummy.shotIDs.includes(this.shots[t].id)){
+                                            this.shots[t].draw()
+                                        }
                                     }
                                 }
                             }
