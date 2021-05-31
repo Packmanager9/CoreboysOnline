@@ -27749,6 +27749,7 @@ let copy = new Banandroid(this.controller)
                                     if (this.gamepad.gamepad.buttonsStatus.includes('B') || (keysPressed['l'] || keysPressed['ArrowRight'])) {
 
 
+                                        if (this.righthand.fired <= 0) {
                                     if (this.face == 1) {
                                         if (this.righthand.fired <= 0) {
                                             if (this.righthand.anchored == 0) {
@@ -27790,7 +27791,9 @@ let copy = new Banandroid(this.controller)
                                                     }
                                                     this.shotdraw = 1
                                     }
+                                }
 
+                                if (this.lefthand.fired <= 0) {
                                                 if (this.face == -1) {
                                                     if (this.lefthand.anchored == 0) {
                                                         this.shot = new Shot(this.lefthand.x, this.lefthand.y, this.charge * .54, "#00FF00", -this.speed * 2, 0)
@@ -27828,6 +27831,7 @@ let copy = new Banandroid(this.controller)
                                                             this.charge2 += .8
                                                         this.shotdraw = 1
                                                 }
+                                            }
                                         }
 
                                     if (this.body.fired > 30) {
