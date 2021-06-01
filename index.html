@@ -31887,9 +31887,9 @@
                                         }
                                     }
                                     if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
-                                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x > boys[t].body.x) {
+                                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                                             if (this.face == -1) {
-                                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                                if (Math.abs(this.body.x - boys[t].body.x) < 570) {
                                                     this.leftshot = 1
                                                     if (Math.random() < .009) {
                                                         this.hortsmash = 1
@@ -31898,9 +31898,9 @@
                                                 }
                                             }
                                         }
-                                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x < boys[t].body.x) {
+                                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                                             if (this.face == 1) {
-                                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                                if (Math.abs(this.body.x - boys[t].body.x) < 570) {
                                                     this.rightshot = 1
                                                     if (Math.random() < .009) {
                                                         this.hortsmash = 1
@@ -34502,10 +34502,10 @@
                                         }
                                     }
                                     if (this.screwshot + this.hortsmash + this.downspike + this.storeshield == 0) {
-                                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x > boys[t].body.x) {
+                                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x > boys[t].body.x) {
                                             if (this.face == -1) {
                                                 this.leftshot = 1
-                                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                                if (Math.abs(this.body.x - boys[t].body.x) < 570) {
                                                     if (Math.random() < .009) {
                                                         this.hortsmash = 1
                                                         this.leftshot = 0
@@ -34513,10 +34513,10 @@
                                                 }
                                             }
                                         }
-                                        if (Math.abs(this.body.y - boys[t].body.y) < 35 && this.body.x < boys[t].body.x) {
+                                        if (Math.abs(this.body.y - boys[t].body.y) < boys[t].body.radius && this.body.x < boys[t].body.x) {
                                             if (this.face == 1) {
                                                 this.rightshot = 1
-                                                if (Math.abs(this.body.x - boys[t].body.x) < 170) {
+                                                if (Math.abs(this.body.x - boys[t].body.x) < 570) {
                                                     if (Math.random() < .009) {
                                                         this.hortsmash = 1
                                                         this.rightshot = 0
@@ -34719,7 +34719,7 @@
                                                 this.detonate = 1
                                                 this.bullets[0].body.x = this.body.x
                                                 this.bullets[0].body.y = this.body.y
-                                                this.bullets[0].body.xmom = this.speed * 4.5 * this.face
+                                                this.bullets[0].body.xmom = this.speed * 3.5 * this.face
                                                 this.bullets[0].body.ymom = 0
                                                 this.shots.push(this.bullets[0].body)
                                                 this.bullets.splice(0, 1)
@@ -34955,7 +34955,7 @@
                                                         this.detonate = 1
                                                         this.bullets[0].body.x = this.body.x
                                                         this.bullets[0].body.y = this.body.y
-                                                        this.bullets[0].body.xmom = this.speed * 4.5 * this.face
+                                                        this.bullets[0].body.xmom = this.speed * 3.5 * this.face
                                                         this.bullets[0].body.ymom = 0
                                                         this.shots.push(this.bullets[0].body)
                                                         this.bullets.splice(0, 1)
@@ -35782,13 +35782,21 @@
                                     if (stock > 0) {
                                         if (drops[t] < stock) {
                                             if (t != boys[t].striker) {
-                                                scores[boys[t].striker]++
+                                            // if(AItoggle == 0){
+                                            scores[boys[t].striker]++
+                                            // }else{
+                                            // scores[t]++
+                                            // }
                                             }
                                             drops[t]++
                                         }
                                     } else {
                                         if (t != boys[t].striker) {
+                                            // if(AItoggle == 0){
                                             scores[boys[t].striker]++
+                                            // }else{
+                                            // scores[t]++
+                                            // }
                                         }
                                         drops[t]++
                                     }
@@ -35851,13 +35859,7 @@
 
                                             }
                                         } else {
-
-                                            if (boys[t].playername != "") {
-                                                canvas_context.fillText(`${boys[t].name + " (" + boys[t].playername + ")"} ${scores[t]}/${drops[t]}`, 20, ((t - dropouts) * 61) + 70)
-                                            } else {
                                                 canvas_context.fillText(`${boys[t].name} ${scores[t]}/${drops[t]}`, 20, ((t - dropouts) * 61) + 70)
-
-                                            }
                                         }
                                     }
                                 }
