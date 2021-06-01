@@ -2497,7 +2497,7 @@ canvas_context.closePath();
                                 return
                             }
                             if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
-                                canvas_context.lineWidth = this.radius * .1
+                                canvas_context.lineWidth = this.radius * .3
                             } else {
                                 canvas_context.lineWidth = 10
                             }
@@ -2532,26 +2532,29 @@ canvas_context.closePath();
 
                                     }
 
+                                    
+                                    canvas_context.beginPath();
+                                    canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
+                                    canvas_context.stroke()
 
-
-                                    tempcanvas.width = this.radius * 2
-                                    tempcanvas.height = this.radius * 2
+                                    // tempcanvas.width = this.radius * 2
+                                    // tempcanvas.height = this.radius * 2
 
 
                                     // temp_context.save();
-                                    temp_context.fillStyle = gard
-                                    temp_context.beginPath();
-                                    temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
-                                    temp_context.fill()
-                                    temp_context.globalCompositeOperation = 'destination-out'
-                                    temp_context.beginPath();
-                                    temp_context.fillStyle = '#888888'
-                                    temp_context.arc(this.radius, this.radius, this.radius * .5, 0, 2 * Math.PI)
-                                    temp_context.fill()
+                                    // temp_context.fillStyle = gard
+                                    // temp_context.beginPath();
+                                    // temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
+                                    // temp_context.fill()
+                                    // temp_context.globalCompositeOperation = 'destination-out'
+                                    // temp_context.beginPath();
+                                    // temp_context.fillStyle = '#888888'
+                                    // temp_context.arc(this.radius, this.radius, this.radius * .5, 0, 2 * Math.PI)
+                                    // temp_context.fill()
                                     // temp_context.restore()
                                     canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
                                     // canvas_context.stroke();
-                                    temp_context.globalCompositeOperation = 'source-over'
+                                    // temp_context.globalCompositeOperation = 'source-over'
                                 }
                             } else {
                                 // //////////////////////////// //////////////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
