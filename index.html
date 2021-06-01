@@ -152,6 +152,13 @@
                                             boys[t].knocks++
                                         }
                                     }
+                                } else if (parseInt(JSON.parse(data).pinging) == 1) {
+                                    for (let t = 0; t < boys.length; t++) {
+                                        if (boys[t].serverID == parseFloat(JSON.parse(data).serverID)) {
+                                             const now = new Date()  
+                                            boys[t].ping = now.getTime()-parseInt(JSON.parse(data).ping)
+                                        }
+                                    }
                                 } else if (parseInt(JSON.parse(data).counter) == 1) {
                                     //////////////////////////console.log(data)
                                     for (let t = 0; t < boys.length; t++) {
@@ -36092,9 +36099,13 @@
 
                                         if (AItoggle == 0) {
 
+                                            let Xson = {}
                                             const now = new Date()  
-                                            Json.ping = now.getTime()
+                                            Xson.ping = now.getTime()
+                                            Xson.pinging = 1
+                                            Xson.serverID = serverID
                                             ws.send(JSON.stringify(Json))
+                                            ws.send(JSON.stringify(Xson))
                                         }
 
                                         for (let f = 0; f < boys[t].nodes.length; f++) {

@@ -151,6 +151,17 @@ wss.on("connection", ws => {
                     game[t].send(JSON.stringify(sjon))
             }
 
+        }else if(JSON.parse(data).pinging == 1){
+            let sjon = {
+                "pinging": `1`
+            }
+            sjon.ping = parseInt(JSON.parse(data).ping)
+            // console.log(data)
+            sjon.serverID = JSON.parse(data).serverID
+            for (let t = 0; t < game.length; t++) {
+                    game[t].send(JSON.stringify(sjon))
+            }
+
         }else {
             if (data >= 0) {
                 let minarr = []
