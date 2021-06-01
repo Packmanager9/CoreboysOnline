@@ -260,6 +260,8 @@ wss.on("connection", ws => {
                     if (ws != game[t]) {
                         // data = JSON.parse(data)
                         data.serverID = ws.serverID
+                        const now = new Date()  
+                        data.ping = now.getTime() - parseFloat(data.ping)
                         let datapacket = JSON.stringify(data)
                         game[t].send(datapacket)
                     } else {

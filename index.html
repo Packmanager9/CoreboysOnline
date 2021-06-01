@@ -59,9 +59,12 @@
 
 
                     let boys = []
+                    let fightlogged = 0
+                    let strarr = []
                     let selectors = []
                     let characterbuttons = []
                     let scores = []
+                    let fightnum = 0
                     let drops = []
                     let baselaunch = .60
                     let vsmashlimit = 42
@@ -74,10 +77,10 @@
                     let AItoggle = 0
 
                     let stock = 0
-                    let ws 
-                    if(AItoggle == 0){
-                    let HOST = location.origin.replace(/^http/, 'ws')
-                     ws = new WebSocket(HOST);
+                    let ws
+                    if (AItoggle == 0) {
+                        let HOST = location.origin.replace(/^http/, 'ws')
+                        ws = new WebSocket(HOST);
                     }
                     let connectionnumber = -1
                     let start = 0
@@ -3478,6 +3481,7 @@
                         window.setInterval(function () {
 
                             main()
+
                         }, 18)
                         document.addEventListener('keydown', (event) => {
                             keysPressed[event.key] = true;
@@ -5209,6 +5213,7 @@
                     class Boy {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -7623,6 +7628,7 @@
                     class Mass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -10092,6 +10098,7 @@
                     class Blastgirl {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -12682,6 +12689,7 @@
                     class Jox {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -15119,6 +15127,7 @@
                     class Dummy {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -16298,6 +16307,7 @@
                     class ScorchedMass {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -18798,6 +18808,7 @@
                     class AsigMan {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -21832,6 +21843,7 @@
                     class Princess {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -24393,6 +24405,7 @@
                     class Rhopho {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.pounding = 0
                                 this.shotIDs = []
                                 this.struck = 0
@@ -27118,6 +27131,7 @@
                     class Banandroid {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.nograv = 0
                                 this.pounding = 0
                                 this.shotIDs = []
@@ -30015,6 +30029,7 @@
                     class Bunkstanks {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotclock = 0
                                 this.shotIDs = []
                                 this.struck = 0
@@ -31855,7 +31870,7 @@
                                     } else if (Math.abs(this.body.x - boys[t].body.x) < 150 && this.body.y <= boys[t].body.y && (boys[t].righthand.anchored == 1 || boys[t].lefthand.anchored == 1)) {
                                         this.hortsmash = 1
                                     }
-                                    if (Math.abs(this.body.x - boys[t].body.x) < boys[t].body.radius  && this.body.y > boys[t].body.y) {
+                                    if (Math.abs(this.body.x - boys[t].body.x) < boys[t].body.radius && this.body.y > boys[t].body.y) {
                                         this.screwshot = 1
                                     } else if (this.body.y - boys[t].body.y > 100) {
                                         if (Math.random() < .01) {
@@ -32659,6 +32674,7 @@
                     class DrSoto {
                         constructor(controller, args = 0) {
                             if (args == 0) {
+                                this.ping = 0
                                 this.shotIDs = []
                                 this.struck = 0
                                 this.drops = 0
@@ -34663,68 +34679,20 @@
                                 }
 
                                 if (this.screwshot == 1) {
-                                    if(this.body.fired <= 0){
+                                    if (this.body.fired <= 0) {
                                         if (this.bullets.length > 0) {
-                                        if (this.bullets[0].generating == 0) {
-
-                                            this.shot.bomb = 1
-                                            this.detonate = 1
-                                            this.bullets[0].body.x = this.body.x
-                                            this.bullets[0].body.y = this.body.y
-                                            this.bullets[0].body.ymom = -vsmashlimit
-                                            this.bullets[0].body.xmom = 0
-                                            this.shots.push(this.bullets[0].body)
-                                            this.bullets.splice(0, 1)
-                                            if (this.body.ymom > -jumplimit) {
-                                                // this.body.ymom -= this.speed * .3
-                                                if (this.body.ymom < -jumplimit) {
-                                                    this.body.ymom = -jumplimit
-                                                }
-                                            } else {
-                                            }
-                                            this.idify()
-                                            this.body.fired = 5
-                                        }
-                                    }
-                                    }
-                                if (this.righthand.fired <= 0) {
-                                    if (this.righthand.anchored == 0) {
-                                        this.rightshoulder.xmom = 0
-                                        this.rightshoulder.ymom = 0
-                                        this.righthand.ymom = -(this.punchspeed * 17) + this.body.ymom * 2
-                                        this.righthand.xmom = this.punchspeed * -1
-                                        this.righthand.fired = 20
-                                        this.idify()
-                                    }
-                                }
-                                if (this.lefthand.fired <= 0) {
-                                    if (this.lefthand.anchored == 0) {
-                                        this.leftshoulder.xmom = 0
-                                        this.leftshoulder.ymom = 0
-                                        this.lefthand.ymom = -(this.punchspeed * 17) + this.body.ymom * 2
-                                        this.lefthand.xmom = -this.punchspeed * -1
-                                        this.lefthand.fired = 20
-                                        this.idify()
-                                    }
-                                }
-                                }
-
-                                if (this.rightshot == 1 || this.leftshot == 1) {
-                                if (this.body.fired <= 0) {
-                                    if (this.bullets.length > 0) {
-                                        if (this.face != 0) {
                                             if (this.bullets[0].generating == 0) {
 
                                                 this.shot.bomb = 1
                                                 this.detonate = 1
                                                 this.bullets[0].body.x = this.body.x
                                                 this.bullets[0].body.y = this.body.y
-                                                this.bullets[0].body.xmom = this.speed * 3.5 * this.face
-                                                this.bullets[0].body.ymom = 0
+                                                this.bullets[0].body.ymom = -vsmashlimit
+                                                this.bullets[0].body.xmom = 0
                                                 this.shots.push(this.bullets[0].body)
                                                 this.bullets.splice(0, 1)
                                                 if (this.body.ymom > -jumplimit) {
-                                                    this.body.ymom -= this.speed * .15
+                                                    // this.body.ymom -= this.speed * .3
                                                     if (this.body.ymom < -jumplimit) {
                                                         this.body.ymom = -jumplimit
                                                     }
@@ -34735,32 +34703,80 @@
                                             }
                                         }
                                     }
-                                }
-                            }
-
-
-                            if (this.hortsmash == 1) {
-                                if (this.righthand.fired <= 0) {
-                                    if (this.righthand.anchored == 0) {
-                                        this.rightshoulder.xmom = 0
-                                        this.rightshoulder.ymom = 0
-                                        this.righthand.xmom = (this.punchspeed * 18)
-                                        this.righthand.ymom = this.punchspeed * .9 + this.body.ymom * 2
-                                        this.righthand.fired = 20
-                                        this.idify()
+                                    if (this.righthand.fired <= 0) {
+                                        if (this.righthand.anchored == 0) {
+                                            this.rightshoulder.xmom = 0
+                                            this.rightshoulder.ymom = 0
+                                            this.righthand.ymom = -(this.punchspeed * 17) + this.body.ymom * 2
+                                            this.righthand.xmom = this.punchspeed * -1
+                                            this.righthand.fired = 20
+                                            this.idify()
+                                        }
+                                    }
+                                    if (this.lefthand.fired <= 0) {
+                                        if (this.lefthand.anchored == 0) {
+                                            this.leftshoulder.xmom = 0
+                                            this.leftshoulder.ymom = 0
+                                            this.lefthand.ymom = -(this.punchspeed * 17) + this.body.ymom * 2
+                                            this.lefthand.xmom = -this.punchspeed * -1
+                                            this.lefthand.fired = 20
+                                            this.idify()
+                                        }
                                     }
                                 }
-                                if (this.lefthand.fired <= 0) {
-                                    if (this.lefthand.anchored == 0) {
-                                        this.leftshoulder.xmom = 0
-                                        this.leftshoulder.ymom = 0
-                                        this.lefthand.xmom = (this.punchspeed * -18)
-                                        this.lefthand.ymom = -this.punchspeed * .9 + this.body.ymom * 2
-                                        this.lefthand.fired = 20
-                                        this.idify()
+
+                                if (this.rightshot == 1 || this.leftshot == 1) {
+                                    if (this.body.fired <= 0) {
+                                        if (this.bullets.length > 0) {
+                                            if (this.face != 0) {
+                                                if (this.bullets[0].generating == 0) {
+
+                                                    this.shot.bomb = 1
+                                                    this.detonate = 1
+                                                    this.bullets[0].body.x = this.body.x
+                                                    this.bullets[0].body.y = this.body.y
+                                                    this.bullets[0].body.xmom = this.speed * 3.5 * this.face
+                                                    this.bullets[0].body.ymom = 0
+                                                    this.shots.push(this.bullets[0].body)
+                                                    this.bullets.splice(0, 1)
+                                                    if (this.body.ymom > -jumplimit) {
+                                                        this.body.ymom -= this.speed * .15
+                                                        if (this.body.ymom < -jumplimit) {
+                                                            this.body.ymom = -jumplimit
+                                                        }
+                                                    } else {
+                                                    }
+                                                    this.idify()
+                                                    this.body.fired = 5
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                            }
+
+
+                                if (this.hortsmash == 1) {
+                                    if (this.righthand.fired <= 0) {
+                                        if (this.righthand.anchored == 0) {
+                                            this.rightshoulder.xmom = 0
+                                            this.rightshoulder.ymom = 0
+                                            this.righthand.xmom = (this.punchspeed * 18)
+                                            this.righthand.ymom = this.punchspeed * .9 + this.body.ymom * 2
+                                            this.righthand.fired = 20
+                                            this.idify()
+                                        }
+                                    }
+                                    if (this.lefthand.fired <= 0) {
+                                        if (this.lefthand.anchored == 0) {
+                                            this.leftshoulder.xmom = 0
+                                            this.leftshoulder.ymom = 0
+                                            this.lefthand.xmom = (this.punchspeed * -18)
+                                            this.lefthand.ymom = -this.punchspeed * .9 + this.body.ymom * 2
+                                            this.lefthand.fired = 20
+                                            this.idify()
+                                        }
+                                    }
+                                }
 
                             }
 
@@ -35621,6 +35637,7 @@
                         }
 
                         if (counter == 1) {
+                            // JumpIn(boys[0])
 
                             if (AItoggle == 0) {
 
@@ -35782,11 +35799,11 @@
                                     if (stock > 0) {
                                         if (drops[t] < stock) {
                                             if (t != boys[t].striker) {
-                                            // if(AItoggle == 0){
-                                            scores[boys[t].striker]++
-                                            // }else{
-                                            // scores[t]++
-                                            // }
+                                                // if(AItoggle == 0){
+                                                scores[boys[t].striker]++
+                                                // }else{
+                                                // scores[t]++
+                                                // }
                                             }
                                             drops[t]++
                                         }
@@ -35853,13 +35870,13 @@
                                         canvas_context.fillStyle = boys[t].body.color
                                         if (AItoggle == 0) {
                                             if (boys[t].playername != "") {
-                                                canvas_context.fillText(`${boys[t].name + " (" + boys[t].playername + ")"} ${boys[t].knocks}/${boys[t].drops}`, 20, ((t - dropouts) * 61) + 70)
+                                                canvas_context.fillText(`${boys[t].name + " (" + boys[t].playername + ")"} ${boys[t].knocks}/${boys[t].drops} Ping: ${boys[t].ping}`, 20, ((t - dropouts) * 61) + 70)
                                             } else {
-                                                canvas_context.fillText(`${boys[t].name} ${boys[t].knocks}/${boys[t].drops}`, 20, ((t - dropouts) * 61) + 70)
+                                                canvas_context.fillText(`${boys[t].name} ${boys[t].knocks}/${boys[t].drops} Ping: ${boys[t].ping}`, 20, ((t - dropouts) * 61) + 70)
 
                                             }
                                         } else {
-                                                canvas_context.fillText(`${boys[t].name} ${scores[t]}/${drops[t]}`, 20, ((t - dropouts) * 61) + 70)
+                                            canvas_context.fillText(`${boys[t].name} ${scores[t]}/${drops[t]}`, 20, ((t - dropouts) * 61) + 70)
                                         }
                                     }
                                 }
@@ -36074,6 +36091,9 @@
                                         }
 
                                         if (AItoggle == 0) {
+
+                                            const now = new Date()  
+                                            Json.ping = now.getTime()
                                             ws.send(JSON.stringify(Json))
                                         }
 
@@ -36281,6 +36301,48 @@
 
                     }
 
+                    function JumpIn(fighter) {
+                        //start with the dummy
+                        if (scores.includes(100)) {
+                            let str = `${boys[0].name}: ${scores[0]}, ${boys[1].name}: ${scores[1]}`
+                            strarr.push(str)
+                            scores = [0, 0]
+                            drops = [0, 0]
+                            let whosUp
+                            if (fightnum == 0) {
+                                whosUp = new DrSoto(boys.length)
+                            } else if (fightnum == 1) {
+                                whosUp = new Boy(boys.length)
+                            } else if (fightnum == 2) {
+                                whosUp = new Blastgirl(boys.length)
+                            } else if (fightnum == 3) {
+                                whosUp = new Jox(boys.length)
+                            } else if (fightnum == 4) {
+                                whosUp = new ScorchedMass(boys.length)
+                            } else if (fightnum == 5) {
+                                whosUp = new AsigMan(boys.length)
+                            } else if (fightnum == 6) {
+                                whosUp = new Princess(boys.length)
+                            } else if (fightnum == 7) {
+                                whosUp = new Rhopho(boys.length)
+                            } else if (fightnum == 8) {
+                                whosUp = new Banandroid(boys.length)
+                            } else if (fightnum == 9) {
+                                whosUp = new Bunkstanks(boys.length)
+                            } else if (fightnum == 10) {
+                                whosUp = new Mass(boys.length)
+                            } else {
+                                if (fightlogged == 0) {
+                                    console.log(strarr)
+                                    fightlogged = 1
+                                }
+                                whosUp = new Dummy(boys.length)
+                            }
+                            boys[1] = whosUp
+                            fighter = fighter.copy()
+                            fightnum++
+                        }
+                    }
 
                 </script>
             </div id="go">
