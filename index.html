@@ -1800,7 +1800,7 @@
 
 
                                 if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
-                                    var gard = canvas_context.createRadialGradient(Math.round(this.radius), Math.round(this.radius), 0, Math.round(this.radius), Math.ceil(this.radius + (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y + (this.radius * 1.25)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
                                     this.string = this.color
                                     if (this.color != "#FFFF00") {
                                         for (let t = 0; t < 13; t += 6) {
@@ -1821,24 +1821,37 @@
 
 
 
-                                    tempcanvas.width = this.radius * 2
-                                    tempcanvas.height = this.radius * 2
+
+
+
+
+
+
+                                    // tempcanvas.width = this.radius * 2
+                                    // tempcanvas.height = this.radius * 2
 
 
                                     // temp_context.save();
-                                    temp_context.fillStyle = gard
-                                    temp_context.beginPath();
-                                    temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
-                                    temp_context.fill()
-                                    temp_context.globalCompositeOperation = 'destination-out'
-                                    temp_context.beginPath();
-                                    temp_context.fillStyle = '#888888'
-                                    temp_context.arc(this.radius, this.radius - (this.radius * .75), this.radius * 1.1, 0, 2 * Math.PI)
-                                    temp_context.fill()
-                                    // temp_context.restore()
-                                    canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
-                                    // canvas_context.stroke();
-                                    temp_context.globalCompositeOperation = 'source-over'
+                                    // temp_context.fillStyle = gard
+                                    // temp_context.beginPath();
+                                    // temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
+                                    // temp_context.fill()
+                                    // temp_context.globalCompositeOperation = 'destination-out'
+                                    // temp_context.beginPath();
+                                    // temp_context.fillStyle = '#888888'
+                                    // temp_context.arc(this.radius, this.radius - (this.radius * .75), this.radius * 1.1, 0, 2 * Math.PI)
+                                    // temp_context.fill()
+                                    // // temp_context.restore()
+                                    // canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
+                                    // // canvas_context.stroke();
+                                    // temp_context.globalCompositeOperation = 'source-over'
+
+                                    canvas_context.fillStyle = gard
+canvas_context.beginPath();
+canvas_context.arc(this.x, this.y, this.radius, Math.PI, 0, true); 
+canvas_context.arc(this.x, this.y-(this.radius*.5), this.radius, - 0,Math.PI, false);
+canvas_context.fill()
+canvas_context.closePath();
                                 }
                             } else {
                                 // //////////////////////////// //////////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
@@ -2019,45 +2032,56 @@
 
 
                                 if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
-                                    var gard = canvas_context.createRadialGradient(Math.round(this.radius), Math.round(this.radius), 0, Math.round(this.radius), Math.ceil(this.radius + (this.radius * 0)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
+                                    var gard = canvas_context.createRadialGradient(Math.round(this.x), Math.round(this.y), 0, Math.round(this.x), Math.ceil(this.y + (this.radius * 0)), Math.ceil(Math.max((this.radius * 1.1) - canvas_context.lineWidth, 0)))
                                     this.string = this.color
-                                    if (this.color != "#FFAAAA") {
-                                        for (let t = 0; t < 13; t += 6) {
-                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                                            gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
-                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                                            gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
-                                        }
-                                    } else {
-                                        for (let t = 0; t < 13; t += 6) {
-                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                                            gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
-                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                                            gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
-                                        }
+                                    // if (this.color != "#FFAAAA") {
+                                    //     for (let t = 0; t < 13; t += 6) {
+                                    //         gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                    //         gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                    //         gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                    //         gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
+                                    //     }
+                                    // } else {
+                                    //     for (let t = 0; t < 13; t += 6) {
+                                    //         gard.addColorStop(t / 18.1, (this.string) + `ff`)
+                                    //         gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
+                                    //         gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
+                                    //         gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
+                                    //     }
 
-                                    }
-
-
-
-                                    tempcanvas.width = this.radius * 2
-                                    tempcanvas.height = this.radius * 2
+                                    // }
 
 
-                                    // temp_context.save();
-                                    temp_context.fillStyle = gard
-                                    temp_context.beginPath();
-                                    temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
-                                    temp_context.fill()
-                                    temp_context.globalCompositeOperation = 'destination-out'
-                                    temp_context.beginPath();
-                                    temp_context.fillStyle = '#888888'
-                                    temp_context.arc(this.radius, this.radius, this.radius * .5, 0, 2 * Math.PI)
-                                    temp_context.fill()
-                                    // temp_context.restore()
-                                    canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
-                                    // canvas_context.stroke();
-                                    temp_context.globalCompositeOperation = 'source-over'
+                                            gard.addColorStop(0, (this.string) + `00`)
+                                            gard.addColorStop(.5, "#000000" + "00")
+                                            gard.addColorStop(.75, (this.string) + "ff")
+                                            // gard.addColorStop(.9, (this.string) + "ff")
+                                            gard.addColorStop(1, "#000000" + "00")
+
+                                    canvas_context.fillStyle = gard
+                                    canvas_context.beginPath();
+                                    canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
+                                    canvas_context.fill()
+
+
+                                    // tempcanvas.width = this.radius * 2
+                                    // tempcanvas.height = this.radius * 2
+
+
+                                    // // temp_context.save();
+                                    // temp_context.fillStyle = gard
+                                    // temp_context.beginPath();
+                                    // temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
+                                    // temp_context.fill()
+                                    // temp_context.globalCompositeOperation = 'destination-out'
+                                    // temp_context.beginPath();
+                                    // temp_context.fillStyle = '#888888'
+                                    // temp_context.arc(this.radius, this.radius, this.radius * .5, 0, 2 * Math.PI)
+                                    // temp_context.fill()
+                                    // // temp_context.restore()
+                                    // canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
+                                    // // canvas_context.stroke();
+                                    // temp_context.globalCompositeOperation = 'source-over'
                                 }
                             } else {
                                 // //////////////////////////// //////////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
@@ -2258,7 +2282,7 @@
                             if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
                                 canvas_context.lineWidth = this.radius * .1
                             } else {
-                                canvas_context.lineWidth = 10
+                                canvas_context.lineWidth = this.radius*.4
                             }
                             canvas_context.strokeStyle = this.color
                             // canvas_context.beginPath();
@@ -2272,45 +2296,43 @@
 
 
                                 if (isFinite(this.x) && isFinite(this.y) && isFinite(this.radius)) {
-                                    var gard = canvas_context.createRadialGradient(Math.round(this.radius), Math.round(this.radius), 0, Math.round(this.radius), Math.ceil(this.radius + (this.radius * 0)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
-                                    this.string = this.color
-                                    if (this.color != "#FFAAAA") {
-                                        for (let t = 0; t < 13; t += 6) {
-                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                                            gard.addColorStop((t + 1.5) / 18.1, "#FFFFFF" + "ff")
-                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                                            gard.addColorStop((t + 4) / 18.1, "#FFFFFF" + "ff")
-                                        }
-                                    } else {
-                                        for (let t = 0; t < 13; t += 6) {
-                                            gard.addColorStop(t / 18.1, (this.string) + `ff`)
-                                            gard.addColorStop((t + 1.5) / 18.1, "#000000" + "ff")
-                                            gard.addColorStop((t + 3) / 18.1, (this.string) + "ff")
-                                            gard.addColorStop((t + 4) / 18.1, "#000000" + "ff")
-                                        }
-
-                                    }
+                                    // var gard = canvas_context.createRadialGradient(Math.round(this.radius), Math.round(this.radius), 0, Math.round(this.radius), Math.ceil(this.radius + (this.radius * 0)), Math.ceil(Math.max((this.radius * 2.5) - canvas_context.lineWidth, 0)))
+                                    // this.string = this.color
+                                    
+                                    //         gard.addColorStop(0, (this.string) + `00`)
+                                    //         gard.addColorStop(.8, "#FFFFFF" + "00")
+                                    //         gard.addColorStop(.85, (this.string) + "ff")
+                                    //         gard.addColorStop(.9, this.string + "00")
+                                    //         gard.addColorStop(.95, this.string + "00")
+                                    //         gard.addColorStop(.1, "#FFFFFF" + "00")
 
 
 
-                                    tempcanvas.width = this.radius * 2
-                                    tempcanvas.height = this.radius * 2
+                                    // // tempcanvas.width = this.radius * 2
+                                    // // tempcanvas.height = this.radius * 2
 
 
-                                    // temp_context.save();
-                                    temp_context.fillStyle = gard
-                                    temp_context.beginPath();
-                                    temp_context.arc(this.radius, this.radius, this.radius, 0, (Math.PI * 2), true)
-                                    temp_context.fill()
-                                    temp_context.globalCompositeOperation = 'destination-out'
-                                    temp_context.beginPath();
-                                    temp_context.fillStyle = '#888888'
-                                    temp_context.arc(this.radius, this.radius, this.radius * .8, 0, 2 * Math.PI)
-                                    temp_context.fill()
+                                    // // temp_context.save();
+                                    // canvas_context.fillStyle = gard
+                                    canvas_context.beginPath();
+                                    canvas_context.arc(this.x, this.y, this.radius, 0, (Math.PI * 2), true)
+                                    
+                                    // canvas_context.fill()
+                                    canvas_context.stroke()
+                                    // temp_context.globalCompositeOperation = 'destination-out'
+                                    // temp_context.beginPath();
+                                    // temp_context.fillStyle = '#888888'
+                                    // temp_context.arc(this.radius, this.radius, this.radius * .8, 0, 2 * Math.PI)
+                                    // temp_context.fill()
                                     // temp_context.restore()
-                                    canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
+
+
+                                    // canvas_context.fillStyle = '#000000'
+                                    // canvas_context.arc(this.x, this.y, this.radius * .8, 0, 2 * Math.PI)
+                                    // canvas_context.fill()
+                                    // canvas_context.drawImage(tempcanvas, 0, 0, tempcanvas.width, tempcanvas.height, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2)
                                     // canvas_context.stroke();
-                                    temp_context.globalCompositeOperation = 'source-over'
+                                    // temp_context.globalCompositeOperation = 'source-over'
                                 }
                             } else {
                                 // //////////////////////////// //////////////////////////console.log("The circle is below a radius of 0, and has not been drawn. The circle is:", this)
@@ -31955,8 +31977,8 @@
                                 this.grounded = 0
                                 this.jumping = 1
                                 this.nodes.push(this.body)
-                                this.leftshoulder = new ShotZ(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
-                                this.rightshoulder = new ShotZ(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
+                                this.leftshoulder = new Circle(this.body.x - (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
+                                this.rightshoulder = new Circle(this.body.x + (this.body.radius + this.shoulderwidth), 350, 10, "#FF0000", 0, 0, .999)
                                 this.lefthand = new Circle(this.leftshoulder.x, (this.leftshoulder.y + this.armlength), 43.5, "#FF0000", 0, 0, .85)
                                 this.righthand = new Circle(this.rightshoulder.x, (this.rightshoulder.y + this.armlength), 43.5, "#FF0000", 0, 0, .85)
                                 this.nodes.push(this.leftshoulder)
@@ -34131,10 +34153,18 @@
                             if (this.inactive == 1) {
                                 return
                             }
+                            let xb = this.body.x
+                            let yb = this.body.y
                             for (let t = 0; t < stage.bricks.length; t++) {
                                 for (let k = 0; k < this.nodes.length; k++) {
                                     stage.bricks[t].doesPerimeterTouch(this.nodes[k], this)
                                 }
+                            }
+                            let x = this.body.x-xb
+                            let y = this.body.y-yb
+                            for(let t = 0;t<this.bullets.length;t++){
+                                this.bullets[t].body.x += x
+                                this.bullets[t].body.y += y
                             }
                             this.fixupshoulder()
                             //this.enemycollide()
@@ -34203,7 +34233,7 @@
             }
             if(this.bullets.length < 12){
                 if(wait == 1){
-                    let bullet = new Bullet(this.body.x-0, this.body.y, 12, this.body.color)
+                    let bullet = new Bullet(this.body.x-0, this.body.y-(this.body.radius*.8), 12, this.body.color)
                     bullet.generating = 1
                     this.bullets.push(bullet)
                 }
