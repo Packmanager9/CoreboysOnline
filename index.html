@@ -52,6 +52,8 @@
                 <canvas id="canvas" width="1280" height="720"></canvas>
                 <canvas hidden = "true" id="tempcanvas" width="2500" height="500"></canvas>
                 <script>
+
+let HOST = location.origin.replace(/^http/, 'ws')
                     ////////////// //////////////////////////////////console.log(HOST)
                     let pick = -1
                     let meshX = 10
@@ -81,7 +83,6 @@
 
                     let stock = 0
                     let ws
-                        let HOST = location.origin.replace(/^http/, 'ws')
                     if (AItoggle == 0) {
                         ws = new WebSocket(HOST);
                     }
