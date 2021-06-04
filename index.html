@@ -51,7 +51,6 @@
 
                 <canvas id="canvas" width="1280" height="720"></canvas>
                 <canvas hidden = "true" id="tempcanvas" width="2500" height="500"></canvas>
-                <script src="firstgood.js"></script>
                 <script>
                     ////////////// //////////////////////////////////console.log(HOST)
                     let pick = -1
@@ -82,8 +81,8 @@
 
                     let stock = 0
                     let ws
-                        let HOST = location.origin.replace(/^http/, 'ws')
                     if (AItoggle == 0) {
+                        let HOST = location.origin.replace(/^http/, 'ws')
                         ws = new WebSocket(HOST);
                     }
                     let connectionnumber = -1
@@ -5827,7 +5826,7 @@
                                     // console.log(coreboyvcoreboymesh)
                                     //bakedcoreboy
                                     //overnight
-                                    this.mesh = new GenNN(this.meshinputs, 4, [66, 66, 24, 10], 10, testcoreboy)
+                                    this.mesh = new GenNN(this.meshinputs, 4, [66, 66, 24, 10], 10)
                                     }
                                 }
                                 }
