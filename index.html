@@ -78,10 +78,8 @@
 
                     let stock = 0
                     let ws
-                    if (AItoggle == 0) {
                         let HOST = location.origin.replace(/^http/, 'ws')
                         ws = new WebSocket(HOST);
-                    }
                     let connectionnumber = -1
                     let start = 0
                     let ID = parseFloat(Math.random().toFixed(7))
